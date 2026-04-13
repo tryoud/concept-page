@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: white;
+	color: #0a0a0a;
+}
+
+@media (pointer: fine) {
+  html, body {
+    cursor: none !important;
+  }
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}

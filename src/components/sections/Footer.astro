@@ -1,0 +1,33 @@
+---
+const { footer } = Astro.props;
+
+const year = new Date().getFullYear();
+
+const copyright =
+  (footer?.copyright ?? "© {year} tryoud").replace("{year}", String(year));
+
+const links = footer?.links ?? [];
+const note = footer?.note ?? "";
+---
+
+<footer class="border-t border-black/10">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between">
+    <div class="text-sm text-black/60">{copyright}</div>
+
+    {(links?.length ?? 0) > 0 && (
+      <div class="flex flex-wrap gap-4">
+        {links.map((l) => (
+          <a class="text-sm text-black/60 underline hover:text-black" href={l.href}>
+            {l.label}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {note && (
+    <div class="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
+      <p class="text-xs text-black/45">{note}</p>
+    </div>
+  )}
+</footer>

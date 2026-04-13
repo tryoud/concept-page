@@ -1,0 +1,37 @@
+---
+const { branding, navigation, contact } = Astro.props;
+
+const brandName = branding?.brandName ?? "tryoud";
+const personalName = branding?.personalName ?? "";
+const navItems = navigation ?? [];
+const mailto = contact?.email ? `mailto:${contact.email}` : "#contact";
+---
+
+<header class="sticky top-0 z-40 border-b border-black/10 bg-white/80 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+    <a href="/" class="flex items-center gap-3">
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white">
+        <span class="text-sm font-semibold">{brandName.slice(0, 1)}</span>
+      </span>
+      <div class="leading-tight">
+        <div class="text-sm font-semibold text-black">{brandName}</div>
+        {personalName && <div class="text-xs text-black/60">{personalName}</div>}
+      </div>
+    </a>
+
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Primary">
+      {navItems.map((item) => (
+        <a class="text-sm text-black/70 hover:text-black" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <a
+      class="inline-flex items-center justify-center rounded-xl bg-black px-4 py-2 text-sm font-medium text-white hover:bg-black/90"
+      href={mailto}
+    >
+      Contact
+    </a>
+  </div>
+</header>

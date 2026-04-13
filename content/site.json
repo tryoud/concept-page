@@ -1,0 +1,256 @@
+{
+    "meta": {
+      "title": "tryoud — Web Development & Performance Websites",
+      "description": "I build fast, high-performance websites and AI-assisted workflows. Astro + Tailwind + Cloudflare Pages. Clean code. SEO-ready.",
+      "siteUrl": "https://tryoud.com",
+      "ogImage": "/og/og-tryoud.png",
+      "language": "en",
+      "locale": "en_US"
+    },
+    "branding": {
+      "brandName": "tryoud",
+      "personalName": "Nikolas Maerker",
+      "logo": {
+        "src": "/brand/logo.svg",
+        "alt": "tryoud logo"
+      }
+    },
+    "navigation": [
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Stack", "href": "#stack" },
+      { "label": "Projects", "href": "#projects" },
+      { "label": "About", "href": "#about" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "hero": {
+      "headline": "Fast, SEO-ready websites—built to convert.",
+      "subline": "I build high-performance web experiences and AI-assisted workflows with Astro, Tailwind, and Cloudflare Pages. Minimal JS. Clean code. Real outcomes.",
+      "ctas": [
+        { "label": "View Projects", "href": "#projects", "variant": "primary" },
+        { "label": "Contact", "href": "#contact", "variant": "outline" }
+      ],
+      "highlights": [
+        "Static-first performance (Lighthouse-focused)",
+        "Modern UI with clean, maintainable components",
+        "Single source of truth content (JSON-driven)"
+      ]
+    },
+    "skills": {
+      "headline": "Skills",
+      "subline": "Broad coverage across frontend, backend, DevOps, CMS, performance, and automation—always with a focus on maintainability and speed.",
+      "categories": [
+        {
+          "id": "frontend",
+          "title": "Frontend",
+          "items": [
+            "Astro (static sites)",
+            "Tailwind CSS",
+            "HTML semantics & accessibility",
+            "Responsive layout systems",
+            "Component-driven UI (Astro components)",
+            "Design systems & UI consistency"
+          ],
+          "proof": [
+            "Build static landing pages with minimal JS and strong Core Web Vitals",
+            "Structure pages with semantic headings and accessible navigation"
+          ]
+        },
+        {
+          "id": "backend",
+          "title": "Backend",
+          "items": [
+            "REST basics",
+            "Serverless patterns (edge functions / workers)",
+            "Lightweight APIs for forms & automations",
+            "Authentication concepts (sessions, tokens)",
+            "Data modeling basics"
+          ],
+          "proof": [
+            "Implement simple endpoints for form handling and automation triggers",
+            "Design small, maintainable interfaces between frontend and services"
+          ]
+        },
+        {
+          "id": "devops",
+          "title": "DevOps",
+          "items": [
+            "Cloudflare Pages deployment",
+            "Git-based workflows",
+            "Build pipelines (pnpm)",
+            "Environment variables & secrets handling",
+            "Caching and CDN basics"
+          ],
+          "proof": [
+            "Deploy static sites to Cloudflare Pages with clean build outputs (dist)",
+            "Keep dependencies minimal for reliability and speed"
+          ]
+        },
+        {
+          "id": "cms",
+          "title": "CMS",
+          "items": [
+            "WordPress",
+            "Elementor / ACF concepts",
+            "Custom post types & structured content",
+            "Content modeling",
+            "Editorial workflows"
+          ],
+          "proof": [
+            "Model content to reduce hardcoding and improve maintainability",
+            "Build structured sections that stay consistent across pages"
+          ]
+        },
+        {
+          "id": "performance-seo",
+          "title": "Performance & SEO",
+          "items": [
+            "Core Web Vitals",
+            "Image optimization (formats, lazy loading)",
+            "Metadata (title, description, OG tags)",
+            "Semantic HTML for SEO",
+            "Information architecture"
+          ],
+          "proof": [
+            "Optimize above-the-fold content and defer non-critical assets",
+            "Set up baseline SEO metadata and proper heading structure"
+          ]
+        },
+        {
+          "id": "automation",
+          "title": "Automation",
+          "items": [
+            "AI-assisted workflows (prompting, tooling)",
+            "Form-to-inbox pipelines (Formspree)",
+            "Integrations (email/webhooks)",
+            "Operational automation concepts"
+          ],
+          "proof": [
+            "Create reliable contact flows with honeypot anti-spam",
+            "Automate small business workflows around lead intake and follow-ups"
+          ]
+        }
+      ]
+    },
+    "stack": {
+      "headline": "Tech Stack",
+      "subline": "A practical, modern stack optimized for performance, reliability, and low maintenance overhead.",
+      "groups": [
+        {
+          "title": "Core",
+          "items": [
+            { "name": "Astro", "tags": ["Static", "Performance", "Content-first"], "icon": "/stack/astro.svg" },
+            { "name": "Tailwind CSS", "tags": ["UI", "Utility-first", "Consistent spacing"], "icon": "/stack/tailwind.svg" },
+            { "name": "Cloudflare Pages", "tags": ["CDN", "Deploy", "Edge"], "icon": "/stack/cloudflare.svg" }
+          ]
+        },
+        {
+          "title": "Tooling",
+          "items": [
+            { "name": "pnpm", "tags": ["Fast installs", "Monorepo-friendly"], "icon": "/stack/pnpm.svg" },
+            { "name": "Git + GitHub", "tags": ["Versioning", "CI-friendly"], "icon": "/stack/github.svg" }
+          ]
+        },
+        {
+          "title": "Content & Ops (Optional)",
+          "items": [
+            { "name": "WordPress", "tags": ["CMS", "Editorial"], "icon": "/stack/wordpress.svg" },
+            { "name": "Formspree", "tags": ["Forms", "No backend"], "icon": "/stack/formspree.svg" }
+          ]
+        }
+      ]
+    },
+    "projects": {
+      "headline": "Projects",
+      "subline": "Selected work across high-performance websites, structured content builds, and practical automation.",
+      "items": [
+        {
+          "slug": "portfolio-site-astro",
+          "title": "Portfolio Website (Astro + Tailwind)",
+          "description": "A static-first portfolio optimized for speed, clean UI, and maintainable content sourced from JSON.",
+          "stack": ["Astro", "Tailwind", "Cloudflare Pages"],
+          "outcomes": [
+            "Static rendering and minimal JS for fast load times",
+            "Reusable sections driven by a single JSON source of truth",
+            "SEO-ready structure and metadata baseline"
+          ],
+          "href": "https://tryoud.com",
+          "thumbnail": "/projects/portfolio-astro.png"
+        },
+        {
+          "slug": "consulting-landing-performance",
+          "title": "Performance-First Landing Page",
+          "description": "A conversion-focused landing page with strong hierarchy, responsive layout, and optimized assets.",
+          "stack": ["Astro", "Tailwind"],
+          "outcomes": [
+            "Clear CTA placement and section flow",
+            "Optimized images and lazy loading below the fold",
+            "Clean semantic HTML for accessibility and SEO"
+          ],
+          "href": "#contact",
+          "thumbnail": "/projects/landing-performance.png"
+        },
+        {
+          "slug": "cms-structured-content",
+          "title": "Structured CMS Build (Content Modeling)",
+          "description": "A CMS approach focused on repeatable blocks, structured fields, and minimal editorial friction.",
+          "stack": ["WordPress", "ACF", "Elementor"],
+          "outcomes": [
+            "Reduced hardcoded content via structured fields",
+            "Consistent, reusable layouts across pages",
+            "Cleaner handover for non-technical editors"
+          ],
+          "href": "#contact",
+          "thumbnail": "/projects/cms-structured.png"
+        },
+        {
+          "slug": "lead-intake-automation",
+          "title": "Lead Intake + Automation Pipeline",
+          "description": "A simple, robust contact flow using forms, spam protection, and workflow-ready data.",
+          "stack": ["Formspree", "Webhooks"],
+          "outcomes": [
+            "Honeypot anti-spam and clear success/error states",
+            "Clean payload structure for downstream automations",
+            "Low-maintenance setup (no custom backend required)"
+          ],
+          "href": "#contact",
+          "thumbnail": "/projects/lead-intake.png"
+        }
+      ]
+    },
+    "about": {
+      "headline": "How I work",
+      "subline": "A lightweight process that keeps projects moving fast—without sacrificing quality.",
+      "paragraphs": [
+        "I design and build performance-first websites that are easy to maintain and ship. The goal is always the same: a clean UI, strong SEO foundations, and a clear conversion path.",
+        "I prefer static-first architectures where possible—less complexity, fewer moving parts, and better Core Web Vitals."
+      ],
+      "process": [
+        { "title": "Scope & structure", "details": "Define sections, content model, and success metrics (performance + conversion)." },
+        { "title": "Design system", "details": "Set typography, spacing, and reusable components for consistent UI." },
+        { "title": "Build & optimize", "details": "Implement static pages, optimize images, and keep JS minimal." },
+        { "title": "Ship & iterate", "details": "Deploy to Cloudflare Pages, validate SEO basics, iterate based on feedback." }
+      ]
+    },
+    "contact": {
+      "headline": "Contact",
+      "subline": "Want a fast, modern website or an automation workflow? Send a message and I’ll get back to you.",
+      "email": "nikolas.maerker@gmail.com",
+      "form": {
+        "provider": "formspree",
+        "endpoint": "https://formspree.io/f/REPLACE_ME",
+        "honeypotFieldName": "company"
+      },
+      "social": [
+        { "label": "GitHub", "href": "https://github.com/tryoud" },
+        { "label": "LinkedIn", "href": "https://www.linkedin.com/in/nikolasmaerker/" }
+      ]
+    },
+    "footer": {
+      "copyright": "© {year} tryoud",
+      "links": [
+        { "label": "Imprint", "href": "/imprint" },
+        { "label": "Privacy", "href": "/privacy" }
+      ],
+      "note": "Built with Astro + Tailwind. Deployed on Cloudflare Pages."
+    }
+  }

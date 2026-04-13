@@ -1,0 +1,51 @@
+---
+const { skills } = Astro.props;
+
+const headline = skills?.headline ?? "Skills";
+const subline = skills?.subline ?? "";
+const categories = skills?.categories ?? [];
+---
+
+<section id="skills" class="border-t border-black/10">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="max-w-2xl">
+      <h2 class="text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+        {headline}
+      </h2>
+      {subline && (
+        <p class="mt-3 text-sm leading-relaxed text-black/70 sm:text-base">
+          {subline}
+        </p>
+      )}
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {categories.map((cat) => (
+        <article class="rounded-3xl border border-black/10 bg-white p-6">
+          <h3 class="text-lg font-semibold text-black">{cat.title}</h3>
+
+          {(cat.items?.length ?? 0) > 0 && (
+            <ul class="mt-4 grid gap-2">
+              {cat.items.map((item) => (
+                <li class="text-sm text-black/75">{item}</li>
+              ))}
+            </ul>
+          )}
+
+          {(cat.proof?.length ?? 0) > 0 && (
+            <div class="mt-5 rounded-2xl border border-black/10 bg-black/[0.02] p-4">
+              <div class="text-xs font-medium uppercase tracking-wide text-black/50">
+                Proof
+              </div>
+              <ul class="mt-3 grid gap-2">
+                {cat.proof.map((p) => (
+                  <li class="text-sm text-black/75">• {p}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

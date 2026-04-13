@@ -1,0 +1,62 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { id: "1" } },
+    { params: { id: "2" } },
+    { params: { id: "3" } },
+    { params: { id: "4" } },
+  ];
+}
+
+const { id } = Astro.params;
+---
+
+<Layout title={`Projekt 0${id} | tryoud`}>
+  <div class="min-h-screen pt-24 px-6 md:px-16 flex flex-col relative z-20">
+    
+    {/* Navigation/Back */}
+    <button onclick="history.back()" class="group flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-12 w-fit relative z-30">
+      <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:-translate-x-1 transition-transform">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </div>
+      Zurück zum Showcase
+    </button>
+
+    {/* Hero Section of Detail Page */}
+    <div transition:name={`showcase-bg-${id}`} class={`w-full h-[60vh] rounded-3xl relative overflow-hidden flex items-end p-8 md:p-16 bg-gradient-to-tr ${Number(id)%2===0 ? 'from-violet-600 to-cyan-600' : 'from-cyan-600 to-blue-600'} shadow-[0_0_80px_rgba(6,182,212,0.2)] z-20`}>
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\\'20\\' height=\\'20\\' viewBox=\\'0 0 20 20\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'%23ffffff\\' fill-opacity=\\'0.05\\' fill-rule=\\'evenodd\\'%3E%3Ccircle cx=\\'3\\' cy=\\'3\\' r=\\'3\\'/%3E%3Ccircle cx=\\'13\\' cy=\\'13\\' r=\\'3\\'/%3E%3C/g%3E%3C/svg%3E')] opacity-30 mix-blend-overlay"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
+      
+      <div class="relative z-20">
+        <h1 transition:name={`showcase-title-${id}`} class="text-5xl md:text-8xl font-black text-white mb-4">Projekt 0{id}</h1>
+        <p transition:name={`showcase-desc-${id}`} class="text-xl md:text-3xl text-zinc-300">High-End Webflow Architecture & 3D WebGL Integration</p>
+      </div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto py-24 text-lg text-zinc-400 space-y-8 leading-relaxed">
+      <p>
+        Dies ist eine Fallstudie für das Projekt 0{id}. Bei diesem Projekt standen maximale Performance und grenzenlose Kreativität im Fokus.
+        Durch die Nutzung modernster Technologien wie Astro, Tailwind und nativen Transition-APIs konnten wir eine digitale Experience erschaffen, die komplett ohne altbackene Page-Reloads auskommt.
+      </p>
+      <p>
+        Der Aufbau dieser Seite demonstriert Astro's View Transitions API in Aktion. Anstatt das Layout hart zu unterbrechen, springt das Bild nicht einfach um. Es morpht. Das Hintergrundelement aus dem horizontalen Scroll der Hauptseite fließt flüssig und sanft in diesen gigantischen Hero-Header auf dieser Detailseite über.
+      </p>
+    </div>
+    
+  </div>
+  
+  <script>
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        history.back();
+      }
+    };
+    
+    document.addEventListener('astro:page-load', () => {
+      document.removeEventListener('keydown', handleKeydown);
+      document.addEventListener('keydown', handleKeydown);
+    });
+  </script>
+</Layout>
