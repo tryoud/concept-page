@@ -88,6 +88,8 @@ import Layout from "../layouts/Layout.astro";
             </a>
           </div>
         </div>
+        {/* Sentinel: observed to pause/play video when hero leaves viewport */}
+        <div id="hero-sentinel" class="absolute bottom-0 w-full h-px pointer-events-none"></div>
       </section>
 
       {/* Apple-Style Sticky Journey */}
@@ -313,7 +315,7 @@ import Layout from "../layouts/Layout.astro";
             <div class="relative w-full max-w-md aspect-square h-[300px] md:h-[400px]">
               <div class="scroll-spin-particle-slow w-full aspect-square rounded-full border border-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
               <div class="scroll-spin-particle-fast w-[80%] aspect-square rounded-full border border-zinc-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-              <div class="scroll-spin-particle-core w-[60%] aspect-square rounded-full bg-gradient-to-tr from-cyan-600/20 to-violet-600/20 backdrop-blur-3xl border border-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_80px_rgba(139,92,246,0.3)]">
+              <div class="scroll-spin-particle-core w-[60%] aspect-square rounded-full bg-gradient-to-tr from-cyan-600/30 to-violet-600/30 border border-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_80px_rgba(139,92,246,0.3)]">
                  <div class="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 shadow-inner">
                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                  </div>
@@ -557,16 +559,24 @@ import Layout from "../layouts/Layout.astro";
     // --- Tilt Cards ---
     const tiltCards = document.querySelectorAll('.tilt-card');
     tiltCards.forEach(card => {
+      let rafPending = false;
+      let lastE: MouseEvent;
       card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const xRot = 15 * ((y - rect.height / 2) / (rect.height / 2));
-        const yRot = -15 * ((x - rect.width / 2) / (rect.width / 2));
-        card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.02, 1.02, 1.02)`;
+        lastE = e as MouseEvent;
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          const rect = (card as HTMLElement).getBoundingClientRect();
+          const x = lastE.clientX - rect.left;
+          const y = lastE.clientY - rect.top;
+          const xRot = 15 * ((y - rect.height / 2) / (rect.height / 2));
+          const yRot = -15 * ((x - rect.width / 2) / (rect.width / 2));
+          (card as HTMLElement).style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.02, 1.02, 1.02)`;
+          rafPending = false;
+        });
       });
       card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+        (card as HTMLElement).style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
       });
     });
 
@@ -791,10 +801,24 @@ import Layout from "../layouts/Layout.astro";
       }
     }
     updateJourneyBounds();
-    window.addEventListener('resize', updateJourneyBounds, { passive: true });
+
+    let horizTop = 0, horizHeight = 0;
+    function updateHorizBounds() {
+      if (horizontalSection) {
+        horizTop = horizontalSection.offsetTop;
+        horizHeight = horizontalSection.offsetHeight;
+      }
+    }
+    updateHorizBounds();
+
+    window.addEventListener('resize', () => {
+      updateJourneyBounds();
+      updateHorizBounds();
+    }, { passive: true });
 
     // --- UNIFIED RAF LOOP ---
     function render() {
+      if (document.visibilityState !== 'visible') return;
       const scrollY = window.scrollY;
 
       // Spin Particles
@@ -845,15 +869,15 @@ import Layout from "../layouts/Layout.astro";
         }
       }
 
-      // Horizontal Scroll
+      // Horizontal Scroll (cached bounds — no getBoundingClientRect)
       if (horizontalSection && horizontalTrack) {
-        const rect = horizontalSection.getBoundingClientRect();
         const ih = window.innerHeight;
-        const scrollableDistance = rect.height - ih;
+        const relScroll = scrollY - horizTop;
+        const scrollableDistance = horizHeight - ih;
         let progress = 0;
-        if (rect.top <= 0 && rect.bottom >= ih) {
-          progress = Math.abs(rect.top) / scrollableDistance;
-        } else if (rect.bottom < ih) {
+        if (relScroll >= 0 && relScroll <= scrollableDistance) {
+          progress = relScroll / scrollableDistance;
+        } else if (relScroll > scrollableDistance) {
           progress = 1;
         }
         const maxTranslate = -(document.body.clientWidth * 2.6);
@@ -867,7 +891,7 @@ import Layout from "../layouts/Layout.astro";
         follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
       }
 
-      if (document.visibilityState === 'visible') requestAnimationFrame(render);
+      requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
 
@@ -927,6 +951,19 @@ import Layout from "../layouts/Layout.astro";
         initYTPlayer();
       } else {
         window.onYouTubeIframeAPIReady = initYTPlayer;
+      }
+
+      // Pause video when hero is scrolled out of view to save GPU/CPU
+      const heroSentinel = document.getElementById('hero-sentinel');
+      if (heroSentinel) {
+        new IntersectionObserver(([entry]) => {
+          if (!player) return;
+          if (entry.isIntersecting) {
+            player.playVideo?.();
+          } else {
+            player.pauseVideo?.();
+          }
+        }, { threshold: 0 }).observe(heroSentinel);
       }
     }
 
@@ -1017,6 +1054,12 @@ import Layout from "../layouts/Layout.astro";
   .cta-content.cta-animate {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* content-visibility: skip rendering off-screen sections */
+  #work, #about, #apple-journey {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100vh;
   }
 
   /* Hero Video Background */
