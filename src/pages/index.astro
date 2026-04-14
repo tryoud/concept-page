@@ -53,8 +53,9 @@ import Layout from "../layouts/Layout.astro";
         {/* Desktop Nav */}
         <div class="hidden md:flex items-center gap-8">
           <a href="#services" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.services">Services</a>
+          <a href="#expertise" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.expertise">Expertise</a>
           <a href="#work" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.work">Work</a>
-          <a href="#about" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.about">About</a>
+          <a href="#process" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.process">Prozess</a>
           <a href="#contact" class="px-5 py-2 text-sm font-semibold text-white transition-all bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:scale-105">
             <span data-i18n="nav.contact">Kontakt</span>
           </a>
@@ -73,8 +74,9 @@ import Layout from "../layouts/Layout.astro";
       {/* Mobile Menu */}
       <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 pt-20">
         <a href="#services" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.services">Services</a>
+        <a href="#expertise" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.expertise">Expertise</a>
         <a href="#work" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.work">Work</a>
-        <a href="#about" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.about">About</a>
+        <a href="#process" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.process">Prozess</a>
         <a href="#contact" class="px-8 py-4 text-lg font-bold text-black bg-gradient-to-r from-cyan-400 to-violet-400 rounded-full mobile-link" data-i18n="nav.contact">Kontakt</a>
         <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Sprachauswahl">
           <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 mobile-link" data-lang-switch="de" aria-label="Deutsch">DE</button>
@@ -258,7 +260,7 @@ import Layout from "../layouts/Layout.astro";
       </section>
 
       {/* Expertise Section */}
-      <section class="py-24 w-full bg-zinc-950 relative z-40 overflow-hidden" id="about">
+      <section class="py-24 w-full bg-zinc-950 relative z-40 overflow-hidden" id="expertise">
         <div class="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 mb-16">
           <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 reveal-on-scroll">
             <div>
@@ -458,7 +460,7 @@ import Layout from "../layouts/Layout.astro";
       </section>
 
       {/* Process Section */}
-      <section class="py-24 md:py-32 px-4 sm:px-6 md:px-16 lg:px-24 w-full bg-zinc-950 relative z-40 border-t border-white/5">
+      <section id="process" class="py-24 md:py-32 px-4 sm:px-6 md:px-16 lg:px-24 w-full bg-zinc-950 relative z-40 border-t border-white/5">
         <div class="max-w-7xl mx-auto">
           
           <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-16 gap-6 reveal-on-scroll">
@@ -568,8 +570,9 @@ import Layout from "../layouts/Layout.astro";
         metaTitle: 'Nikolas Maerker | Web Developer & Creative',
         metaDescription: 'Freelancer for web development, video production, and drone footage — everything from one source.',
         'nav.services': 'Services',
+        'nav.expertise': 'Expertise',
         'nav.work': 'Work',
-        'nav.about': 'About',
+        'nav.process': 'Process',
         'nav.contact': 'Contact',
         'hero.line1': 'Websites and content',
         'hero.line2': 'for service providers,',
