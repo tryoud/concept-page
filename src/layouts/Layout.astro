@@ -16,7 +16,6 @@ const { title, description = 'Nikolas Maerker — Freelancer für Webentwicklung
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -41,6 +40,11 @@ const { title, description = 'Nikolas Maerker — Freelancer für Webentwicklung
 
         const cursor = document.getElementById('magic-cursor');
         if (!cursor) return;
+
+        // Always reset to invisible on each page load (handles View Transitions)
+        cursor.style.transition = 'none';
+        cursor.style.opacity = '0';
+        cursor.style.transform = 'translate3d(-100px,-100px,0)';
 
         let mouseX = -100;
         let mouseY = -100;
