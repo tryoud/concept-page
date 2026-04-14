@@ -5,13 +5,18 @@ import '../styles/global.css'
 interface Props {
   title: string;
   description?: string;
+  lang?: string;
 }
 
-const { title, description = 'Nikolas Maerker — Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen.' } = Astro.props;
+const {
+  title,
+  description = 'Nikolas Maerker — Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen.',
+  lang = 'de',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="de" class="dark">
+<html lang={lang} class="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -123,10 +128,7 @@ const { title, description = 'Nikolas Maerker — Freelancer für Webentwicklung
   
 /* Hide the default cursor everywhere for mouse users */
   @media (pointer: fine) {
-    html, html body {
-      cursor: none !important;
-    }
-    html *, html *::before, html *::after,
+    html, html body, html *, html *::before, html *::after,
     html *:hover, html *:focus, html *:active,
     #video-controls, #video-controls * {
       cursor: none !important;

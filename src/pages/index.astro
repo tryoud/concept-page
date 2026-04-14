@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Nikolas Maerker | Web Developer & Creative" description="Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen — alles aus einer Hand.">
+<Layout lang="de" title="Nikolas Maerker | Web Developer & Creative" description="Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen — alles aus einer Hand.">
   
   {/* Background Glow Orbs */}
   <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -29,6 +29,17 @@ import Layout from "../layouts/Layout.astro";
     </div>
 
     <main class="relative z-10 font-sans">
+      <div id="hover-follower" class="fixed top-0 left-0 w-0 h-0 pointer-events-none z-[60] will-change-transform hidden [@media(pointer:fine)]:block">
+         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] aspect-[4/3] overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-50 opacity-0" id="reveal-img-01">
+            <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center"></div>
+         </div>
+         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] aspect-[4/3] overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-50 opacity-0" id="reveal-img-02">
+            <div class="w-full h-full bg-[url('/expertise-content.jpg')] bg-cover bg-center"></div>
+         </div>
+         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] aspect-[4/3] overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-50 opacity-0" id="reveal-img-03">
+            <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center"></div>
+         </div>
+      </div>
       
       {/* Navigation */}
       <nav class="fixed top-0 w-full flex items-center justify-between px-4 py-3 sm:px-6 md:px-12 z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
@@ -41,12 +52,16 @@ import Layout from "../layouts/Layout.astro";
         
         {/* Desktop Nav */}
         <div class="hidden md:flex items-center gap-8">
-          <a href="#services" class="text-sm text-zinc-400 hover:text-white transition-colors">Services</a>
-          <a href="#work" class="text-sm text-zinc-400 hover:text-white transition-colors">Work</a>
-          <a href="#about" class="text-sm text-zinc-400 hover:text-white transition-colors">About</a>
+          <a href="#services" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.services">Services</a>
+          <a href="#work" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.work">Work</a>
+          <a href="#about" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.about">About</a>
           <a href="#contact" class="px-5 py-2 text-sm font-semibold text-white transition-all bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:scale-105">
-            Kontakt
+            <span data-i18n="nav.contact">Kontakt</span>
           </a>
+          <div class="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Sprachauswahl">
+            <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold text-white/90 transition-colors hover:bg-white/10" data-lang-switch="de" aria-label="Deutsch">DE</button>
+            <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="en" aria-label="English">EN</button>
+          </div>
         </div>
         
         {/* Mobile Menu Button */}
@@ -57,10 +72,14 @@ import Layout from "../layouts/Layout.astro";
       
       {/* Mobile Menu */}
       <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 pt-20">
-        <a href="#services" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link">Services</a>
-        <a href="#work" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link">Work</a>
-        <a href="#about" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link">About</a>
-        <a href="#contact" class="px-8 py-4 text-lg font-bold text-black bg-gradient-to-r from-cyan-400 to-violet-400 rounded-full mobile-link">Kontakt</a>
+        <a href="#services" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.services">Services</a>
+        <a href="#work" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.work">Work</a>
+        <a href="#about" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.about">About</a>
+        <a href="#contact" class="px-8 py-4 text-lg font-bold text-black bg-gradient-to-r from-cyan-400 to-violet-400 rounded-full mobile-link" data-i18n="nav.contact">Kontakt</a>
+        <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Sprachauswahl">
+          <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 mobile-link" data-lang-switch="de" aria-label="Deutsch">DE</button>
+          <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10 mobile-link" data-lang-switch="en" aria-label="English">EN</button>
+        </div>
       </div>
 
       {/* Hero Section */}
@@ -68,22 +87,22 @@ import Layout from "../layouts/Layout.astro";
         <div class="w-full max-w-5xl mx-auto flex flex-col items-start text-left">
           
           <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.1] max-w-5xl reveal-on-scroll">
-            <span class="block">Websites und Content</span>
-            <span class="block">für Dienstleister,</span>
-            <span class="block">Unternehmen <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-[length:200%_auto] animate-gradient">und Marken.</span></span>
+            <span class="block" data-i18n="hero.line1">Websites und Content</span>
+            <span class="block" data-i18n="hero.line2">für Dienstleister,</span>
+            <span class="block"><span data-i18n="hero.line3Prefix">Unternehmen</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">und Marken.</span></span>
           </h1>
           
-          <p class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal-on-scroll">
+          <p class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal-on-scroll" data-i18n="hero.subline">
             Web Design, Photo, Video und Drohnenaufnahmen — alles aus einer Hand.
           </p>
           
           <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-8 sm:mt-12 w-fit reveal-on-scroll">
             <a href="#apple-journey" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
-              <span>Mehr erfahren</span>
+              <span data-i18n="hero.primaryCta">Mehr erfahren</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </a>
             <a href="#contact" class="group px-6 sm:px-8 py-3 sm:py-4 text-white font-medium hover:text-cyan-400 transition-colors flex items-center gap-2 text-sm sm:text-base">
-              Projekt starten 
+              <span data-i18n="hero.secondaryCta">Projekt starten</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 -translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0 sm:w-4 sm:h-4"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
             </a>
           </div>
@@ -100,8 +119,8 @@ import Layout from "../layouts/Layout.astro";
           
           {/* Frame 1: Text */}
           <div class="absolute inset-0 flex items-center justify-center flex-col z-10 text-center frame-1 pointer-events-none will-change-transform">
-            <h2 class="text-6xl md:text-8xl font-black text-white px-4 tracking-tighter">Alles aus<br/>einer Hand.</h2>
-            <p class="text-xl text-cyan-300 mt-6 font-semibold uppercase tracking-widest">Scroll nach unten ↓</p>
+            <h2 class="text-6xl md:text-8xl font-black text-white px-4 tracking-tighter" data-i18n="journey.headline">Alles aus<br/>einer Hand.</h2>
+            <p class="text-xl text-cyan-300 mt-6 font-semibold uppercase tracking-widest" data-i18n="journey.scroll">Scroll nach unten ↓</p>
           </div>
 
           {/* Frame 2: Services */}
@@ -124,7 +143,7 @@ import Layout from "../layouts/Layout.astro";
 
           {/* Frame 3: The ultimate reveal */}
           <div class="absolute inset-0 flex items-center justify-center z-30 frame-3 opacity-0 pointer-events-none will-change-transform">
-             <h2 class="text-[clamp(3rem,10vw,12rem)] px-4 font-black text-white opacity-90 drop-shadow-[0_0_100px_rgba(255,255,255,1)] tracking-tighter uppercase whitespace-normal text-center">Fokussiert.</h2>
+             <h2 class="text-[clamp(3rem,10vw,12rem)] px-4 font-black text-white opacity-90 drop-shadow-[0_0_100px_rgba(255,255,255,1)] tracking-tighter uppercase whitespace-normal text-center" data-i18n="journey.reveal">Fokussiert.</h2>
           </div>
         </div>
       </section>
@@ -135,12 +154,12 @@ import Layout from "../layouts/Layout.astro";
           
           <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
             <div class="reveal-on-scroll">
-              <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block">Leistungen</span>
+              <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block" data-i18n="services.eyebrow">Leistungen</span>
               <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                Was ich <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">mache.</span>
+                <span data-i18n="services.headingPrefix">Was ich</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400" data-i18n="services.headingAccent">mache.</span>
               </h2>
             </div>
-            <p class="text-zinc-400 max-w-md reveal-on-scroll">
+            <p class="text-zinc-400 max-w-md reveal-on-scroll" data-i18n="services.subline">
               Von der Konzeption bis zum Launch — alles aus einer Hand, effizient und fokussiert auf dein Ergebnis.
             </p>
           </div>
@@ -155,22 +174,22 @@ import Layout from "../layouts/Layout.astro";
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
                 </div>
                 <span class="text-5xl font-black text-white/5 mb-4">01</span>
-                <h3 class="text-2xl font-bold text-white mb-4">Websites & Landing Pages</h3>
-                <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow">
+                <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services.web.title">Websites & Landing Pages</h3>
+                <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow" data-i18n="services.web.text">
                   Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.
                 </p>
                 <ul class="space-y-3 text-sm text-zinc-500">
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                    Positionierung & UX-Strategie
+                    <span data-i18n="services.web.bullet1">Positionierung & UX-Strategie</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                    SEO & Performance-Optimierung
+                    <span data-i18n="services.web.bullet2">SEO & Performance-Optimierung</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                    Astro, WordPress, Cloudflare
+                    <span data-i18n="services.web.bullet3">Astro, WordPress, Cloudflare</span>
                   </li>
                 </ul>
               </div>
@@ -184,22 +203,22 @@ import Layout from "../layouts/Layout.astro";
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
                 </div>
                 <span class="text-5xl font-black text-white/5 mb-4">02</span>
-                <h3 class="text-2xl font-bold text-white mb-4">Photo & Video</h3>
-                <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow">
+                <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services.content.title">Photo & Video</h3>
+                <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow" data-i18n="services.content.text">
                   Foto- und Videocontent, der deine Marke hochwertig zeigt — für Website, Social Media und Kampagnen.
                 </p>
                 <ul class="space-y-3 text-sm text-zinc-500">
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
-                    Event-, Portrait- & Redaktionsfotografie
+                    <span data-i18n="services.content.bullet1">Event-, Portrait- & Redaktionsfotografie</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
-                    Videoproduktion & Videoschnitt
+                    <span data-i18n="services.content.bullet2">Videoproduktion & Videoschnitt</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
-                    Einheitlicher Look für alle Kanäle
+                    <span data-i18n="services.content.bullet3">Einheitlicher Look für alle Kanäle</span>
                   </li>
                 </ul>
               </div>
@@ -213,22 +232,22 @@ import Layout from "../layouts/Layout.astro";
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="m5 12-2-2 2-2"/><path d="m19 12 2-2-2-2"/><path d="m5 16-2 2 2 2"/><path d="m19 16 2 2-2 2"/><circle cx="12" cy="5" r="3"/></svg>
                 </div>
                 <span class="text-5xl font-black text-white/5 mb-4">03</span>
-                <h3 class="text-2xl font-bold text-white mb-4">Drohne & Aerial</h3>
-                <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow">
+                <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services.drone.title">Drohne & Aerial</h3>
+                <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow" data-i18n="services.drone.text">
                   Lizenzierte Drohnenaufnahmen für Immobilien, Events und Markencontent. Filmische Shots.
                 </p>
                 <ul class="space-y-3 text-sm text-zinc-500">
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    Lizenzierte Luftaufnahmen
+                    <span data-i18n="services.drone.bullet1">Lizenzierte Luftaufnahmen</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    Immobilien, Events & Unternehmen
+                    <span data-i18n="services.drone.bullet2">Immobilien, Events & Unternehmen</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    Ruhige, filmische Shots
+                    <span data-i18n="services.drone.bullet3">Ruhige, filmische Shots</span>
                   </li>
                 </ul>
               </div>
@@ -243,34 +262,22 @@ import Layout from "../layouts/Layout.astro";
         <div class="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 mb-16">
           <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 reveal-on-scroll">
             <div>
-              <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block">Expertise</span>
+              <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block" data-i18n="expertise.eyebrow">Expertise</span>
               <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                Drei Bereiche,<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">eine Vision.</span>
+                <span data-i18n="expertise.headingPrefix">Drei Bereiche,</span><br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400" data-i18n="expertise.headingAccent">eine Vision.</span>
               </h2>
             </div>
-            <p class="text-zinc-400 max-w-md">
+            <p class="text-zinc-400 max-w-md" data-i18n="expertise.subline">
               Von der Code-Zeile bis zum finalen Shot — ich verbinde Technik und Kreativität für Ergebnisse, die überzeugen.
             </p>
           </div>
         </div>
         
         <div class="w-full flex flex-col relative" id="reveal-list">
-          <div id="hover-follower" class="fixed top-0 left-0 w-0 h-0 pointer-events-none z-[45] will-change-transform hidden [@media(pointer:fine)]:block">
-             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] aspect-[4/3] overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-50 opacity-0" id="reveal-img-01">
-                <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center"></div>
-             </div>
-             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] aspect-[4/3] overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-50 opacity-0" id="reveal-img-02">
-                <div class="w-full h-full bg-[url('/expertise-content.jpg')] bg-cover bg-center"></div>
-             </div>
-             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] aspect-[4/3] overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-50 opacity-0" id="reveal-img-03">
-                <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center"></div>
-             </div>
-          </div>
-          
           {[
-            { title: 'Code', id: '01', desc: 'Performante Architekturen mit Astro, WordPress & Cloudflare', color: 'cyan' },
-            { title: 'Content', id: '02', desc: 'Event-Fotografie, Drohnenaufnahmen und Videoschnitt', color: 'violet' },
-            { title: 'Prozess', id: '03', desc: 'Klarer Ablauf: Briefing, Konzeption, Umsetzung, Launch', color: 'amber' }
+            { key: 'code', title: 'Code', id: '01', desc: 'Performante Architekturen mit Astro, WordPress & Cloudflare', color: 'cyan' },
+            { key: 'content', title: 'Content', id: '02', desc: 'Event-Fotografie, Drohnenaufnahmen und Videoschnitt', color: 'violet' },
+            { key: 'process', title: 'Prozess', id: '03', desc: 'Klarer Ablauf: Briefing, Konzeption, Umsetzung, Launch', color: 'amber' }
           ].map(item => (
             <div class="hover-reveal-row relative border-t border-white/5 last:border-b group md:cursor-none" data-id={item.id}>
               {/* Mobile: colored left border accent */}
@@ -278,10 +285,10 @@ import Layout from "../layouts/Layout.astro";
               <div class="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 py-8 md:py-16 flex flex-col md:flex-row md:justify-between md:items-center relative z-50 transition-colors duration-500 group-hover:text-white">
                 <div class="pointer-events-none">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="text-4xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter mix-blend-difference">{item.title}</h3>
+                    <h3 class="text-4xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter mix-blend-difference" data-i18n={`expertise.rows.${item.key}.title`}>{item.title}</h3>
                     <span class={`md:hidden text-xs font-bold tracking-widest px-2 py-0.5 rounded-full border ${item.color === 'cyan' ? 'text-cyan-400 border-cyan-500/40 bg-cyan-500/10' : item.color === 'violet' ? 'text-violet-400 border-violet-500/40 bg-violet-500/10' : 'text-amber-400 border-amber-500/40 bg-amber-500/10'}`}>{item.id}</span>
                   </div>
-                  <p class={`text-sm md:text-2xl font-light mt-1 md:mt-2 md:text-zinc-500 mix-blend-difference opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 duration-500 ${item.color === 'cyan' ? 'text-cyan-300/70' : item.color === 'violet' ? 'text-violet-300/70' : 'text-amber-300/70'}`}>{item.desc}</p>
+                  <p class={`text-sm md:text-2xl font-light mt-1 md:mt-2 md:text-zinc-500 mix-blend-difference opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 duration-500 ${item.color === 'cyan' ? 'text-cyan-300/70' : item.color === 'violet' ? 'text-violet-300/70' : 'text-amber-300/70'}`} data-i18n={`expertise.rows.${item.key}.desc`}>{item.desc}</p>
                 </div>
                 <span class={`text-xl md:text-3xl font-light opacity-30 group-hover:opacity-100 transition-opacity pointer-events-none hidden md:block ${item.color === 'cyan' ? 'group-hover:text-cyan-400' : item.color === 'violet' ? 'group-hover:text-violet-400' : 'group-hover:text-amber-400'}`}>{item.id}</span>
               </div>
@@ -299,8 +306,8 @@ import Layout from "../layouts/Layout.astro";
       <section class="py-24 px-6 md:px-16 lg:px-24 border-y border-white/5 bg-black relative overflow-hidden flex justify-center">
         <div class="w-full max-w-6xl flex flex-col md:flex-row items-center gap-16 justify-between relative z-10">
           <div class="flex-1 w-full max-w-2xl">
-            <h2 class="text-2xl md:text-4xl font-bold text-white mb-6">Tools & Technologien</h2>
-            <p class="text-zinc-400 text-lg mb-8 max-w-lg">
+            <h2 class="text-2xl md:text-4xl font-bold text-white mb-6" data-i18n="stack.heading">Tools & Technologien</h2>
+            <p class="text-zinc-400 text-lg mb-8 max-w-lg" data-i18n="stack.subline">
               Moderner Stack für performante Ergebnisse. Schnelle Umsetzung, saubere Struktur.
             </p>
             <div class="flex flex-wrap gap-3">
@@ -331,7 +338,7 @@ import Layout from "../layouts/Layout.astro";
            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/10 via-[#030303] to-violet-900/10 pointer-events-none"></div>
            
            <div class="absolute top-[15vh] left-[5vw] md:left-[10vw]">
-             <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight uppercase">Ausgewählte Arbeiten</h2>
+             <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight uppercase" data-i18n="work.heading">Ausgewählte Arbeiten</h2>
              <div class="h-1 w-24 bg-cyan-500 mt-4 rounded-full"></div>
            </div>
 
@@ -352,9 +359,9 @@ import Layout from "../layouts/Layout.astro";
                   <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="px-4 py-1 text-xs font-semibold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4 inline-block">Astro · Product</span>
                     <h3 class="text-3xl md:text-5xl font-black text-white mb-2">Focus Partner</h3>
-                    <p class="text-zinc-400 text-lg">Produktseite für ein fokussiertes Tool.</p>
+                    <p class="text-zinc-400 text-lg" data-i18n="work.focuspartner">Produktseite für ein fokussiertes Tool.</p>
                     <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md">Besuchen →</span>
+                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">Besuchen →</span>
                     </div>
                   </div>
                </a>
@@ -374,9 +381,9 @@ import Layout from "../layouts/Layout.astro";
                   <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="px-4 py-1 text-xs font-semibold rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30 mb-4 inline-block">Astro · SaaS</span>
                     <h3 class="text-3xl md:text-5xl font-black text-white mb-2">ExamDraft</h3>
-                    <p class="text-zinc-400 text-lg">KI-gestützte Prüfungsvorbereitung für Studierende.</p>
+                    <p class="text-zinc-400 text-lg" data-i18n="work.examdraft">KI-gestützte Prüfungsvorbereitung für Studierende.</p>
                     <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md">Besuchen →</span>
+                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">Besuchen →</span>
                     </div>
                   </div>
                </a>
@@ -396,9 +403,9 @@ import Layout from "../layouts/Layout.astro";
                   <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="px-4 py-1 text-xs font-semibold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4 inline-block">WordPress · PHP</span>
                     <h3 class="text-3xl md:text-5xl font-black text-white mb-2">TUM Management Alumni</h3>
-                    <p class="text-zinc-400 text-lg">Alumni-Website mit besserer Orientierung und modernerem Look.</p>
+                    <p class="text-zinc-400 text-lg" data-i18n="work.tum">Alumni-Website mit besserer Orientierung und modernerem Look.</p>
                     <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md">Besuchen →</span>
+                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">Besuchen →</span>
                     </div>
                   </div>
                </a>
@@ -418,9 +425,9 @@ import Layout from "../layouts/Layout.astro";
                   <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="px-4 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-4 inline-block">Astro · Figma</span>
                     <h3 class="text-3xl md:text-5xl font-black text-white mb-2">Cantero Consulting</h3>
-                    <p class="text-zinc-400 text-lg">Beratungs-Funnel mit klarer Conversion-Führung.</p>
+                    <p class="text-zinc-400 text-lg" data-i18n="work.cantero">Beratungs-Funnel mit klarer Conversion-Führung.</p>
                     <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md">Besuchen →</span>
+                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">Besuchen →</span>
                     </div>
                   </div>
                </a>
@@ -440,9 +447,9 @@ import Layout from "../layouts/Layout.astro";
                   <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="px-4 py-1 text-xs font-semibold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4 inline-block">WordPress · PHP</span>
                     <h3 class="text-3xl md:text-5xl font-black text-white mb-2">WIRO e.V.</h3>
-                    <p class="text-zinc-400 text-lg">Alumni-Website mit klarem Aufbau und modernem Auftritt.</p>
+                    <p class="text-zinc-400 text-lg" data-i18n="work.wiro">Alumni-Website mit klarem Aufbau und modernem Auftritt.</p>
                     <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md">Besuchen →</span>
+                       <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">Besuchen →</span>
                     </div>
                   </div>
                </a>
@@ -456,12 +463,12 @@ import Layout from "../layouts/Layout.astro";
           
           <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-16 gap-6 reveal-on-scroll">
             <div>
-              <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block">Mein Prozess</span>
+              <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block" data-i18n="process.eyebrow">Mein Prozess</span>
               <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                So <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">arbeite ich.</span>
+                <span data-i18n="process.headingPrefix">So</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400" data-i18n="process.headingAccent">arbeite ich.</span>
               </h2>
             </div>
-            <p class="text-zinc-400 max-w-md">
+            <p class="text-zinc-400 max-w-md" data-i18n="process.subline">
               Vier klare Schritte von der ersten Idee bis zum finalen Launch — strukturiert und fokussiert.
             </p>
           </div>
@@ -472,8 +479,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group hover:border-cyan-500/30 transition-colors duration-500">
               <span class="text-3xl sm:text-4xl md:text-5xl font-black text-cyan-500/30 group-hover:text-cyan-500 transition-colors">01</span>
               <div>
-                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Discovery</h3>
-                <p class="text-zinc-500 text-sm md:text-base">Ich höre deiner Vision zu, analysiere deine Ziele und definiere den Weg zum Erfolg.</p>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2" data-i18n="process.discovery.title">Discovery</h3>
+                <p class="text-zinc-500 text-sm md:text-base" data-i18n="process.discovery.text">Ich höre deiner Vision zu, analysiere deine Ziele und definiere den Weg zum Erfolg.</p>
               </div>
             </div>
 
@@ -481,8 +488,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group hover:border-violet-500/30 transition-colors duration-500">
               <span class="text-3xl sm:text-4xl md:text-5xl font-black text-violet-500/30 group-hover:text-violet-500 transition-colors">02</span>
               <div>
-                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Strategie</h3>
-                <p class="text-zinc-500 text-sm md:text-base">Ich analysiere den Markt, definiere die Positionierung und den technischen Ansatz.</p>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2" data-i18n="process.strategy.title">Strategie</h3>
+                <p class="text-zinc-500 text-sm md:text-base" data-i18n="process.strategy.text">Ich analysiere den Markt, definiere die Positionierung und den technischen Ansatz.</p>
               </div>
             </div>
 
@@ -490,8 +497,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group hover:border-cyan-500/30 transition-colors duration-500">
               <span class="text-3xl sm:text-4xl md:text-5xl font-black text-cyan-500/30 group-hover:text-cyan-500 transition-colors">03</span>
               <div>
-                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Umsetzung</h3>
-                <p class="text-zinc-500 text-sm md:text-base">Design, Build und Feinschliff — effizient und fokussiert auf dein Ziel.</p>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2" data-i18n="process.implementation.title">Umsetzung</h3>
+                <p class="text-zinc-500 text-sm md:text-base" data-i18n="process.implementation.text">Design, Build und Feinschliff — effizient und fokussiert auf dein Ziel.</p>
               </div>
             </div>
 
@@ -499,8 +506,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group hover:border-amber-500/30 transition-colors duration-500">
               <span class="text-3xl sm:text-4xl md:text-5xl font-black text-amber-500/30 group-hover:text-amber-500 transition-colors">04</span>
               <div>
-                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Launch</h3>
-                <p class="text-zinc-500 text-sm md:text-base">Go-Live mit Support und bei Bedarf weiterführender Optimierung.</p>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2" data-i18n="process.launch.title">Launch</h3>
+                <p class="text-zinc-500 text-sm md:text-base" data-i18n="process.launch.text">Go-Live mit Support und bei Bedarf weiterführender Optimierung.</p>
               </div>
             </div>
             
@@ -513,18 +520,18 @@ import Layout from "../layouts/Layout.astro";
         <canvas id="cta-particles" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-900/20 pointer-events-none"></div>
         <div class="cta-content w-full max-w-2xl mx-auto relative z-10 flex flex-col items-start text-left opacity-0 translate-y-8 px-2">
-          <h2 class="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 md:mb-8 tracking-tight leading-tight">Lass uns etwas <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500">Bleibendes</span> bauen.</h2>
-          <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 md:mb-12 max-w-xl">Schreib mir, wie ich dich bei deinem Projekt unterstützen kann.</p>
+          <h2 class="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 md:mb-8 tracking-tight leading-tight"><span data-i18n="contact.headingPrefix">Lass uns etwas</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500" data-i18n="contact.headingAccent">Bleibendes</span> <span data-i18n="contact.headingSuffix">bauen.</span></h2>
+          <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 md:mb-12 max-w-xl" data-i18n="contact.subline">Schreib mir, wie ich dich bei deinem Projekt unterstützen kann.</p>
           
-          <form class="w-full space-y-3 sm:space-y-4" action="https://formspree.io/f/your-form-id" method="POST">
+          <form class="w-full space-y-3 sm:space-y-4" action="https://formspree.io/f/mzdakanj" method="POST">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <input type="text" name="name" placeholder="Name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
-              <input type="email" name="email" placeholder="E-Mail" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+              <input type="text" name="name" placeholder="Name" data-i18n-placeholder="contact.form.name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+              <input type="email" name="email" placeholder="E-Mail" data-i18n-placeholder="contact.form.email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
             </div>
-            <input type="text" name="subject" placeholder="Betreff" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
-            <textarea name="message" rows="4" placeholder="Nachricht" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors resize-none text-sm sm:text-base"></textarea>
+            <input type="text" name="subject" placeholder="Betreff" data-i18n-placeholder="contact.form.subject" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+            <textarea name="message" rows="4" placeholder="Nachricht" data-i18n-placeholder="contact.form.message" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors resize-none text-sm sm:text-base"></textarea>
             <button type="submit" class="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold rounded-full hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 w-full sm:w-fit text-sm sm:text-base">
-              Nachricht senden
+              <span data-i18n="contact.form.submit">Nachricht senden</span>
             </button>
           </form>
           
@@ -544,15 +551,172 @@ import Layout from "../layouts/Layout.astro";
 
     {/* Footer */}
     <footer class="py-8 text-center text-zinc-600 text-sm border-t border-white/5 reveal-on-scroll bg-[#030303]">
-      <p>© {new Date().getFullYear()} Nikolas Maerker. Alle Rechte vorbehalten.</p>
+      <p>© {new Date().getFullYear()} Nikolas Maerker. <span data-i18n="footer.rights">Alle Rechte vorbehalten.</span></p>
       <div class="mt-3 flex justify-center gap-6">
-        <a href="/imprint" class="hover:text-zinc-400 transition-colors">Impressum</a>
-        <a href="/privacy" class="hover:text-zinc-400 transition-colors">Datenschutz</a>
+        <a href="/imprint" class="hover:text-zinc-400 transition-colors" data-i18n="footer.imprint">Impressum</a>
+        <a href="/privacy" class="hover:text-zinc-400 transition-colors" data-i18n="footer.privacy">Datenschutz</a>
       </div>
     </footer>
     
   </main>
 </Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const translations = {
+      en: {
+        metaTitle: 'Nikolas Maerker | Web Developer & Creative',
+        metaDescription: 'Freelancer for web development, video production, and drone footage — everything from one source.',
+        'nav.services': 'Services',
+        'nav.work': 'Work',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'hero.line1': 'Websites and content',
+        'hero.line2': 'for service providers,',
+        'hero.line3Prefix': 'companies',
+        'hero.line3Accent': 'and brands.',
+        'hero.subline': 'Web design, photo, video, and drone footage — everything from one source.',
+        'hero.primaryCta': 'Learn more',
+        'hero.secondaryCta': 'Start a project',
+        'journey.headline': 'Everything from<br/>one source.',
+        'journey.scroll': 'Scroll down ↓',
+        'journey.reveal': 'Focused.',
+        'services.eyebrow': 'Services',
+        'services.headingPrefix': 'What I',
+        'services.headingAccent': 'do.',
+        'services.subline': 'From concept to launch — everything from one source, efficient and focused on your outcome.',
+        'services.web.title': 'Websites & Landing Pages',
+        'services.web.text': 'High-performance websites that explain your offer clearly and turn visitors into inquiries.',
+        'services.web.bullet1': 'Positioning & UX strategy',
+        'services.web.bullet2': 'SEO & performance optimization',
+        'services.web.bullet3': 'Astro, WordPress, Cloudflare',
+        'services.content.title': 'Photo & Video',
+        'services.content.text': 'Photo and video content that presents your brand with a premium look — for websites, social media, and campaigns.',
+        'services.content.bullet1': 'Event, portrait & editorial photography',
+        'services.content.bullet2': 'Video production & editing',
+        'services.content.bullet3': 'Consistent look across every channel',
+        'services.drone.title': 'Drone & Aerial',
+        'services.drone.text': 'Licensed drone footage for real estate, events, and brand content. Cinematic shots.',
+        'services.drone.bullet1': 'Licensed aerial footage',
+        'services.drone.bullet2': 'Real estate, events & companies',
+        'services.drone.bullet3': 'Smooth, cinematic shots',
+        'expertise.eyebrow': 'Expertise',
+        'expertise.headingPrefix': 'Three disciplines,',
+        'expertise.headingAccent': 'one vision.',
+        'expertise.subline': 'From the first line of code to the final shot — I combine technology and creativity for results that convince.',
+        'expertise.rows.code.title': 'Code',
+        'expertise.rows.code.desc': 'High-performance architectures with Astro, WordPress & Cloudflare',
+        'expertise.rows.content.title': 'Content',
+        'expertise.rows.content.desc': 'Event photography, drone footage, and video editing',
+        'expertise.rows.process.title': 'Process',
+        'expertise.rows.process.desc': 'Clear workflow: briefing, concept, implementation, launch',
+        'stack.heading': 'Tools & Technologies',
+        'stack.subline': 'A modern stack for high-performance results. Fast implementation, clean structure.',
+        'work.heading': 'Selected Work',
+        'work.focuspartner': 'Product page for a focused tool.',
+        'work.examdraft': 'AI-powered exam preparation for students.',
+        'work.tum': 'Alumni website with clearer orientation and a more modern look.',
+        'work.cantero': 'Consulting funnel with clear conversion guidance.',
+        'work.wiro': 'Alumni website with clear structure and a modern presence.',
+        'work.visit': 'Visit →',
+        'process.eyebrow': 'My Process',
+        'process.headingPrefix': 'How',
+        'process.headingAccent': 'I work.',
+        'process.subline': 'Four clear steps from the first idea to final launch — structured and focused.',
+        'process.discovery.title': 'Discovery',
+        'process.discovery.text': 'I listen to your vision, analyze your goals, and define the path to success.',
+        'process.strategy.title': 'Strategy',
+        'process.strategy.text': 'I analyze the market, define positioning, and choose the technical approach.',
+        'process.implementation.title': 'Implementation',
+        'process.implementation.text': 'Design, build, and refinement — efficient and focused on your goal.',
+        'process.launch.title': 'Launch',
+        'process.launch.text': 'Go-live with support and further optimization when needed.',
+        'contact.headingPrefix': "Let's build something",
+        'contact.headingAccent': 'lasting',
+        'contact.headingSuffix': 'together.',
+        'contact.subline': 'Tell me how I can support your project.',
+        'contact.form.name': 'Name',
+        'contact.form.email': 'Email',
+        'contact.form.subject': 'Subject',
+        'contact.form.message': 'Message',
+        'contact.form.submit': 'Send message',
+        'footer.rights': 'All rights reserved.',
+        'footer.imprint': 'Imprint',
+        'footer.privacy': 'Privacy',
+      },
+    };
+
+    const textNodes = Array.from(document.querySelectorAll('[data-i18n]'));
+    const placeholderNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
+
+    const defaults = {
+      title: document.title,
+      description: document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
+      text: new Map(textNodes.map((node) => [node.getAttribute('data-i18n'), node.innerHTML])),
+      placeholders: new Map(placeholderNodes.map((node) => [node.getAttribute('data-i18n-placeholder'), node.getAttribute('placeholder') ?? ''])),
+    };
+
+    const getLanguage = () => {
+      const param = new URLSearchParams(window.location.search).get('lang');
+      if (param === 'de' || param === 'en') return param;
+      const stored = window.localStorage.getItem('site-language');
+      return stored === 'en' ? 'en' : 'de';
+    };
+
+    const updateUrl = (lang) => {
+      const url = new URL(window.location.href);
+      if (lang === 'en') {
+        url.searchParams.set('lang', 'en');
+      } else {
+        url.searchParams.delete('lang');
+      }
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+    };
+
+    const setLanguage = (lang, shouldUpdateUrl = false) => {
+      const dictionary = translations[lang] ?? {};
+      document.documentElement.lang = lang;
+      document.title = lang === 'en' ? dictionary.metaTitle : defaults.title;
+      document.querySelector('meta[name="description"]')?.setAttribute(
+        'content',
+        lang === 'en' ? dictionary.metaDescription : defaults.description,
+      );
+
+      textNodes.forEach((node) => {
+        const key = node.getAttribute('data-i18n');
+        node.innerHTML = lang === 'en' && dictionary[key] ? dictionary[key] : defaults.text.get(key);
+      });
+
+      placeholderNodes.forEach((node) => {
+        const key = node.getAttribute('data-i18n-placeholder');
+        node.setAttribute(
+          'placeholder',
+          lang === 'en' && dictionary[key] ? dictionary[key] : defaults.placeholders.get(key),
+        );
+      });
+
+      document.querySelectorAll('[data-lang-switch]').forEach((button) => {
+        const isActive = button.getAttribute('data-lang-switch') === lang;
+        button.classList.toggle('bg-white/15', isActive);
+        button.classList.toggle('text-white', isActive);
+        button.classList.toggle('text-white/60', !isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+
+      window.localStorage.setItem('site-language', lang);
+      if (shouldUpdateUrl) updateUrl(lang);
+    };
+
+    document.querySelectorAll('[data-lang-switch]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const lang = button.getAttribute('data-lang-switch') === 'en' ? 'en' : 'de';
+        setLanguage(lang, true);
+      });
+    });
+
+    setLanguage(getLanguage());
+  });
+</script>
 
 <script>
   document.addEventListener('astro:page-load', () => {
@@ -872,16 +1036,22 @@ import Layout from "../layouts/Layout.astro";
       // Horizontal Scroll (cached bounds — no getBoundingClientRect)
       if (horizontalSection && horizontalTrack) {
         const ih = window.innerHeight;
-        const relScroll = scrollY - horizTop;
-        const scrollableDistance = horizHeight - ih;
-        let progress = 0;
-        if (relScroll >= 0 && relScroll <= scrollableDistance) {
-          progress = relScroll / scrollableDistance;
-        } else if (relScroll > scrollableDistance) {
-          progress = 1;
+        const startOffset = 150;
+        const arrivalThreshold = 300;
+        const relScroll = scrollY - horizTop - startOffset;
+        const clampedRelScroll = Math.max(0, relScroll - arrivalThreshold);
+        const scrollableDistance = horizHeight - ih - startOffset - arrivalThreshold;
+        let targetProgress = 0;
+        if (clampedRelScroll >= 0 && clampedRelScroll <= scrollableDistance) {
+          targetProgress = clampedRelScroll / scrollableDistance;
+        } else if (clampedRelScroll > scrollableDistance) {
+          targetProgress = 1;
         }
+        // Smooth interpolation
+        if (typeof window.horizProgress === 'undefined') window.horizProgress = 0;
+        window.horizProgress += (targetProgress - window.horizProgress) * 0.3;
         const maxTranslate = -(document.body.clientWidth * 2.6);
-        horizontalTrack.style.transform = `translate3d(${progress * maxTranslate}px, 0, 0)`;
+        horizontalTrack.style.transform = `translate3d(${window.horizProgress * maxTranslate}px, 0, 0)`;
       }
 
       // Follower Animation (desktop only)

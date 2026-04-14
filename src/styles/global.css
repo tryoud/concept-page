@@ -10,10 +10,11 @@ body {
 }
 
 @media (pointer: fine) {
-  html, body {
+  html, body, * {
     cursor: none !important;
   }
-  *, *::before, *::after {
+  html *, html *::before, html *::after,
+  html *:hover, html *:focus, html *:active {
     cursor: none !important;
   }
 }
