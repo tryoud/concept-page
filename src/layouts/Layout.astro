@@ -6,17 +6,25 @@ interface Props {
   title: string;
   description?: string;
   lang?: string;
+  ogImage?: string;
+  canonical?: string;
 }
 
 const {
   title,
   description = 'Nikolas Maerker — Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen.',
   lang = 'de',
+  ogImage = '/og/og-tryoud.png',
+  canonical,
 } = Astro.props;
+
+const siteUrl = 'https://tryoud.com';
+const fullCanonical = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
 
 <!doctype html>
-<html lang={lang} class="dark">
+<html lang={lang} class="dark" data-reduced-motion="false">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -25,28 +33,78 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
     <meta name="description" content={description} />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href={fullCanonical} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Nikolas Maerker",
+      url: siteUrl,
+      jobTitle: "Web Developer & Creative",
+      sameAs: [
+        "https://www.instagram.com/nikolasmaerker",
+        "https://github.com/tryoud",
+        "https://www.linkedin.com/in/nikolasmaerker/"
+      ]
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: title,
+      url: siteUrl,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${siteUrl}/?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+    
     <ViewTransitions />
 	</head>
 	<body class="bg-[#030303] text-zinc-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
 		
-		{/* Noise Overlay */}
-		<div class="pointer-events-none fixed inset-0 z-50 w-full h-full opacity-30 mix-blend-overlay" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"></div>
+		<!-- Noise Overlay -->
+		<div class="pointer-events-none fixed inset-0 z-50 w-full h-full opacity-30 mix-blend-overlay noise-overlay" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"></div>
 		
-		{/* Custom Cursor — starts invisible, no position until first mousemove */}
-		<div transition:persist id="magic-cursor" class="hidden md:block pointer-events-none fixed top-0 left-0 w-6 h-6 rounded-full bg-cyan-400 mix-blend-screen shadow-[0_0_25px_rgba(34,211,238,0.9)] z-[9999] opacity-0 backdrop-blur-sm" style="transform: translate3d(-100px,-100px,0)">
+		<!-- Custom Cursor -->
+		<div transition:persist id="magic-cursor" class="hidden pointer-events-none fixed top-0 left-0 w-6 h-6 rounded-full bg-cyan-400 mix-blend-screen shadow-[0_0_25px_rgba(34,211,238,0.9)] z-[9999] opacity-0 backdrop-blur-sm cursor-element" style="transform: translate3d(-100px,-100px,0)">
 		</div>
 
 		<slot />
 
 		<script>
       document.addEventListener('astro:page-load', () => {
+        const html = document.documentElement;
         const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-        if (isTouchDevice) return;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        html.setAttribute('data-reduced-motion', String(prefersReducedMotion));
+        
+        if (isTouchDevice || prefersReducedMotion) return;
 
         const cursor = document.getElementById('magic-cursor');
         if (!cursor) return;
+        cursor.classList.remove('hidden');
+        cursor.classList.add('md:block');
 
-        // Always reset to invisible on each page load (handles View Transitions)
         cursor.style.transition = 'none';
         cursor.style.opacity = '0';
         cursor.style.transform = 'translate3d(-100px,-100px,0)';
@@ -58,10 +116,8 @@ const {
         let isHovering = false;
         let hasEntered = false;
 
-        // Snap to real position on first entry, then smooth-follow
         document.addEventListener('mousemove', (e) => {
           if (!hasEntered) {
-            // First move: teleport cursor to exact position instantly
             cursorX = e.clientX;
             cursorY = e.clientY;
             hasEntered = true;
@@ -72,7 +128,6 @@ const {
           mouseY = e.clientY;
         }, { passive: true });
 
-        // Hide cursor when mouse leaves the window
         document.addEventListener('mouseleave', () => {
           cursor.style.opacity = '0';
           hasEntered = false;
@@ -126,25 +181,27 @@ const {
     background-color: var(--bg-color);
   }
   
-/* Hide the default cursor everywhere for mouse users */
+  /* Hide default cursor for mouse users */
   @media (pointer: fine) {
-    html, html body, html *, html *::before, html *::after,
-    html *:hover, html *:focus, html *:active,
-    #video-controls, #video-controls * {
+    html:not([data-reduced-motion="true"]) body,
+    html:not([data-reduced-motion="true"]) body * {
       cursor: none !important;
     }
   }
-
- 	html.dark body {
- 		background-color: #030303 !important;
- 		color: #f4f4f5 !important;
- 	}
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		min-height: 100%;
-	}
+  
+  /* Reduced motion: disable animations globally */
+  html[data-reduced-motion="true"] *,
+  html[data-reduced-motion="true"] *::before,
+  html[data-reduced-motion="true"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html[data-reduced-motion="true"] .noise-overlay,
+  html[data-reduced-motion="true"] .cursor-element {
+    display: none !important;
+  }
   
   /* Fallback for interactables transition when mouse leaves */
   a, button, .magnetic {

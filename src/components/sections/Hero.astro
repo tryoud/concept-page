@@ -1,80 +1,188 @@
 ---
-const { hero } = Astro.props;
-
-const headline = hero?.headline ?? "Fast, SEO-ready websites—built to convert.";
-const subline = hero?.subline ?? "";
-const ctas = hero?.ctas ?? [];
-const highlights = hero?.highlights ?? [];
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-  <div class="grid gap-10 md:grid-cols-12 md:items-center">
-    <div class="md:col-span-7">
-      <h1 class="text-4xl font-semibold tracking-tight text-black sm:text-5xl">
-        {headline}
-      </h1>
+<!-- Background Glow Orbs -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+  <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-600/20 blur-[120px] mix-blend-screen opacity-70 animate-pulse"></div>
+  <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-violet-600/20 blur-[150px] mix-blend-screen opacity-70" style="animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></div>
+  <div class="absolute top-[40%] left-[50%] -translate-x-1/2 w-[800px] h-[400px] rounded-[100%] bg-blue-900/10 blur-[120px]"></div>
+</div>
 
-      {subline && (
-        <p class="mt-5 max-w-2xl text-base leading-relaxed text-black/70 sm:text-lg">
-          {subline}
-        </p>
-      )}
+<!-- Hero Video Background -->
+<div id="hero-video-wrapper" class="fixed inset-0 -z-20">
+  <div id="hero-player" class="w-full h-full"></div>
+  <div class="hero-video-overlay"></div>
+</div>
 
-      {(ctas?.length ?? 0) > 0 && (
-        <div class="mt-8 flex flex-wrap gap-3">
-          {ctas.map((cta) => {
-            const isPrimary = cta.variant === "primary";
-            const base =
-              "inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium transition";
-            const primary = "bg-black text-white hover:bg-black/90";
-            const outline = "border border-black/15 bg-white text-black hover:bg-black/5";
-            return (
-              <a class={`${base} ${isPrimary ? primary : outline}`} href={cta.href}>
-                {cta.label}
-              </a>
-            );
-          })}
-        </div>
-      )}
+<!-- Video Controls -->
+<div id="video-controls" class="fixed bottom-8 right-8 z-50 hidden md:flex gap-3" style="transition: opacity 0.5s ease; opacity: 1;">
+  <button id="fullscreen-btn" class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300" aria-label="Video fullscreen">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+  </button>
+  <button id="unmute-btn" class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300" aria-label="Ton einschalten">
+    <svg id="mute-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+    <svg id="sound-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+  </button>
+</div>
 
-      {(highlights?.length ?? 0) > 0 && (
-        <ul class="mt-10 grid gap-3 sm:grid-cols-2">
-          {highlights.map((h) => (
-            <li class="flex items-start gap-3 rounded-2xl border border-black/10 bg-white p-4">
-              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-lg bg-black text-xs font-semibold text-white">
-                ✓
-              </span>
-              <span class="text-sm text-black/75">{h}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-
-    <div class="md:col-span-5">
-      <div class="rounded-3xl border border-black/10 bg-gradient-to-b from-black/[0.03] to-black/[0.01] p-6">
-        <div class="text-xs font-medium uppercase tracking-wide text-black/50">
-          Snapshot
-        </div>
-        <div class="mt-4 space-y-4">
-          <div class="rounded-2xl border border-black/10 bg-white p-4">
-            <div class="text-sm font-semibold text-black">Stack</div>
-            <div class="mt-1 text-sm text-black/70">Astro · Tailwind · Cloudflare Pages</div>
-          </div>
-          <div class="rounded-2xl border border-black/10 bg-white p-4">
-            <div class="text-sm font-semibold text-black">Focus</div>
-            <div class="mt-1 text-sm text-black/70">
-              Performance, SEO, clean UI, maintainable content.
-            </div>
-          </div>
-          <div class="rounded-2xl border border-black/10 bg-white p-4">
-            <div class="text-sm font-semibold text-black">Work</div>
-            <div class="mt-1 text-sm text-black/70">
-              Websites, landing pages, CMS structuring, automations.
-            </div>
-          </div>
-        </div>
-      </div>
+<section class="min-h-[100dvh] w-full flex flex-col justify-center items-center px-4 sm:px-6 pt-20 pb-12 md:pt-32 md:pb-20 lg:px-24 relative">
+  <div class="w-full max-w-5xl mx-auto flex flex-col items-start text-left">
+    <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.1] max-w-5xl reveal-on-scroll">
+      <span class="block" data-i18n="hero.line1">{isEn ? 'Websites and content' : 'Websites und Content'}</span>
+      <span class="block" data-i18n="hero.line2">{isEn ? 'for service providers,' : 'für Dienstleister,'}</span>
+      <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'companies' : 'Unternehmen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'and brands.' : 'und Marken.'}</span></span>
+    </h1>
+    
+    <p class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal-on-scroll" data-i18n="hero.subline">
+      {isEn ? 'Web design, photo, video, and drone footage — everything from one source.' : 'Web Design, Photo, Video und Drohnenaufnahmen — alles aus einer Hand.'}
+    </p>
+    
+    <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-8 sm:mt-12 w-fit reveal-on-scroll">
+      <a href="#apple-journey" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
+        <span data-i18n="hero.primaryCta">{isEn ? 'Learn more' : 'Mehr erfahren'}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+      <a href="#contact" class="group px-6 sm:px-8 py-3 sm:py-4 text-white font-medium hover:text-cyan-400 transition-colors flex items-center gap-2 text-sm sm:text-base">
+        <span data-i18n="hero.secondaryCta">{isEn ? 'Start a project' : 'Projekt starten'}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 -translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0 sm:w-4 sm:h-4"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+      </a>
     </div>
   </div>
+  <!-- Sentinel: observed to pause/play video when hero leaves viewport -->
+  <div id="hero-sentinel" class="absolute bottom-0 w-full h-px pointer-events-none"></div>
 </section>
+
+<style>
+  #hero-video-wrapper {
+    background: #030303;
+  }
+  #hero-player {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+  #hero-player iframe {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: max(100vw, calc(100vh * 16 / 9));
+    height: max(100vh, calc(100vw * 9 / 16));
+  }
+  .hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.7) 50%, rgba(3,3,3,0.95) 100%);
+    z-index: 1;
+    pointer-events: auto;
+  }
+  @media (max-width: 768px) {
+    #hero-video-wrapper, #hero-player { display: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) and (min-width: 769px) {
+    #hero-video-wrapper {
+      background-image: url('https://i.ytimg.com/vi/vWi8L-jiYhc/maxresdefault.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // YouTube IFrame API
+    let player;
+    let isMuted = true;
+    const isMobile = window.innerWidth <= 768;
+
+    if (!isMobile && !window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    function initYTPlayer() {
+      player = new YT.Player('hero-player', {
+        videoId: 'vWi8L-jiYhc',
+        playerVars: {
+          autoplay: 1, mute: 1, loop: 1, playlist: 'vWi8L-jiYhc',
+          controls: 0, rel: 0, modestbranding: 1, playsinline: 1,
+          showinfo: 0, fs: 0, wmode: 'transparent', vq: 'hd2160'
+        },
+        events: {
+          onReady: (e) => { e.target.setPlaybackQuality('hd2160'); },
+          onPlaybackQualityChange: (e) => {
+            const q = e.target.getPlaybackQuality();
+            if (q !== 'hd2160' && q !== 'hd1440' && q !== 'hd1080') {
+              e.target.setPlaybackQuality('hd2160');
+            }
+          }
+        }
+      });
+    }
+
+    if (!isMobile) {
+      if (window.YT && window.YT.Player) {
+        initYTPlayer();
+      } else {
+        window.onYouTubeIframeAPIReady = initYTPlayer;
+      }
+
+      const heroSentinel = document.getElementById('hero-sentinel');
+      const videoControls = document.getElementById('video-controls');
+      if (heroSentinel) {
+        new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            player?.playVideo?.();
+            if (videoControls) { videoControls.style.opacity = '1'; videoControls.style.pointerEvents = 'auto'; }
+          } else {
+            player?.pauseVideo?.();
+            if (videoControls) { videoControls.style.opacity = '0'; videoControls.style.pointerEvents = 'none'; }
+          }
+        }, { threshold: 0 }).observe(heroSentinel);
+      }
+    }
+
+    // Unmute Button
+    const unmuteBtn = document.getElementById('unmute-btn');
+    const muteIcon = document.getElementById('mute-icon');
+    const soundIcon = document.getElementById('sound-icon');
+    function updateUnmuteBtn() {
+      if (!muteIcon || !soundIcon) return;
+      muteIcon.classList.toggle('hidden', !isMuted);
+      soundIcon.classList.toggle('hidden', isMuted);
+    }
+    if (unmuteBtn) {
+      updateUnmuteBtn();
+      unmuteBtn.addEventListener('click', () => {
+        if (!player) return;
+        if (isMuted) { player.unMute(); isMuted = false; }
+        else { player.mute(); isMuted = true; }
+        updateUnmuteBtn();
+      });
+    }
+
+    // Fullscreen Button
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', () => {
+        if (player && player.getIframe) {
+          const iframe = player.getIframe();
+          if (iframe.requestFullscreen) iframe.requestFullscreen();
+          else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+          else if (iframe.webkitEnterFullscreen) iframe.webkitEnterFullscreen();
+          if (player.unMute) player.unMute();
+          if (player.setVolume) player.setVolume(100);
+          isMuted = false;
+          updateUnmuteBtn();
+        }
+      });
+    }
+  });
+</script>

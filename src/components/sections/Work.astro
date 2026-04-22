@@ -1,0 +1,191 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<!-- Tech Stack -->
+<section class="py-24 px-6 md:px-16 lg:px-24 border-y border-white/5 bg-black relative overflow-hidden flex justify-center">
+  <div class="w-full max-w-6xl flex flex-col md:flex-row items-center gap-16 justify-between relative z-10">
+    <div class="flex-1 w-full max-w-2xl">
+      <h2 class="text-2xl md:text-4xl font-bold text-white mb-6" data-i18n="stack.heading">{isEn ? 'Tools & Technologies' : 'Tools & Technologien'}</h2>
+      <p class="text-zinc-400 text-lg mb-8 max-w-lg" data-i18n="stack.subline">
+        {isEn ? 'A modern stack for high-performance results. Fast implementation, clean structure.' : 'Moderner Stack für performante Ergebnisse. Schnelle Umsetzung, saubere Struktur.'}
+      </p>
+      <div class="flex flex-wrap gap-3">
+        {["Astro", "WordPress", "Figma", "TypeScript", "Cloudflare", "Premiere Pro", "Lightroom"].map(tag => (
+          <span class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-zinc-300 font-medium hover:bg-white/10 hover:text-white transition-colors">{tag}</span>
+        ))}
+      </div>
+    </div>
+    <div class="hidden md:flex flex-1 w-full justify-center items-center">
+      <div class="relative w-full max-w-md aspect-square h-[300px] md:h-[400px]">
+        <div class="scroll-spin-particle-slow w-full aspect-square rounded-full border border-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="scroll-spin-particle-fast w-[80%] aspect-square rounded-full border border-zinc-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="scroll-spin-particle-core w-[60%] aspect-square rounded-full bg-gradient-to-tr from-cyan-600/30 to-violet-600/30 border border-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_80px_rgba(139,92,246,0.3)]">
+          <div class="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 shadow-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Horizontal Scroll Showcase - Projects -->
+<section class="h-[400vh] w-full relative bg-[#030303]" id="work">
+  <div class="sticky top-0 h-screen w-full flex flex-col items-start justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/10 via-[#030303] to-violet-900/10 pointer-events-none"></div>
+    
+    <div class="absolute top-[15vh] left-[5vw] md:left-[10vw]">
+      <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight uppercase" data-i18n="work.heading">{isEn ? 'Selected Work' : 'Ausgewählte Arbeiten'}</h2>
+      <div class="h-1 w-24 bg-cyan-500 mt-4 rounded-full"></div>
+    </div>
+
+    <div class="horizontal-track absolute top-[28vh] w-[350vw] h-[60vh] flex gap-[5vw] px-[8vw] will-change-transform">
+      <!-- Focus Partner -->
+      <a href="https://focuspartner.app/" target="_blank" rel="noopener" class="shrink-0 w-[85vw] md:w-[60vw] h-full bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group shadow-2xl block hover:border-cyan-500/50 transition-all duration-500">
+        <div class="absolute inset-0 overflow-hidden">
+          <img src="https://s0.wordpress.com/mshots/v1/https%3A%2F%2Ffocuspartner.app%2F?w=1400&h=900" alt="Focus Partner Screenshot" class="w-full h-full object-cover object-top opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out" loading="lazy" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-cyan-900/30 to-transparent z-10"></div>
+        <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="px-4 py-1 text-xs font-semibold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4 inline-block">Astro · Product</span>
+          <h3 class="text-3xl md:text-5xl font-black text-white mb-2">Focus Partner</h3>
+          <p class="text-zinc-400 text-lg" data-i18n="work.focuspartner">{isEn ? 'Product page for a focused tool.' : 'Produktseite für ein fokussiertes Tool.'}</p>
+          <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+            <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">{isEn ? 'Visit →' : 'Besuchen →'}</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- ExamDraft -->
+      <a href="https://examdraft.com/" target="_blank" rel="noopener" class="shrink-0 w-[85vw] md:w-[60vw] h-full bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group shadow-2xl block hover:border-violet-500/50 transition-all duration-500">
+        <div class="absolute inset-0 overflow-hidden">
+          <img src="https://s0.wordpress.com/mshots/v1/https%3A%2F%2Fexamdraft.com%2F?w=1400&h=900" alt="ExamDraft Screenshot" class="w-full h-full object-cover object-top opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out" loading="lazy" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-violet-900/30 to-transparent z-10"></div>
+        <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="px-4 py-1 text-xs font-semibold rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30 mb-4 inline-block">Astro · SaaS</span>
+          <h3 class="text-3xl md:text-5xl font-black text-white mb-2">ExamDraft</h3>
+          <p class="text-zinc-400 text-lg" data-i18n="work.examdraft">{isEn ? 'AI-powered exam preparation for students.' : 'KI-gestützte Prüfungsvorbereitung für Studierende.'}</p>
+          <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+            <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">{isEn ? 'Visit →' : 'Besuchen →'}</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- TUM -->
+      <a href="https://tum-management-alumni.de/" target="_blank" rel="noopener" class="shrink-0 w-[85vw] md:w-[60vw] h-full bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group shadow-2xl block hover:border-cyan-500/50 transition-all duration-500">
+        <div class="absolute inset-0 overflow-hidden">
+          <img src="https://s0.wordpress.com/mshots/v1/https%3A%2F%2Ftum-management-alumni.de%2F?w=1400&h=900" alt="TUM Management Alumni Screenshot" class="w-full h-full object-cover object-top opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out" loading="lazy" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-cyan-900/30 to-transparent z-10"></div>
+        <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="px-4 py-1 text-xs font-semibold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4 inline-block">WordPress · PHP</span>
+          <h3 class="text-3xl md:text-5xl font-black text-white mb-2">TUM Management Alumni</h3>
+          <p class="text-zinc-400 text-lg" data-i18n="work.tum">{isEn ? 'Alumni website with clearer orientation and a more modern look.' : 'Alumni-Website mit besserer Orientierung und modernerem Look.'}</p>
+          <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+            <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">{isEn ? 'Visit →' : 'Besuchen →'}</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Cantero -->
+      <a href="https://www.cantero-consulting.de/" target="_blank" rel="noopener" class="shrink-0 w-[85vw] md:w-[60vw] h-full bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group shadow-2xl block hover:border-amber-500/50 transition-all duration-500">
+        <div class="absolute inset-0 overflow-hidden">
+          <img src="https://s0.wordpress.com/mshots/v1/https%3A%2F%2Fwww.cantero-consulting.de%2F?w=1400&h=900" alt="Cantero Consulting Screenshot" class="w-full h-full object-cover object-top opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out" loading="lazy" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-amber-900/30 to-transparent z-10"></div>
+        <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="px-4 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-4 inline-block">Astro · Figma</span>
+          <h3 class="text-3xl md:text-5xl font-black text-white mb-2">Cantero Consulting</h3>
+          <p class="text-zinc-400 text-lg" data-i18n="work.cantero">{isEn ? 'Consulting funnel with clear conversion guidance.' : 'Beratungs-Funnel mit klarer Conversion-Führung.'}</p>
+          <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+            <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">{isEn ? 'Visit →' : 'Besuchen →'}</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- WIRO -->
+      <a href="https://www.wiro-alumni.de/" target="_blank" rel="noopener" class="shrink-0 w-[85vw] md:w-[60vw] h-full bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group shadow-2xl block hover:border-cyan-500/50 transition-all duration-500">
+        <div class="absolute inset-0 overflow-hidden">
+          <img src="https://s0.wordpress.com/mshots/v1/https%3A%2F%2Fwww.wiro-alumni.de%2F?w=1400&h=900" alt="WIRO Alumni Screenshot" class="w-full h-full object-cover object-top opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out" loading="lazy" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-cyan-900/30 to-transparent z-10"></div>
+        <div class="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="px-4 py-1 text-xs font-semibold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4 inline-block">WordPress · PHP</span>
+          <h3 class="text-3xl md:text-5xl font-black text-white mb-2">WIRO e.V.</h3>
+          <p class="text-zinc-400 text-lg" data-i18n="work.wiro">{isEn ? 'Alumni website with clear structure and a modern presence.' : 'Alumni-Website mit klarem Aufbau und modernem Auftritt.'}</p>
+          <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+            <span class="px-4 py-2 rounded-full border border-white/20 text-xs text-white uppercase font-bold tracking-widest backdrop-blur-md" data-i18n="work.visit">{isEn ? 'Visit →' : 'Besuchen →'}</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const horizontalSection = document.getElementById('work');
+    const horizontalTrack = document.querySelector('.horizontal-track');
+    const particleSlow = document.querySelector('.scroll-spin-particle-slow');
+    const particleFast = document.querySelector('.scroll-spin-particle-fast');
+    const particleCore = document.querySelector('.scroll-spin-particle-core');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    let horizTop = 0, horizHeight = 0;
+    function updateHorizBounds() {
+      if (horizontalSection) {
+        horizTop = horizontalSection.offsetTop;
+        horizHeight = horizontalSection.offsetHeight;
+      }
+    }
+    updateHorizBounds();
+    window.addEventListener('resize', updateHorizBounds, { passive: true });
+
+    function render() {
+      if (document.visibilityState !== 'visible') {
+        requestAnimationFrame(render);
+        return;
+      }
+      const scrollY = window.scrollY;
+      
+      if (!prefersReducedMotion) {
+        if (particleSlow) particleSlow.style.transform = `translate(-50%, -50%) rotate(${scrollY * 0.05}deg)`;
+        if (particleFast) particleFast.style.transform = `translate(-50%, -50%) rotate(${-scrollY * 0.15}deg)`;
+        if (particleCore) particleCore.style.transform = `translate(-50%, -50%) rotate(${scrollY * 0.1}deg) scale(${1 + Math.sin(scrollY * 0.005) * 0.05})`;
+      }
+      
+      if (horizontalSection && horizontalTrack) {
+        const ih = window.innerHeight;
+        const startOffset = 150;
+        const arrivalThreshold = 300;
+        const relScroll = scrollY - horizTop - startOffset;
+        const clampedRelScroll = Math.max(0, relScroll - arrivalThreshold);
+        const scrollableDistance = horizHeight - ih - startOffset - arrivalThreshold;
+        let targetProgress = 0;
+        if (clampedRelScroll >= 0 && clampedRelScroll <= scrollableDistance) {
+          targetProgress = clampedRelScroll / scrollableDistance;
+        } else if (clampedRelScroll > scrollableDistance) {
+          targetProgress = 1;
+        }
+        if (typeof window.horizProgress === 'undefined') window.horizProgress = 0;
+        window.horizProgress += (targetProgress - window.horizProgress) * 0.3;
+        const maxTranslate = -(document.body.clientWidth * 2.6);
+        horizontalTrack.style.transform = `translate3d(${window.horizProgress * maxTranslate}px, 0, 0)`;
+      }
+      
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  });
+</script>

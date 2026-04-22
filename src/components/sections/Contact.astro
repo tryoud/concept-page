@@ -1,133 +1,154 @@
 ---
-const { contact } = Astro.props;
-
-const headline = contact?.headline ?? "Contact";
-const subline = contact?.subline ?? "";
-const email = contact?.email ?? "";
-const social = contact?.social ?? [];
-
-const endpoint = contact?.form?.endpoint ?? "";
-const honeypotFieldName = contact?.form?.honeypotFieldName ?? "company";
-
-const needsEndpoint = !endpoint || endpoint.includes("REPLACE_ME");
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
 ---
 
-<section id="contact" class="border-t border-black/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-    <div class="max-w-2xl">
-      <h2 class="text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-        {headline}
-      </h2>
-      {subline && (
-        <p class="mt-3 text-sm leading-relaxed text-black/70 sm:text-base">
-          {subline}
-        </p>
-      )}
-    </div>
-
-    <div class="mt-10 grid gap-6 lg:grid-cols-12">
-      <div class="lg:col-span-5">
-        <div class="rounded-3xl border border-black/10 bg-white p-6">
-          <div class="text-sm font-semibold text-black">Email</div>
-          {email ? (
-            <a
-              class="mt-2 inline-block text-sm text-black/70 underline hover:text-black"
-              href={`mailto:${email}`}
-            >
-              {email}
-            </a>
-          ) : (
-            <p class="mt-2 text-sm text-black/60">Add an email in content/site.json.</p>
-          )}
-
-          {(social?.length ?? 0) > 0 && (
-            <div class="mt-8">
-              <div class="text-sm font-semibold text-black">Social</div>
-              <ul class="mt-3 grid gap-2">
-                {social.map((s) => (
-                  <li>
-                    <a
-                      class="text-sm text-black/70 underline hover:text-black"
-                      href={s.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+<section id="contact" class="py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-16 flex flex-col items-center relative overflow-hidden bg-[#030303]">
+  <canvas id="cta-particles" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-900/20 pointer-events-none"></div>
+  <div class="cta-content w-full max-w-2xl mx-auto relative z-10 flex flex-col items-start text-left opacity-0 translate-y-8 px-2">
+    <h2 class="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 md:mb-8 tracking-tight leading-tight">
+      <span data-i18n="contact.headingPrefix">{isEn ? "Let's build something" : 'Lass uns etwas'}</span> 
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500" data-i18n="contact.headingAccent">{isEn ? 'lasting' : 'Bleibendes'}</span> 
+      <span data-i18n="contact.headingSuffix">{isEn ? 'together.' : 'bauen.'}</span>
+    </h2>
+    <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 md:mb-12 max-w-xl" data-i18n="contact.subline">
+      {isEn ? 'Tell me how I can support your project.' : 'Schreib mir, wie ich dich bei deinem Projekt unterstützen kann.'}
+    </p>
+    
+    <form class="w-full space-y-3 sm:space-y-4" action="https://formspree.io/f/mzdakanj" method="POST">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <input type="text" name="name" placeholder={isEn ? 'Name' : 'Name'} data-i18n-placeholder="contact.form.name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+        <input type="email" name="email" placeholder={isEn ? 'Email' : 'E-Mail'} data-i18n-placeholder="contact.form.email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
       </div>
-
-      <div class="lg:col-span-7">
-        <form
-          class="rounded-3xl border border-black/10 bg-white p-6"
-          method="POST"
-          action={endpoint}
-        >
-          <div class="grid gap-4 sm:grid-cols-2">
-            <label class="grid gap-2">
-              <span class="text-sm font-medium text-black">Name</span>
-              <input
-                class="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm outline-none focus:border-black/30"
-                name="name"
-                required
-                autocomplete="name"
-              />
-            </label>
-
-            <label class="grid gap-2">
-              <span class="text-sm font-medium text-black">Email</span>
-              <input
-                class="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm outline-none focus:border-black/30"
-                type="email"
-                name="email"
-                required
-                autocomplete="email"
-              />
-            </label>
-
-            <label class="grid gap-2 sm:col-span-2">
-              <span class="text-sm font-medium text-black">Message</span>
-              <textarea
-                class="min-h-[140px] rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:border-black/30"
-                name="message"
-                required
-              ></textarea>
-            </label>
-
-            <!-- Honeypot (spam trap) -->
-            <div class="hidden">
-              <label>
-                Don’t fill this out:
-                <input name={honeypotFieldName} tabindex="-1" autocomplete="off" />
-              </label>
-            </div>
-          </div>
-
-          <div class="mt-6 flex items-center justify-between gap-4">
-            <p class="text-xs text-black/50">
-              By sending this, you agree that I can reply to your message.
-            </p>
-            <button
-              class="inline-flex items-center justify-center rounded-xl bg-black px-5 py-2.5 text-sm font-medium text-white hover:bg-black/90"
-              type="submit"
-            >
-              Send
-            </button>
-          </div>
-        </form>
-
-        {needsEndpoint && (
-          <p class="mt-3 text-xs text-black/50">
-            Note: Replace the Formspree endpoint in{" "}
-            <code class="rounded bg-black/[0.03] px-1.5 py-0.5">content/site.json</code>.
-          </p>
-        )}
-      </div>
+      <input type="text" name="subject" placeholder={isEn ? 'Subject' : 'Betreff'} data-i18n-placeholder="contact.form.subject" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+      <textarea name="message" rows="4" placeholder={isEn ? 'Message' : 'Nachricht'} data-i18n-placeholder="contact.form.message" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors resize-none text-sm sm:text-base"></textarea>
+      <button type="submit" class="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold rounded-full hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 w-full sm:w-fit text-sm sm:text-base">
+        <span data-i18n="contact.form.submit">{isEn ? 'Send message' : 'Nachricht senden'}</span>
+      </button>
+    </form>
+    
+    <div class="mt-8 sm:mt-12 flex items-center gap-5 sm:gap-6">
+      <a href="https://www.instagram.com/nikolasmaerker" target="_blank" rel="noopener" class="text-zinc-400 hover:text-white transition-colors p-2 -m-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+      </a>
+      <a href="https://github.com/tryoud" target="_blank" rel="noopener" class="text-zinc-400 hover:text-white transition-colors p-2 -m-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/nikolasmaerker/" target="_blank" rel="noopener" class="text-zinc-400 hover:text-white transition-colors p-2 -m-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // CTA Animation on Scroll
+    const ctaSection = document.getElementById('contact');
+    const ctaContent = document.querySelector('.cta-content');
+    const ctaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          ctaContent?.classList.add('cta-animate');
+          ctaObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    if (ctaSection) ctaObserver.observe(ctaSection);
+
+    // Canvas Particles
+    const canvas = document.getElementById('cta-particles');
+    let particlesVisible = false;
+    if (canvas && ctaSection && !prefersReducedMotion) {
+      new IntersectionObserver(([entry]) => {
+        const wasVisible = particlesVisible;
+        particlesVisible = entry.isIntersecting;
+        if (particlesVisible && !wasVisible) renderParticles();
+      }, { threshold: 0 }).observe(ctaSection);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, { passive: true });
+
+      const particles = [];
+      const particleCount = window.innerWidth > 768 ? 120 : 60;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 2 + 0.5,
+          color: Math.random() > 0.5 ? '#22d3ee' : '#a78bfa',
+          alpha: Math.random() * 0.25 + 0.1
+        });
+      }
+
+      let mouse = { x: -1000, y: -1000, active: false, radius: 150 };
+      ctaSection.addEventListener('mousemove', (e) => {
+        const rect = ctaSection.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.active = true;
+      });
+      ctaSection.addEventListener('mouseleave', () => { mouse.active = false; });
+
+      function renderParticles() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'screen';
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          if (mouse.active) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < mouse.radius) {
+              const force = (mouse.radius - dist) / mouse.radius;
+              p.x -= (dx / dist) * force * 4;
+              p.y -= (dy / dist) * force * 4;
+            }
+          }
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = width; else if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height; else if (p.y > height) p.y = 0;
+          p.vx *= 0.99; p.vy *= 0.99;
+          p.vx += (Math.random() - 0.5) * 0.05;
+          p.vy += (Math.random() - 0.5) * 0.05;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1.0;
+        if (particlesVisible && document.visibilityState === 'visible') requestAnimationFrame(renderParticles);
+      }
+      renderParticles();
+    } else if (ctaContent) {
+      // If reduced motion, show content immediately
+      ctaContent.classList.add('cta-animate');
+    }
+  });
+</script>
+
+<style>
+  .cta-content {
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cta-content.cta-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  input:focus, textarea:focus {
+    border-color: rgba(34, 211, 238, 0.5);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+  }
+</style>

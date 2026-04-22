@@ -1,0 +1,64 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+
+const steps = [
+  { color: 'cyan', titleKey: 'process.discovery.title', textKey: 'process.discovery.text' },
+  { color: 'violet', titleKey: 'process.strategy.title', textKey: 'process.strategy.text' },
+  { color: 'cyan', titleKey: 'process.implementation.title', textKey: 'process.implementation.text' },
+  { color: 'amber', titleKey: 'process.launch.title', textKey: 'process.launch.text' }
+];
+
+const deSteps = [
+  { title: 'Discovery', text: 'Ich höre deiner Vision zu, analysiere deine Ziele und definiere den Weg zum Erfolg.' },
+  { title: 'Strategie', text: 'Ich analysiere den Markt, definiere die Positionierung und den technischen Ansatz.' },
+  { title: 'Umsetzung', text: 'Design, Build und Feinschliff — effizient und fokussiert auf dein Ziel.' },
+  { title: 'Launch', text: 'Go-Live mit Support und bei Bedarf weiterführender Optimierung.' }
+];
+
+const enSteps = [
+  { title: 'Discovery', text: 'I listen to your vision, analyze your goals, and define the path to success.' },
+  { title: 'Strategy', text: 'I analyze the market, define positioning, and choose the technical approach.' },
+  { title: 'Implementation', text: 'Design, build, and refinement — efficient and focused on your goal.' },
+  { title: 'Launch', text: 'Go-live with support and further optimization when needed.' }
+];
+
+const displaySteps = isEn ? enSteps : deSteps;
+---
+
+<section id="process" class="py-24 md:py-32 px-4 sm:px-6 md:px-16 lg:px-24 w-full bg-zinc-950 relative z-40 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-16 gap-6 reveal-on-scroll">
+      <div>
+        <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block" data-i18n="process.eyebrow">{isEn ? 'My Process' : 'Mein Prozess'}</span>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+          <span data-i18n="process.headingPrefix">{isEn ? 'How' : 'So'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400" data-i18n="process.headingAccent">{isEn ? 'I work.' : 'arbeite ich.'}</span>
+        </h2>
+      </div>
+      <p class="text-zinc-400 max-w-md" data-i18n="process.subline">
+        {isEn ? 'Four clear steps from the first idea to final launch — structured and focused.' : 'Vier klare Schritte von der ersten Idee bis zum finalen Launch — strukturiert und fokussiert.'}
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {displaySteps.map((step, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        const color = steps[idx].color;
+        const colorClass = color === 'cyan' ? 'text-cyan-500' : color === 'violet' ? 'text-violet-500' : 'text-amber-500';
+        const borderClass = color === 'cyan' ? 'hover:border-cyan-500/30' : color === 'violet' ? 'hover:border-violet-500/30' : 'hover:border-amber-500/30';
+        return (
+          <div class="reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group transition-colors duration-500 ${borderClass}">
+            <span class={`text-3xl sm:text-4xl md:text-5xl font-black opacity-30 group-hover:opacity-100 transition-colors ${colorClass}`}>{num}</span>
+            <div>
+              <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">{step.title}</h3>
+              <p class="text-zinc-500 text-sm md:text-base">{step.text}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<section id="services" class="py-32 px-6 md:px-16 lg:px-24 w-full bg-zinc-950 relative z-40 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
+      <div class="reveal-on-scroll">
+        <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block" data-i18n="services.eyebrow">{isEn ? 'Services' : 'Leistungen'}</span>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+          <span data-i18n="services.headingPrefix">{isEn ? 'What I' : 'Was ich'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400" data-i18n="services.headingAccent">{isEn ? 'do.' : 'mache.'}</span>
+        </h2>
+      </div>
+      <p class="text-zinc-400 max-w-md reveal-on-scroll" data-i18n="services.subline">
+        {isEn ? 'From concept to launch — everything from one source, efficient and focused on your outcome.' : 'Von der Konzeption bis zum Launch — alles aus einer Hand, effizient und fokussiert auf dein Ergebnis.'}
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Web Design & Development -->
+      <div class="tilt-card reveal-on-scroll group relative p-8 rounded-2xl bg-zinc-900/40 backdrop-blur-xl border border-white/5 transition-all duration-500 hover:bg-zinc-800/50 hover:border-cyan-500/30 hover:shadow-[0_0_40px_-10px_rgba(6,182,212,0.3)] min-h-[380px] flex flex-col" style="transform-style: preserve-3d;">
+        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+        <div class="relative z-10 transform-gpu flex flex-col h-full" style="transform: translateZ(30px);">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-6 text-cyan-400 group-hover:scale-110 transition-transform duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <span class="text-5xl font-black text-white/5 mb-4">01</span>
+          <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services.web.title">{isEn ? 'Websites & Landing Pages' : 'Websites & Landing Pages'}</h3>
+          <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow" data-i18n="services.web.text">
+            {isEn ? 'High-performance websites that explain your offer clearly and turn visitors into inquiries.' : 'Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.'}
+          </p>
+          <ul class="space-y-3 text-sm text-zinc-500">
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span><span data-i18n="services.web.bullet1">{isEn ? 'Positioning & UX strategy' : 'Positionierung & UX-Strategie'}</span></li>
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span><span data-i18n="services.web.bullet2">{isEn ? 'SEO & performance optimization' : 'SEO & Performance-Optimierung'}</span></li>
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span><span data-i18n="services.web.bullet3">Astro, WordPress, Cloudflare</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Photo & Video -->
+      <div class="tilt-card reveal-on-scroll group relative p-8 rounded-2xl bg-zinc-900/40 backdrop-blur-xl border border-white/5 transition-all duration-500 hover:bg-zinc-800/50 hover:border-violet-500/30 hover:shadow-[0_0_40px_-10px_rgba(139,92,246,0.3)] min-h-[380px] flex flex-col" style="transform-style: preserve-3d;">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+        <div class="relative z-10 transform-gpu flex flex-col h-full" style="transform: translateZ(30px);">
+          <div class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-6 text-violet-400 group-hover:scale-110 transition-transform duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
+          </div>
+          <span class="text-5xl font-black text-white/5 mb-4">02</span>
+          <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services.content.title">{isEn ? 'Photo & Video' : 'Photo & Video'}</h3>
+          <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow" data-i18n="services.content.text">
+            {isEn ? 'Photo and video content that presents your brand with a premium look — for websites, social media, and campaigns.' : 'Foto- und Videocontent, der deine Marke hochwertig zeigt — für Website, Social Media und Kampagnen.'}
+          </p>
+          <ul class="space-y-3 text-sm text-zinc-500">
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span><span data-i18n="services.content.bullet1">{isEn ? 'Event, portrait & editorial photography' : 'Event-, Portrait- & Redaktionsfotografie'}</span></li>
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span><span data-i18n="services.content.bullet2">{isEn ? 'Video production & editing' : 'Videoproduktion & Videoschnitt'}</span></li>
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span><span data-i18n="services.content.bullet3">{isEn ? 'Consistent look across every channel' : 'Einheitlicher Look für alle Kanäle'}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Drone / Aerial -->
+      <div class="tilt-card reveal-on-scroll group relative p-8 rounded-2xl bg-zinc-900/40 backdrop-blur-xl border border-white/5 transition-all duration-500 hover:bg-zinc-800/50 hover:border-amber-500/30 hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.3)] min-h-[380px] flex flex-col" style="transform-style: preserve-3d;">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+        <div class="relative z-10 transform-gpu flex flex-col h-full" style="transform: translateZ(30px);">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-6 text-amber-400 group-hover:scale-110 transition-transform duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="m5 12-2-2 2-2"/><path d="m19 12 2-2-2-2"/><path d="m5 16-2 2 2 2"/><path d="m19 16 2 2-2 2"/><circle cx="12" cy="5" r="3"/></svg>
+          </div>
+          <span class="text-5xl font-black text-white/5 mb-4">03</span>
+          <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services.drone.title">{isEn ? 'Drone & Aerial' : 'Drohne & Aerial'}</h3>
+          <p class="text-zinc-400 font-light leading-relaxed mb-6 flex-grow" data-i18n="services.drone.text">
+            {isEn ? 'Licensed drone footage for real estate, events, and brand content. Cinematic shots.' : 'Lizenzierte Drohnenaufnahmen für Immobilien, Events und Markencontent. Filmische Shots.'}
+          </p>
+          <ul class="space-y-3 text-sm text-zinc-500">
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span><span data-i18n="services.drone.bullet1">{isEn ? 'Licensed aerial footage' : 'Lizenzierte Luftaufnahmen'}</span></li>
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span><span data-i18n="services.drone.bullet2">{isEn ? 'Real estate, events & companies' : 'Immobilien, Events & Unternehmen'}</span></li>
+            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span><span data-i18n="services.drone.bullet3">{isEn ? 'Smooth, cinematic shots' : 'Ruhige, filmische Shots'}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+    
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      let rafPending = false;
+      let lastE;
+      card.addEventListener('mousemove', (e) => {
+        lastE = e;
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = lastE.clientX - rect.left;
+          const y = lastE.clientY - rect.top;
+          const xRot = 15 * ((y - rect.height / 2) / (rect.height / 2));
+          const yRot = -15 * ((x - rect.width / 2) / (rect.width / 2));
+          card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.02, 1.02, 1.02)`;
+          rafPending = false;
+        });
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+      });
+    });
+  });
+</script>

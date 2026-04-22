@@ -1,256 +1,285 @@
 {
-    "meta": {
-      "title": "tryoud — Web Development & Performance Websites",
-      "description": "I build fast, high-performance websites and AI-assisted workflows. Astro + Tailwind + Cloudflare Pages. Clean code. SEO-ready.",
-      "siteUrl": "https://tryoud.com",
-      "ogImage": "/og/og-tryoud.png",
-      "language": "en",
-      "locale": "en_US"
-    },
+  "meta": {
+    "siteUrl": "https://tryoud.com",
+    "ogImage": "/og/og-tryoud.png",
+    "language": "de",
+    "locale": "de_DE",
+    "author": "Nikolas Maerker",
     "branding": {
       "brandName": "tryoud",
       "personalName": "Nikolas Maerker",
-      "logo": {
-        "src": "/brand/logo.svg",
-        "alt": "tryoud logo"
-      }
-    },
-    "navigation": [
-      { "label": "Skills", "href": "#skills" },
-      { "label": "Stack", "href": "#stack" },
-      { "label": "Projects", "href": "#projects" },
-      { "label": "About", "href": "#about" },
-      { "label": "Contact", "href": "#contact" }
-    ],
-    "hero": {
-      "headline": "Fast, SEO-ready websites—built to convert.",
-      "subline": "I build high-performance web experiences and AI-assisted workflows with Astro, Tailwind, and Cloudflare Pages. Minimal JS. Clean code. Real outcomes.",
-      "ctas": [
-        { "label": "View Projects", "href": "#projects", "variant": "primary" },
-        { "label": "Contact", "href": "#contact", "variant": "outline" }
-      ],
-      "highlights": [
-        "Static-first performance (Lighthouse-focused)",
-        "Modern UI with clean, maintainable components",
-        "Single source of truth content (JSON-driven)"
-      ]
-    },
-    "skills": {
-      "headline": "Skills",
-      "subline": "Broad coverage across frontend, backend, DevOps, CMS, performance, and automation—always with a focus on maintainability and speed.",
-      "categories": [
-        {
-          "id": "frontend",
-          "title": "Frontend",
-          "items": [
-            "Astro (static sites)",
-            "Tailwind CSS",
-            "HTML semantics & accessibility",
-            "Responsive layout systems",
-            "Component-driven UI (Astro components)",
-            "Design systems & UI consistency"
-          ],
-          "proof": [
-            "Build static landing pages with minimal JS and strong Core Web Vitals",
-            "Structure pages with semantic headings and accessible navigation"
-          ]
-        },
-        {
-          "id": "backend",
-          "title": "Backend",
-          "items": [
-            "REST basics",
-            "Serverless patterns (edge functions / workers)",
-            "Lightweight APIs for forms & automations",
-            "Authentication concepts (sessions, tokens)",
-            "Data modeling basics"
-          ],
-          "proof": [
-            "Implement simple endpoints for form handling and automation triggers",
-            "Design small, maintainable interfaces between frontend and services"
-          ]
-        },
-        {
-          "id": "devops",
-          "title": "DevOps",
-          "items": [
-            "Cloudflare Pages deployment",
-            "Git-based workflows",
-            "Build pipelines (pnpm)",
-            "Environment variables & secrets handling",
-            "Caching and CDN basics"
-          ],
-          "proof": [
-            "Deploy static sites to Cloudflare Pages with clean build outputs (dist)",
-            "Keep dependencies minimal for reliability and speed"
-          ]
-        },
-        {
-          "id": "cms",
-          "title": "CMS",
-          "items": [
-            "WordPress",
-            "Elementor / ACF concepts",
-            "Custom post types & structured content",
-            "Content modeling",
-            "Editorial workflows"
-          ],
-          "proof": [
-            "Model content to reduce hardcoding and improve maintainability",
-            "Build structured sections that stay consistent across pages"
-          ]
-        },
-        {
-          "id": "performance-seo",
-          "title": "Performance & SEO",
-          "items": [
-            "Core Web Vitals",
-            "Image optimization (formats, lazy loading)",
-            "Metadata (title, description, OG tags)",
-            "Semantic HTML for SEO",
-            "Information architecture"
-          ],
-          "proof": [
-            "Optimize above-the-fold content and defer non-critical assets",
-            "Set up baseline SEO metadata and proper heading structure"
-          ]
-        },
-        {
-          "id": "automation",
-          "title": "Automation",
-          "items": [
-            "AI-assisted workflows (prompting, tooling)",
-            "Form-to-inbox pipelines (Formspree)",
-            "Integrations (email/webhooks)",
-            "Operational automation concepts"
-          ],
-          "proof": [
-            "Create reliable contact flows with honeypot anti-spam",
-            "Automate small business workflows around lead intake and follow-ups"
-          ]
-        }
-      ]
-    },
-    "stack": {
-      "headline": "Tech Stack",
-      "subline": "A practical, modern stack optimized for performance, reliability, and low maintenance overhead.",
-      "groups": [
-        {
-          "title": "Core",
-          "items": [
-            { "name": "Astro", "tags": ["Static", "Performance", "Content-first"], "icon": "/stack/astro.svg" },
-            { "name": "Tailwind CSS", "tags": ["UI", "Utility-first", "Consistent spacing"], "icon": "/stack/tailwind.svg" },
-            { "name": "Cloudflare Pages", "tags": ["CDN", "Deploy", "Edge"], "icon": "/stack/cloudflare.svg" }
-          ]
-        },
-        {
-          "title": "Tooling",
-          "items": [
-            { "name": "pnpm", "tags": ["Fast installs", "Monorepo-friendly"], "icon": "/stack/pnpm.svg" },
-            { "name": "Git + GitHub", "tags": ["Versioning", "CI-friendly"], "icon": "/stack/github.svg" }
-          ]
-        },
-        {
-          "title": "Content & Ops (Optional)",
-          "items": [
-            { "name": "WordPress", "tags": ["CMS", "Editorial"], "icon": "/stack/wordpress.svg" },
-            { "name": "Formspree", "tags": ["Forms", "No backend"], "icon": "/stack/formspree.svg" }
-          ]
-        }
-      ]
-    },
-    "projects": {
-      "headline": "Projects",
-      "subline": "Selected work across high-performance websites, structured content builds, and practical automation.",
-      "items": [
-        {
-          "slug": "portfolio-site-astro",
-          "title": "Portfolio Website (Astro + Tailwind)",
-          "description": "A static-first portfolio optimized for speed, clean UI, and maintainable content sourced from JSON.",
-          "stack": ["Astro", "Tailwind", "Cloudflare Pages"],
-          "outcomes": [
-            "Static rendering and minimal JS for fast load times",
-            "Reusable sections driven by a single JSON source of truth",
-            "SEO-ready structure and metadata baseline"
-          ],
-          "href": "https://tryoud.com",
-          "thumbnail": "/projects/portfolio-astro.png"
-        },
-        {
-          "slug": "consulting-landing-performance",
-          "title": "Performance-First Landing Page",
-          "description": "A conversion-focused landing page with strong hierarchy, responsive layout, and optimized assets.",
-          "stack": ["Astro", "Tailwind"],
-          "outcomes": [
-            "Clear CTA placement and section flow",
-            "Optimized images and lazy loading below the fold",
-            "Clean semantic HTML for accessibility and SEO"
-          ],
-          "href": "#contact",
-          "thumbnail": "/projects/landing-performance.png"
-        },
-        {
-          "slug": "cms-structured-content",
-          "title": "Structured CMS Build (Content Modeling)",
-          "description": "A CMS approach focused on repeatable blocks, structured fields, and minimal editorial friction.",
-          "stack": ["WordPress", "ACF", "Elementor"],
-          "outcomes": [
-            "Reduced hardcoded content via structured fields",
-            "Consistent, reusable layouts across pages",
-            "Cleaner handover for non-technical editors"
-          ],
-          "href": "#contact",
-          "thumbnail": "/projects/cms-structured.png"
-        },
-        {
-          "slug": "lead-intake-automation",
-          "title": "Lead Intake + Automation Pipeline",
-          "description": "A simple, robust contact flow using forms, spam protection, and workflow-ready data.",
-          "stack": ["Formspree", "Webhooks"],
-          "outcomes": [
-            "Honeypot anti-spam and clear success/error states",
-            "Clean payload structure for downstream automations",
-            "Low-maintenance setup (no custom backend required)"
-          ],
-          "href": "#contact",
-          "thumbnail": "/projects/lead-intake.png"
-        }
-      ]
-    },
-    "about": {
-      "headline": "How I work",
-      "subline": "A lightweight process that keeps projects moving fast—without sacrificing quality.",
-      "paragraphs": [
-        "I design and build performance-first websites that are easy to maintain and ship. The goal is always the same: a clean UI, strong SEO foundations, and a clear conversion path.",
-        "I prefer static-first architectures where possible—less complexity, fewer moving parts, and better Core Web Vitals."
-      ],
-      "process": [
-        { "title": "Scope & structure", "details": "Define sections, content model, and success metrics (performance + conversion)." },
-        { "title": "Design system", "details": "Set typography, spacing, and reusable components for consistent UI." },
-        { "title": "Build & optimize", "details": "Implement static pages, optimize images, and keep JS minimal." },
-        { "title": "Ship & iterate", "details": "Deploy to Cloudflare Pages, validate SEO basics, iterate based on feedback." }
-      ]
+      "logo": "/favicon.svg"
     },
     "contact": {
-      "headline": "Contact",
-      "subline": "Want a fast, modern website or an automation workflow? Send a message and I’ll get back to you.",
       "email": "nikolas.maerker@gmail.com",
       "form": {
         "provider": "formspree",
-        "endpoint": "https://formspree.io/f/REPLACE_ME",
+        "endpoint": "https://formspree.io/f/mzdakanj",
         "honeypotFieldName": "company"
       },
       "social": [
+        { "label": "Instagram", "href": "https://www.instagram.com/nikolasmaerker" },
         { "label": "GitHub", "href": "https://github.com/tryoud" },
         { "label": "LinkedIn", "href": "https://www.linkedin.com/in/nikolasmaerker/" }
       ]
     },
     "footer": {
-      "copyright": "© {year} tryoud",
+      "copyright": "© {year} Nikolas Maerker",
+      "note": "Built with Astro + Tailwind. Deployed on Cloudflare Pages.",
       "links": [
-        { "label": "Imprint", "href": "/imprint" },
-        { "label": "Privacy", "href": "/privacy" }
-      ],
-      "note": "Built with Astro + Tailwind. Deployed on Cloudflare Pages."
+        { "href": "/imprint", "labelKey": "footer.imprint" },
+        { "href": "/privacy", "labelKey": "footer.privacy" }
+      ]
+    }
+  },
+  "de": {
+    "meta": {
+      "title": "Nikolas Maerker | Web Developer & Creative",
+      "description": "Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen — alles aus einer Hand."
+    },
+    "nav": {
+      "services": "Services",
+      "expertise": "Expertise",
+      "work": "Work",
+      "process": "Prozess",
+      "contact": "Kontakt"
+    },
+    "hero": {
+      "line1": "Websites und Content",
+      "line2": "für Dienstleister,",
+      "line3Prefix": "Unternehmen",
+      "line3Accent": "und Marken.",
+      "subline": "Web Design, Photo, Video und Drohnenaufnahmen — alles aus einer Hand.",
+      "primaryCta": "Mehr erfahren",
+      "secondaryCta": "Projekt starten"
+    },
+    "journey": {
+      "headline": "Alles aus<br/>einer Hand.",
+      "scroll": "Scroll nach unten ↓",
+      "reveal": "Fokussiert."
+    },
+    "services": {
+      "eyebrow": "Leistungen",
+      "headingPrefix": "Was ich",
+      "headingAccent": "mache.",
+      "subline": "Von der Konzeption bis zum Launch — alles aus einer Hand, effizient und fokussiert auf dein Ergebnis.",
+      "web": {
+        "title": "Websites & Landing Pages",
+        "text": "Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.",
+        "bullet1": "Positionierung & UX-Strategie",
+        "bullet2": "SEO & Performance-Optimierung",
+        "bullet3": "Astro, WordPress, Cloudflare"
+      },
+      "content": {
+        "title": "Photo & Video",
+        "text": "Foto- und Videocontent, der deine Marke hochwertig zeigt — für Website, Social Media und Kampagnen.",
+        "bullet1": "Event-, Portrait- & Redaktionsfotografie",
+        "bullet2": "Videoproduktion & Videoschnitt",
+        "bullet3": "Einheitlicher Look für alle Kanäle"
+      },
+      "drone": {
+        "title": "Drohne & Aerial",
+        "text": "Lizenzierte Drohnenaufnahmen für Immobilien, Events und Markencontent. Filmische Shots.",
+        "bullet1": "Lizenzierte Luftaufnahmen",
+        "bullet2": "Immobilien, Events & Unternehmen",
+        "bullet3": "Ruhige, filmische Shots"
+      }
+    },
+    "expertise": {
+      "eyebrow": "Expertise",
+      "headingPrefix": "Drei Bereiche,",
+      "headingAccent": "eine Vision.",
+      "subline": "Von der Code-Zeile bis zum finalen Shot — ich verbinde Technik und Kreativität für Ergebnisse, die überzeugen.",
+      "rows": {
+        "code": { "title": "Code", "desc": "Performante Architekturen mit Astro, WordPress & Cloudflare" },
+        "content": { "title": "Content", "desc": "Event-Fotografie, Drohnenaufnahmen und Videoschnitt" },
+        "process": { "title": "Prozess", "desc": "Klarer Ablauf: Briefing, Konzeption, Umsetzung, Launch" }
+      }
+    },
+    "stack": {
+      "heading": "Tools & Technologien",
+      "subline": "Moderner Stack für performante Ergebnisse. Schnelle Umsetzung, saubere Struktur."
+    },
+    "work": {
+      "heading": "Ausgewählte Arbeiten",
+      "items": {
+        "focuspartner": "Produktseite für ein fokussiertes Tool.",
+        "examdraft": "KI-gestützte Prüfungsvorbereitung für Studierende.",
+        "tum": "Alumni-Website mit besserer Orientierung und modernerem Look.",
+        "cantero": "Beratungs-Funnel mit klarer Conversion-Führung.",
+        "wiro": "Alumni-Website mit klarem Aufbau und modernem Auftritt."
+      },
+      "visit": "Besuchen →"
+    },
+    "process": {
+      "eyebrow": "Mein Prozess",
+      "headingPrefix": "So",
+      "headingAccent": "arbeite ich.",
+      "subline": "Vier klare Schritte von der ersten Idee bis zum finalen Launch — strukturiert und fokussiert.",
+      "steps": [
+        { "title": "Discovery", "text": "Ich höre deiner Vision zu, analysiere deine Ziele und definiere den Weg zum Erfolg." },
+        { "title": "Strategie", "text": "Ich analysiere den Markt, definiere die Positionierung und den technischen Ansatz." },
+        { "title": "Umsetzung", "text": "Design, Build und Feinschliff — effizient und fokussiert auf dein Ziel." },
+        { "title": "Launch", "text": "Go-Live mit Support und bei Bedarf weiterführender Optimierung." }
+      ]
+    },
+    "contact": {
+      "headingPrefix": "Lass uns etwas",
+      "headingAccent": "Bleibendes",
+      "headingSuffix": "bauen.",
+      "subline": "Schreib mir, wie ich dich bei deinem Projekt unterstützen kann.",
+      "form": {
+        "name": "Name",
+        "email": "E-Mail",
+        "subject": "Betreff",
+        "message": "Nachricht",
+        "submit": "Nachricht senden"
+      }
+    },
+    "footer": {
+      "rights": "Alle Rechte vorbehalten.",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz"
+    },
+    "legal": {
+      "imprint": {
+        "title": "Impressum",
+        "company": "Nikolas Maerker",
+        "address": "Deutschland",
+        "email": "nikolas.maerker@gmail.com",
+        "responsible": "Nikolas Maerker",
+        "vat": "USt-IdNr. auf Anfrage"
+      },
+      "privacy": {
+        "title": "Datenschutzerklärung",
+        "intro": "Der Schutz deiner persönlichen Daten ist mir wichtig. Ich verarbeite deine Daten gemäß den gesetzlichen Datenschutzvorschriften (DSGVO).",
+        "contact": "Wenn du Fragen zum Datenschutz hast, erreichst du mich unter: nikolas.maerker@gmail.com"
+      }
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Nikolas Maerker | Web Developer & Creative",
+      "description": "Freelancer for web development, video production, and drone footage — everything from one source."
+    },
+    "nav": {
+      "services": "Services",
+      "expertise": "Expertise",
+      "work": "Work",
+      "process": "Process",
+      "contact": "Contact"
+    },
+    "hero": {
+      "line1": "Websites and content",
+      "line2": "for service providers,",
+      "line3Prefix": "companies",
+      "line3Accent": "and brands.",
+      "subline": "Web design, photo, video, and drone footage — everything from one source.",
+      "primaryCta": "Learn more",
+      "secondaryCta": "Start a project"
+    },
+    "journey": {
+      "headline": "Everything from<br/>one source.",
+      "scroll": "Scroll down ↓",
+      "reveal": "Focused."
+    },
+    "services": {
+      "eyebrow": "Services",
+      "headingPrefix": "What I",
+      "headingAccent": "do.",
+      "subline": "From concept to launch — everything from one source, efficient and focused on your outcome.",
+      "web": {
+        "title": "Websites & Landing Pages",
+        "text": "High-performance websites that explain your offer clearly and turn visitors into inquiries.",
+        "bullet1": "Positioning & UX strategy",
+        "bullet2": "SEO & performance optimization",
+        "bullet3": "Astro, WordPress, Cloudflare"
+      },
+      "content": {
+        "title": "Photo & Video",
+        "text": "Photo and video content that presents your brand with a premium look — for websites, social media, and campaigns.",
+        "bullet1": "Event, portrait & editorial photography",
+        "bullet2": "Video production & editing",
+        "bullet3": "Consistent look across every channel"
+      },
+      "drone": {
+        "title": "Drone & Aerial",
+        "text": "Licensed drone footage for real estate, events, and brand content. Cinematic shots.",
+        "bullet1": "Licensed aerial footage",
+        "bullet2": "Real estate, events & companies",
+        "bullet3": "Smooth, cinematic shots"
+      }
+    },
+    "expertise": {
+      "eyebrow": "Expertise",
+      "headingPrefix": "Three disciplines,",
+      "headingAccent": "one vision.",
+      "subline": "From the first line of code to the final shot — I combine technology and creativity for results that convince.",
+      "rows": {
+        "code": { "title": "Code", "desc": "High-performance architectures with Astro, WordPress & Cloudflare" },
+        "content": { "title": "Content", "desc": "Event photography, drone footage, and video editing" },
+        "process": { "title": "Process", "desc": "Clear workflow: briefing, concept, implementation, launch" }
+      }
+    },
+    "stack": {
+      "heading": "Tools & Technologies",
+      "subline": "A modern stack for high-performance results. Fast implementation, clean structure."
+    },
+    "work": {
+      "heading": "Selected Work",
+      "items": {
+        "focuspartner": "Product page for a focused tool.",
+        "examdraft": "AI-powered exam preparation for students.",
+        "tum": "Alumni website with clearer orientation and a more modern look.",
+        "cantero": "Consulting funnel with clear conversion guidance.",
+        "wiro": "Alumni website with clear structure and a modern presence."
+      },
+      "visit": "Visit →"
+    },
+    "process": {
+      "eyebrow": "My Process",
+      "headingPrefix": "How",
+      "headingAccent": "I work.",
+      "subline": "Four clear steps from the first idea to final launch — structured and focused.",
+      "steps": [
+        { "title": "Discovery", "text": "I listen to your vision, analyze your goals, and define the path to success." },
+        { "title": "Strategy", "text": "I analyze the market, define positioning, and choose the technical approach." },
+        { "title": "Implementation", "text": "Design, build, and refinement — efficient and focused on your goal." },
+        { "title": "Launch", "text": "Go-live with support and further optimization when needed." }
+      ]
+    },
+    "contact": {
+      "headingPrefix": "Let's build something",
+      "headingAccent": "lasting",
+      "headingSuffix": "together.",
+      "subline": "Tell me how I can support your project.",
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message",
+        "submit": "Send message"
+      }
+    },
+    "footer": {
+      "rights": "All rights reserved.",
+      "imprint": "Imprint",
+      "privacy": "Privacy"
+    },
+    "legal": {
+      "imprint": {
+        "title": "Imprint",
+        "company": "Nikolas Maerker",
+        "address": "Germany",
+        "email": "nikolas.maerker@gmail.com",
+        "responsible": "Nikolas Maerker",
+        "vat": "VAT ID available on request"
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "intro": "Your privacy is important to me. I process your data in accordance with GDPR.",
+        "contact": "If you have any questions about data protection, please contact me at: nikolas.maerker@gmail.com"
+      }
     }
   }
+}

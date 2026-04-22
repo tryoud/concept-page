@@ -1,0 +1,121 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<section class="relative w-full h-[400vh] bg-black" id="apple-journey">
+  <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+    <!-- Abstract Background Expander -->
+    <div class="absolute top-1/2 left-1/2 w-[200vw] h-[200vh] rounded-[50%] bg-gradient-to-tr from-cyan-600 to-violet-800 expand-bg-element z-0 shadow-[0_0_100px_rgba(6,182,212,0.8)] opacity-0 will-change-transform" style="transform: translate(-50%, -50%) scale(0.1)"></div>
+    
+    <!-- Frame 1: Text -->
+    <div class="absolute inset-0 flex items-center justify-center flex-col z-10 text-center frame-1 pointer-events-none will-change-transform">
+      <h2 class="text-6xl md:text-8xl font-black text-white px-4 tracking-tighter" data-i18n="journey.headline">{isEn ? 'Everything from' : 'Alles aus'}<br/>{isEn ? 'one source.' : 'einer Hand.'}</h2>
+      <p class="text-xl text-cyan-300 mt-6 font-semibold uppercase tracking-widest" data-i18n="journey.scroll">{isEn ? 'Scroll down ↓' : 'Scroll nach unten ↓'}</p>
+    </div>
+
+    <!-- Frame 2: Services -->
+    <div class="absolute inset-0 flex items-center justify-center z-20 frame-2 opacity-0 pointer-events-none will-change-transform">
+      <div class="flex gap-4 md:gap-12 flex-col sm:flex-row">
+        <div class="w-48 h-64 md:w-72 md:h-96 bg-white/10 backdrop-blur-sm md:backdrop-blur-3xl rounded-3xl border border-white/20 p-6 ui-card-1 flex flex-col justify-between shadow-2xl will-change-transform">
+          <div class="w-12 h-12 rounded-full bg-cyan-400/30"></div>
+          <div class="space-y-3">
+            <div class="h-4 bg-white/20 rounded-md w-full"></div>
+            <div class="h-4 bg-white/20 rounded-md w-3/4"></div>
+            <div class="h-4 bg-white/20 rounded-md w-1/2"></div>
+          </div>
+        </div>
+        <div class="w-48 h-64 md:w-72 md:h-96 bg-white/10 backdrop-blur-sm md:backdrop-blur-3xl rounded-3xl border border-white/20 p-6 ui-card-2 flex flex-col justify-between shadow-2xl will-change-transform">
+          <div class="w-full h-32 bg-violet-500/30 rounded-2xl"></div>
+          <div class="w-full h-12 rounded-full bg-white text-black font-bold flex items-center justify-center">{isEn ? 'More' : 'Mehr'}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 3: The ultimate reveal -->
+    <div class="absolute inset-0 flex items-center justify-center z-30 frame-3 opacity-0 pointer-events-none will-change-transform">
+      <h2 class="text-[clamp(3rem,10vw,12rem)] px-4 font-black text-white opacity-90 drop-shadow-[0_0_100px_rgba(255,255,255,1)] tracking-tighter uppercase whitespace-normal text-center" data-i18n="journey.reveal">{isEn ? 'Focused.' : 'Fokussiert.'}</h2>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+    
+    const journey = document.getElementById('apple-journey');
+    const expandBg = document.querySelector('.expand-bg-element');
+    const frame1 = document.querySelector('.frame-1');
+    const frame2 = document.querySelector('.frame-2');
+    const frame3 = document.querySelector('.frame-3');
+    const card1 = document.querySelector('.ui-card-1');
+    const card2 = document.querySelector('.ui-card-2');
+    
+    let journeyTop = 0, journeyHeight = 0;
+    function updateJourneyBounds() {
+      if (journey) {
+        journeyTop = journey.offsetTop;
+        journeyHeight = journey.offsetHeight;
+      }
+    }
+    updateJourneyBounds();
+    window.addEventListener('resize', updateJourneyBounds, { passive: true });
+    
+    function animateJourney() {
+      if (document.visibilityState !== 'visible') {
+        requestAnimationFrame(animateJourney);
+        return;
+      }
+      const scrollY = window.scrollY;
+      
+      if (journey) {
+        const ih = window.innerHeight;
+        let p = (scrollY - journeyTop) / (journeyHeight - ih);
+        p = Math.max(0, Math.min(1, p));
+        
+        if (expandBg) {
+          if (p < 0.4) {
+            expandBg.style.opacity = `${p * 5}`;
+            const scaleAmount = 0.1 + p * 2.25;
+            expandBg.style.transform = `translate(-50%, -50%) scale(${scaleAmount})`;
+          } else {
+            expandBg.style.transform = `translate(-50%, -50%) scale(1)`;
+            expandBg.style.opacity = '1';
+          }
+        }
+        
+        if (frame1) {
+          let f1Opacity = Math.max(0, Math.min(1, 1 - (p - 0.05) * 6));
+          frame1.style.opacity = p < 0.05 ? '1' : `${f1Opacity}`;
+          frame1.style.transform = `translateY(${p * -200}px) scale(${1 + p * 0.5})`;
+        }
+        
+        if (frame2 && card1 && card2) {
+          let f2Opacity = 0;
+          if (p > 0.2 && p < 0.7) {
+            f2Opacity = p < 0.4 ? (p - 0.2) * 5 : (p > 0.5 ? 1 - (p - 0.5) * 5 : 1);
+          }
+          f2Opacity = Math.max(0, Math.min(1, f2Opacity));
+          frame2.style.opacity = `${f2Opacity}`;
+          let cardOffset = Math.max(0, 1 - (p - 0.2) * 3.33) * 100;
+          card1.style.transform = `translateY(${-30 + cardOffset}px) rotate(${-cardOffset / 5}deg)`;
+          card2.style.transform = `translateY(${30 + cardOffset}px) rotate(${cardOffset / 5}deg)`;
+        }
+        
+        if (frame3) {
+          let f3Opacity = p > 0.6 ? (p - 0.6) * 3.33 : 0;
+          f3Opacity = Math.max(0, Math.min(1, f3Opacity));
+          frame3.style.opacity = `${f3Opacity}`;
+          frame3.style.transform = `scale(${1 + (1 - f3Opacity) * 3})`;
+        }
+      }
+      
+      requestAnimationFrame(animateJourney);
+    }
+    requestAnimationFrame(animateJourney);
+  });
+</script>
