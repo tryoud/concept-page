@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Seite nicht gefunden | tryoud" description="Diese Seite existiert nicht.">
+  <main class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+    <div class="fixed inset-0 -z-10 pointer-events-none" style="background: radial-gradient(ellipse 70% 45% at 50% -5%, rgba(34,211,238,0.10), transparent 60%);"></div>
+    <p class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4">404</p>
+    <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight mb-6">Seite nicht gefunden.</h1>
+    <p class="text-zinc-400 text-lg max-w-md mb-10">Die Seite, die du suchst, existiert nicht (mehr). Zurück zur Startseite:</p>
+    <a href="/" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded-full transition-all hover:scale-[1.03] active:scale-[0.97]">
+      Zur Startseite
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    </a>
+  </main>
+</Layout>
