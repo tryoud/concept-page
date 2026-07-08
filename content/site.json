@@ -34,8 +34,8 @@
   },
   "de": {
     "meta": {
-      "title": "Nikolas Maerker | Web Developer & Creative",
-      "description": "Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen — alles aus einer Hand."
+      "title": "tryoud — Webdesign & Entwicklung | Maßgeschneiderte Websites & Content",
+      "description": "Maßgeschneiderte Websites für mittelständische Unternehmen — individuell konzipiert und von Hand entwickelt statt Baukasten. Dazu Foto, Video und Drohnenaufnahmen aus einer Hand."
     },
     "nav": {
       "services": "Services",
@@ -45,24 +45,24 @@
       "contact": "Kontakt"
     },
     "hero": {
-      "line1": "Websites und Content",
-      "line2": "für Dienstleister,",
-      "line3Prefix": "Unternehmen",
-      "line3Accent": "und Marken.",
-      "subline": "Web Design, Photo, Video und Drohnenaufnahmen — alles aus einer Hand.",
-      "primaryCta": "Mehr erfahren",
-      "secondaryCta": "Projekt starten"
+      "line1": "Websites nach Maß",
+      "line2": "für Unternehmen,",
+      "line3Prefix": "die mehr wollen",
+      "line3Accent": "als Standard.",
+      "subline": "Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.",
+      "primaryCta": "Projekt anfragen",
+      "secondaryCta": "Arbeiten ansehen",
+      "trust": "Vertrauen von Unternehmen wie"
     },
     "journey": {
       "headline": "Alles aus<br/>einer Hand.",
-      "scroll": "Scroll nach unten ↓",
-      "reveal": "Fokussiert."
+      "sub": "Strategie, Design, Code und Content — ein Partner von der ersten Idee bis zum Launch. Keine Übergaben, keine Reibungsverluste."
     },
     "services": {
       "eyebrow": "Leistungen",
       "headingPrefix": "Was ich",
       "headingAccent": "mache.",
-      "subline": "Von der Konzeption bis zum Launch — alles aus einer Hand, effizient und fokussiert auf dein Ergebnis.",
+      "subline": "Strategie, Design, Code und Content aus einer Hand — ohne Reibungsverluste zwischen drei verschiedenen Dienstleistern.",
       "web": {
         "title": "Websites & Landing Pages",
         "text": "Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.",
@@ -103,11 +103,11 @@
     "work": {
       "heading": "Ausgewählte Arbeiten",
       "items": {
-        "focuspartner": "Produktseite für ein fokussiertes Tool.",
-        "examdraft": "KI-gestützte Prüfungsvorbereitung für Studierende.",
-        "tum": "Alumni-Website mit besserer Orientierung und modernerem Look.",
-        "cantero": "Beratungs-Funnel mit klarer Conversion-Führung.",
-        "wiro": "Alumni-Website mit klarem Aufbau und modernem Auftritt."
+        "focuspartner": "Konzept, Design und Entwicklung einer Produktseite — statisch mit Astro gebaut und weltweit per CDN ausgeliefert.",
+        "examdraft": "Landingpage für eine KI-Lernplattform — vom ersten Entwurf bis zum Launch, auf Anmeldungen optimiert.",
+        "tum": "Relaunch der Alumni-Plattform der TUM School of Management — neue Informationsarchitektur und ein zeitgemäßer Auftritt.",
+        "cantero": "Beratungswebsite mit klarer Conversion-Führung — Positionierung, Text und Umsetzung aus einer Hand.",
+        "wiro": "Relaunch des Alumni-Netzwerks — klare Struktur, moderner Auftritt und einfache Pflege für den Verein."
       },
       "visit": "Besuchen →"
     },
@@ -127,13 +127,18 @@
       "headingPrefix": "Lass uns etwas",
       "headingAccent": "Bleibendes",
       "headingSuffix": "bauen.",
-      "subline": "Schreib mir, wie ich dich bei deinem Projekt unterstützen kann.",
+      "subline": "Erzähl mir kurz von deinem Projekt — du bekommst in der Regel innerhalb von 24 Stunden eine ehrliche Einschätzung.",
+      "directLabel": "Oder direkt per E-Mail:",
+      "reassurance": "Unverbindlich und kostenlos — keine Newsletter, keine Warteschleife.",
       "form": {
         "name": "Name",
         "email": "E-Mail",
         "subject": "Betreff",
         "message": "Nachricht",
-        "submit": "Nachricht senden"
+        "submit": "Nachricht senden",
+        "sending": "Wird gesendet …",
+        "success": "Danke für deine Nachricht! Ich melde mich in der Regel innerhalb von 24 Stunden.",
+        "error": "Das hat leider nicht geklappt. Schreib mir bitte direkt per E-Mail."
       }
     },
     "footer": {
@@ -159,8 +164,8 @@
   },
   "en": {
     "meta": {
-      "title": "Nikolas Maerker | Web Developer & Creative",
-      "description": "Freelancer for web development, video production, and drone footage — everything from one source."
+      "title": "tryoud — Web Design & Development | Custom Websites & Content",
+      "description": "Custom websites for mid-sized companies — individually designed and hand-coded instead of templates. Plus photo, video, and drone footage from one source."
     },
     "nav": {
       "services": "Services",
@@ -170,24 +175,24 @@
       "contact": "Contact"
     },
     "hero": {
-      "line1": "Websites and content",
-      "line2": "for service providers,",
-      "line3Prefix": "companies",
-      "line3Accent": "and brands.",
-      "subline": "Web design, photo, video, and drone footage — everything from one source.",
-      "primaryCta": "Learn more",
-      "secondaryCta": "Start a project"
+      "line1": "Custom-built websites",
+      "line2": "for companies",
+      "line3Prefix": "that want more",
+      "line3Accent": "than standard.",
+      "subline": "Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.",
+      "primaryCta": "Start a project",
+      "secondaryCta": "View work",
+      "trust": "Trusted by companies like"
     },
     "journey": {
       "headline": "Everything from<br/>one source.",
-      "scroll": "Scroll down ↓",
-      "reveal": "Focused."
+      "sub": "Strategy, design, code, and content — one partner from the first idea to launch. No hand-offs, no friction."
     },
     "services": {
       "eyebrow": "Services",
       "headingPrefix": "What I",
       "headingAccent": "do.",
-      "subline": "From concept to launch — everything from one source, efficient and focused on your outcome.",
+      "subline": "Strategy, design, code, and content from one source — without the friction of juggling three different vendors.",
       "web": {
         "title": "Websites & Landing Pages",
         "text": "High-performance websites that explain your offer clearly and turn visitors into inquiries.",
@@ -228,11 +233,11 @@
     "work": {
       "heading": "Selected Work",
       "items": {
-        "focuspartner": "Product page for a focused tool.",
-        "examdraft": "AI-powered exam preparation for students.",
-        "tum": "Alumni website with clearer orientation and a more modern look.",
-        "cantero": "Consulting funnel with clear conversion guidance.",
-        "wiro": "Alumni website with clear structure and a modern presence."
+        "focuspartner": "Concept, design, and development of a product page — statically built with Astro, delivered worldwide via CDN.",
+        "examdraft": "Landing page for an AI learning platform — from first draft to launch, optimized for sign-ups.",
+        "tum": "Relaunch of the TUM School of Management alumni platform — new information architecture and a contemporary look.",
+        "cantero": "Consulting website with clear conversion guidance — positioning, copy, and build from one source.",
+        "wiro": "Relaunch of the alumni network — clear structure, modern look, and easy maintenance for the association."
       },
       "visit": "Visit →"
     },
@@ -252,13 +257,18 @@
       "headingPrefix": "Let's build something",
       "headingAccent": "lasting",
       "headingSuffix": "together.",
-      "subline": "Tell me how I can support your project.",
+      "subline": "Tell me briefly about your project — you'll usually get an honest assessment within 24 hours.",
+      "directLabel": "Or email me directly:",
+      "reassurance": "Free and non-binding — no newsletters, no hold music.",
       "form": {
         "name": "Name",
         "email": "Email",
         "subject": "Subject",
         "message": "Message",
-        "submit": "Send message"
+        "submit": "Send message",
+        "sending": "Sending …",
+        "success": "Thanks for your message! I usually reply within 24 hours.",
+        "error": "That didn't work. Please email me directly."
       }
     },
     "footer": {

@@ -6,12 +6,8 @@ const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
 ---
 
-<!-- Background Glow Orbs -->
-<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-  <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-600/20 blur-[120px] mix-blend-screen opacity-70 animate-pulse"></div>
-  <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-violet-600/20 blur-[150px] mix-blend-screen opacity-70" style="animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></div>
-  <div class="absolute top-[40%] left-[50%] -translate-x-1/2 w-[800px] h-[400px] rounded-[100%] bg-blue-900/10 blur-[120px]"></div>
-</div>
+<!-- Static ambient gradient (cheap to composite, replaces blurred glow orbs) -->
+<div class="fixed inset-0 -z-10 pointer-events-none" style="background: radial-gradient(ellipse 70% 45% at 15% -5%, rgba(34,211,238,0.10), transparent 60%), radial-gradient(ellipse 55% 45% at 95% 105%, rgba(139,92,246,0.10), transparent 60%);"></div>
 
 <!-- Hero Video Background -->
 <div id="hero-video-wrapper" class="fixed inset-0 -z-20">
@@ -32,25 +28,40 @@ const isEn = lang === 'en';
 
 <section class="min-h-[100dvh] w-full flex flex-col justify-center items-center px-4 sm:px-6 pt-20 pb-12 md:pt-32 md:pb-20 lg:px-24 relative">
   <div class="w-full max-w-5xl mx-auto flex flex-col items-start text-left">
-    <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.1] max-w-5xl reveal-on-scroll">
-      <span class="block" data-i18n="hero.line1">{isEn ? 'Websites and content' : 'Websites und Content'}</span>
-      <span class="block" data-i18n="hero.line2">{isEn ? 'for service providers,' : 'für Dienstleister,'}</span>
-      <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'companies' : 'Unternehmen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'and brands.' : 'und Marken.'}</span></span>
+    <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-5xl reveal-on-scroll">
+      <span class="block" data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
+      <span class="block" data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
+      <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span></span>
     </h1>
-    
+
     <p class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal-on-scroll" data-i18n="hero.subline">
-      {isEn ? 'Web design, photo, video, and drone footage — everything from one source.' : 'Web Design, Photo, Video und Drohnenaufnahmen — alles aus einer Hand.'}
+      {isEn ? 'Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.' : 'Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.'}
     </p>
-    
+
     <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-8 sm:mt-12 w-fit reveal-on-scroll">
-      <a href="#apple-journey" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
-        <span data-i18n="hero.primaryCta">{isEn ? 'Learn more' : 'Mehr erfahren'}</span>
+      <a href="#contact" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
+        <span data-i18n="hero.primaryCta">{isEn ? 'Start a project' : 'Projekt anfragen'}</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
       </a>
-      <a href="#contact" class="group px-6 sm:px-8 py-3 sm:py-4 text-white font-medium hover:text-cyan-400 transition-colors flex items-center gap-2 text-sm sm:text-base">
-        <span data-i18n="hero.secondaryCta">{isEn ? 'Start a project' : 'Projekt starten'}</span>
+      <a href="#work" class="group px-6 sm:px-8 py-3 sm:py-4 text-white font-medium hover:text-cyan-400 transition-colors flex items-center gap-2 text-sm sm:text-base">
+        <span data-i18n="hero.secondaryCta">{isEn ? 'View work' : 'Arbeiten ansehen'}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 -translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0 sm:w-4 sm:h-4"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
       </a>
+    </div>
+
+    <div class="mt-12 sm:mt-16 reveal-on-scroll">
+      <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] text-zinc-500 mb-3 sm:mb-4" data-i18n="hero.trust">{isEn ? 'Trusted by companies like' : 'Vertrauen von Unternehmen wie'}</p>
+      <div class="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-2 text-zinc-400/90 text-sm sm:text-base font-semibold tracking-tight">
+        <span>TUM Management Alumni</span>
+        <span class="hidden sm:inline text-zinc-700">·</span>
+        <span>Cantero Consulting</span>
+        <span class="hidden sm:inline text-zinc-700">·</span>
+        <span>ExamDraft</span>
+        <span class="hidden sm:inline text-zinc-700">·</span>
+        <span>WIRO e.V.</span>
+        <span class="hidden sm:inline text-zinc-700">·</span>
+        <span>Focus Partner</span>
+      </div>
     </div>
   </div>
   <!-- Sentinel: observed to pause/play video when hero leaves viewport -->
@@ -81,15 +92,15 @@ const isEn = lang === 'en';
     z-index: 1;
     pointer-events: auto;
   }
-  @media (max-width: 768px) {
-    #hero-video-wrapper, #hero-player { display: none !important; }
+  /* Poster is always shown (all viewports) so the hero has imagery before the (deferred) video loads.
+     On mobile the player itself stays disabled — only the poster is displayed. */
+  #hero-video-wrapper {
+    background-image: url('https://i.ytimg.com/vi/vWi8L-jiYhc/maxresdefault.jpg');
+    background-size: cover;
+    background-position: center;
   }
-  @media (prefers-reduced-motion: reduce) and (min-width: 769px) {
-    #hero-video-wrapper {
-      background-image: url('https://i.ytimg.com/vi/vWi8L-jiYhc/maxresdefault.jpg');
-      background-size: cover;
-      background-position: center;
-    }
+  @media (max-width: 768px) {
+    #hero-player { display: none !important; }
   }
 </style>
 
@@ -99,12 +110,26 @@ const isEn = lang === 'en';
     let player;
     let isMuted = true;
     const isMobile = window.innerWidth <= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!isMobile && !window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // Defer the YouTube API until the page is idle so it never blocks first paint.
+    function loadYTApi() {
+      if (window.YT && window.YT.Player) {
+        initYTPlayer();
+        return;
+      }
+      window.onYouTubeIframeAPIReady = initYTPlayer;
+      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+    }
+
+    function scheduleYTLoad() {
+      // setTimeout instead of requestIdleCallback: idle callbacks can starve in background tabs
+      setTimeout(loadYTApi, 800);
     }
 
     function initYTPlayer() {
@@ -127,11 +152,11 @@ const isEn = lang === 'en';
       });
     }
 
-    if (!isMobile) {
-      if (window.YT && window.YT.Player) {
-        initYTPlayer();
+    if (!isMobile && !prefersReducedMotion) {
+      if (document.readyState === 'complete') {
+        scheduleYTLoad();
       } else {
-        window.onYouTubeIframeAPIReady = initYTPlayer;
+        window.addEventListener('load', scheduleYTLoad, { once: true });
       }
 
       const heroSentinel = document.getElementById('hero-sentinel');

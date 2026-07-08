@@ -7,30 +7,40 @@ const isEn = lang === 'en';
 ---
 
 <section id="contact" class="py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-16 flex flex-col items-center relative overflow-hidden bg-[#030303]">
-  <canvas id="cta-particles" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-900/20 pointer-events-none"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(34,211,238,0.10), transparent 65%);"></div>
   <div class="cta-content w-full max-w-2xl mx-auto relative z-10 flex flex-col items-start text-left opacity-0 translate-y-8 px-2">
     <h2 class="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 md:mb-8 tracking-tight leading-tight">
       <span data-i18n="contact.headingPrefix">{isEn ? "Let's build something" : 'Lass uns etwas'}</span> 
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500" data-i18n="contact.headingAccent">{isEn ? 'lasting' : 'Bleibendes'}</span> 
       <span data-i18n="contact.headingSuffix">{isEn ? 'together.' : 'bauen.'}</span>
     </h2>
-    <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 md:mb-12 max-w-xl" data-i18n="contact.subline">
-      {isEn ? 'Tell me how I can support your project.' : 'Schreib mir, wie ich dich bei deinem Projekt unterstützen kann.'}
+    <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-4 max-w-xl" data-i18n="contact.subline">
+      {isEn ? "Tell me briefly about your project — you'll usually get an honest assessment within 24 hours." : 'Erzähl mir kurz von deinem Projekt — du bekommst in der Regel innerhalb von 24 Stunden eine ehrliche Einschätzung.'}
     </p>
-    
-    <form class="w-full space-y-3 sm:space-y-4" action="https://formspree.io/f/mzdakanj" method="POST">
+    <p class="text-sm text-zinc-500 mb-8 md:mb-10 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-500 shrink-0"><path d="M20 6 9 17l-5-5"/></svg>
+      <span data-i18n="contact.reassurance">{isEn ? 'Free and non-binding — no newsletters, no hold music.' : 'Unverbindlich und kostenlos — keine Newsletter, keine Warteschleife.'}</span>
+    </p>
+
+    <form id="contact-form" class="w-full space-y-3 sm:space-y-4" action="https://formspree.io/f/mzdakanj" method="POST">
+      <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" style="position:absolute;left:-9999px;">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <input type="text" name="name" placeholder={isEn ? 'Name' : 'Name'} data-i18n-placeholder="contact.form.name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
         <input type="email" name="email" placeholder={isEn ? 'Email' : 'E-Mail'} data-i18n-placeholder="contact.form.email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
       </div>
       <input type="text" name="subject" placeholder={isEn ? 'Subject' : 'Betreff'} data-i18n-placeholder="contact.form.subject" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
       <textarea name="message" rows="4" placeholder={isEn ? 'Message' : 'Nachricht'} data-i18n-placeholder="contact.form.message" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors resize-none text-sm sm:text-base"></textarea>
-      <button type="submit" class="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold rounded-full hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 w-full sm:w-fit text-sm sm:text-base">
+      <button type="submit" id="contact-submit" class="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold rounded-full hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 w-full sm:w-fit text-sm sm:text-base disabled:opacity-60 disabled:hover:scale-100">
         <span data-i18n="contact.form.submit">{isEn ? 'Send message' : 'Nachricht senden'}</span>
       </button>
+      <p id="contact-status" class="hidden text-sm sm:text-base rounded-xl border px-4 py-3" role="status" aria-live="polite"></p>
     </form>
-    
+
+    <p class="mt-6 text-sm text-zinc-500">
+      <span data-i18n="contact.directLabel">{isEn ? 'Or email me directly:' : 'Oder direkt per E-Mail:'}</span>
+      <a href="mailto:nikolas.maerker@gmail.com" class="text-zinc-300 hover:text-cyan-400 transition-colors font-medium">nikolas.maerker@gmail.com</a>
+    </p>
+
     <div class="mt-8 sm:mt-12 flex items-center gap-5 sm:gap-6">
       <a href="https://www.instagram.com/nikolasmaerker" target="_blank" rel="noopener" class="text-zinc-400 hover:text-white transition-colors p-2 -m-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
@@ -62,78 +72,51 @@ const isEn = lang === 'en';
     }, { threshold: 0.3 });
     if (ctaSection) ctaObserver.observe(ctaSection);
 
-    // Canvas Particles
-    const canvas = document.getElementById('cta-particles');
-    let particlesVisible = false;
-    if (canvas && ctaSection && !prefersReducedMotion) {
-      new IntersectionObserver(([entry]) => {
-        const wasVisible = particlesVisible;
-        particlesVisible = entry.isIntersecting;
-        if (particlesVisible && !wasVisible) renderParticles();
-      }, { threshold: 0 }).observe(ctaSection);
-
-      const ctx = canvas.getContext('2d');
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
-      window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }, { passive: true });
-
-      const particles = [];
-      const particleCount = window.innerWidth > 768 ? 120 : 60;
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * width, y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2 + 0.5,
-          color: Math.random() > 0.5 ? '#22d3ee' : '#a78bfa',
-          alpha: Math.random() * 0.25 + 0.1
-        });
-      }
-
-      let mouse = { x: -1000, y: -1000, active: false, radius: 150 };
-      ctaSection.addEventListener('mousemove', (e) => {
-        const rect = ctaSection.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-        mouse.active = true;
-      });
-      ctaSection.addEventListener('mouseleave', () => { mouse.active = false; });
-
-      function renderParticles() {
-        ctx.clearRect(0, 0, width, height);
-        ctx.globalCompositeOperation = 'screen';
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          if (mouse.active) {
-            const dx = mouse.x - p.x;
-            const dy = mouse.y - p.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < mouse.radius) {
-              const force = (mouse.radius - dist) / mouse.radius;
-              p.x -= (dx / dist) * force * 4;
-              p.y -= (dy / dist) * force * 4;
-            }
-          }
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = width; else if (p.x > width) p.x = 0;
-          if (p.y < 0) p.y = height; else if (p.y > height) p.y = 0;
-          p.vx *= 0.99; p.vy *= 0.99;
-          p.vx += (Math.random() - 0.5) * 0.05;
-          p.vy += (Math.random() - 0.5) * 0.05;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.alpha;
-          ctx.fill();
+    // AJAX form submit: keep the visitor on the page and confirm inline
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('contact-submit');
+    const statusEl = document.getElementById('contact-status');
+    if (form && submitBtn && statusEl && !form.dataset.ajaxBound) {
+      form.dataset.ajaxBound = 'true';
+      const getStrings = () => {
+        const lang = document.documentElement.lang === 'en' ? 'en' : 'de';
+        const dict = window.__SITE_DATA__?.[lang]?.contact?.form ?? {};
+        return {
+          sending: dict.sending ?? (lang === 'en' ? 'Sending …' : 'Wird gesendet …'),
+          success: dict.success ?? (lang === 'en' ? 'Thanks for your message! I usually reply within 24 hours.' : 'Danke für deine Nachricht! Ich melde mich in der Regel innerhalb von 24 Stunden.'),
+          error: dict.error ?? (lang === 'en' ? "That didn't work. Please email me directly." : 'Das hat leider nicht geklappt. Schreib mir bitte direkt per E-Mail.'),
+        };
+      };
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const strings = getStrings();
+        const submitLabel = submitBtn.querySelector('span');
+        const originalLabel = submitLabel?.textContent;
+        submitBtn.disabled = true;
+        if (submitLabel) submitLabel.textContent = strings.sending;
+        statusEl.classList.add('hidden');
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' },
+          });
+          if (!response.ok) throw new Error('Formspree error');
+          form.reset();
+          statusEl.textContent = strings.success;
+          statusEl.className = 'text-sm sm:text-base rounded-xl border px-4 py-3 border-cyan-500/40 bg-cyan-500/10 text-cyan-200';
+        } catch (err) {
+          statusEl.textContent = strings.error;
+          statusEl.className = 'text-sm sm:text-base rounded-xl border px-4 py-3 border-red-500/40 bg-red-500/10 text-red-200';
+        } finally {
+          submitBtn.disabled = false;
+          if (submitLabel && originalLabel) submitLabel.textContent = originalLabel;
         }
-        ctx.globalAlpha = 1.0;
-        if (particlesVisible && document.visibilityState === 'visible') requestAnimationFrame(renderParticles);
-      }
-      renderParticles();
-    } else if (ctaContent) {
-      // If reduced motion, show content immediately
+      });
+    }
+
+    // If reduced motion, show content immediately
+    if (prefersReducedMotion && ctaContent) {
       ctaContent.classList.add('cta-animate');
     }
   });

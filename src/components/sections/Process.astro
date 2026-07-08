@@ -50,11 +50,11 @@ const displaySteps = isEn ? enSteps : deSteps;
         const colorClass = color === 'cyan' ? 'text-cyan-500' : color === 'violet' ? 'text-violet-500' : 'text-amber-500';
         const borderClass = color === 'cyan' ? 'hover:border-cyan-500/30' : color === 'violet' ? 'hover:border-violet-500/30' : 'hover:border-amber-500/30';
         return (
-          <div class="reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group transition-colors duration-500 ${borderClass}">
+          <div class={`reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group transition-colors duration-500 ${borderClass}`}>
             <span class={`text-3xl sm:text-4xl md:text-5xl font-black opacity-30 group-hover:opacity-100 transition-colors ${colorClass}`}>{num}</span>
             <div>
-              <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">{step.title}</h3>
-              <p class="text-zinc-500 text-sm md:text-base">{step.text}</p>
+              <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2" data-i18n={`process.steps.${idx}.title`}>{step.title}</h3>
+              <p class="text-zinc-500 text-sm md:text-base" data-i18n={`process.steps.${idx}.text`}>{step.text}</p>
             </div>
           </div>
         );

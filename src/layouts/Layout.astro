@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title,
-  description = 'Nikolas Maerker — Freelancer für Webentwicklung, Videoproduktion und Drohnenaufnahmen.',
+  description = 'tryoud — maßgeschneiderte Websites für mittelständische Unternehmen, von Hand entwickelt statt Baukasten. Dazu Foto, Video und Drohnenaufnahmen aus einer Hand.',
   lang = 'de',
   ogImage = '/og/og-tryoud.png',
   canonical,
@@ -28,6 +28,9 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -67,6 +70,16 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
     })} />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: "tryoud",
+      url: siteUrl,
+      description: "Webdesign, Webentwicklung und Content-Produktion (Foto, Video, Drohne) für mittelständische Unternehmen.",
+      founder: { "@type": "Person", name: "Nikolas Maerker" },
+      areaServed: "DE",
+      email: "nikolas.maerker@gmail.com"
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
       "@type": "WebSite",
       name: title,
       url: siteUrl,
@@ -80,91 +93,13 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
     <ViewTransitions />
 	</head>
 	<body class="bg-[#030303] text-zinc-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
-		
-		<!-- Noise Overlay -->
-		<div class="pointer-events-none fixed inset-0 z-50 w-full h-full opacity-30 mix-blend-overlay noise-overlay" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"></div>
-		
-		<!-- Custom Cursor -->
-		<div transition:persist id="magic-cursor" class="hidden pointer-events-none fixed top-0 left-0 w-6 h-6 rounded-full bg-cyan-400 mix-blend-screen shadow-[0_0_25px_rgba(34,211,238,0.9)] z-[9999] opacity-0 backdrop-blur-sm cursor-element" style="transform: translate3d(-100px,-100px,0)">
-		</div>
 
 		<slot />
 
 		<script>
       document.addEventListener('astro:page-load', () => {
-        const html = document.documentElement;
-        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        html.setAttribute('data-reduced-motion', String(prefersReducedMotion));
-        
-        if (isTouchDevice || prefersReducedMotion) return;
-
-        const cursor = document.getElementById('magic-cursor');
-        if (!cursor) return;
-        cursor.classList.remove('hidden');
-        cursor.classList.add('md:block');
-
-        cursor.style.transition = 'none';
-        cursor.style.opacity = '0';
-        cursor.style.transform = 'translate3d(-100px,-100px,0)';
-
-        let mouseX = -100;
-        let mouseY = -100;
-        let cursorX = -100;
-        let cursorY = -100;
-        let isHovering = false;
-        let hasEntered = false;
-
-        document.addEventListener('mousemove', (e) => {
-          if (!hasEntered) {
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-            hasEntered = true;
-            cursor.style.transition = 'opacity 0.2s ease';
-            cursor.style.opacity = '0.8';
-          }
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-        }, { passive: true });
-
-        document.addEventListener('mouseleave', () => {
-          cursor.style.opacity = '0';
-          hasEntered = false;
-        });
-        document.addEventListener('mouseenter', () => {
-          if (hasEntered) cursor.style.opacity = isHovering ? '1' : '0.8';
-        });
-
-        document.addEventListener('mouseover', (e) => {
-          const target = e.target as HTMLElement;
-          if (target.closest('a, button, [role="button"], .cursor-hover')) {
-            isHovering = true;
-          }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-          const target = e.target as HTMLElement;
-          if (target.closest('a, button, [role="button"], .cursor-hover')) {
-            isHovering = false;
-          }
-        });
-
-        const render = () => {
-          cursorX += (mouseX - cursorX) * 0.15;
-          cursorY += (mouseY - cursorY) * 0.15;
-
-          const size = isHovering ? 48 : 24;
-          cursor.style.width = `${size}px`;
-          cursor.style.height = `${size}px`;
-          cursor.style.transform = `translate3d(${cursorX - size/2}px, ${cursorY - size/2}px, 0)`;
-          if (hasEntered) {
-            cursor.style.opacity = isHovering ? '1' : '0.8';
-          }
-
-          requestAnimationFrame(render);
-        };
-        requestAnimationFrame(render);
+        document.documentElement.setAttribute('data-reduced-motion', String(prefersReducedMotion));
       });
 		</script>
 	</body>
@@ -180,15 +115,7 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
   body {
     background-color: var(--bg-color);
   }
-  
-  /* Hide default cursor for mouse users */
-  @media (pointer: fine) {
-    html:not([data-reduced-motion="true"]) body,
-    html:not([data-reduced-motion="true"]) body * {
-      cursor: none !important;
-    }
-  }
-  
+
   /* Reduced motion: disable animations globally */
   html[data-reduced-motion="true"] *,
   html[data-reduced-motion="true"] *::before,
@@ -196,15 +123,5 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  
-  html[data-reduced-motion="true"] .noise-overlay,
-  html[data-reduced-motion="true"] .cursor-element {
-    display: none !important;
-  }
-  
-  /* Fallback for interactables transition when mouse leaves */
-  a, button, .magnetic {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 </style>

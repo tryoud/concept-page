@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -7,6 +11,10 @@ html {
 body {
   background-color: #030303;
   color: #f4f4f5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
 }
 
 .reveal-on-scroll {
@@ -19,11 +27,6 @@ body {
   transform: translateY(0);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 0.85; }
-}
-
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -32,10 +35,4 @@ body {
 
 .animate-gradient {
   animation: gradient 6s ease infinite;
-}
-
-/* content-visibility for off-screen sections */
-#work, #apple-journey {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 100vh;
 }
