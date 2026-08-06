@@ -4,73 +4,103 @@ interface Props {
 }
 const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
----
 
-<!-- Static ambient gradient (cheap to composite, replaces blurred glow orbs) -->
-<div class="fixed inset-0 -z-10 pointer-events-none" style="background: radial-gradient(ellipse 70% 45% at 15% -5%, rgba(34,211,238,0.10), transparent 60%), radial-gradient(ellipse 55% 45% at 95% 105%, rgba(139,92,246,0.10), transparent 60%);"></div>
+const chips = [
+  { key: 'hero.chip1', de: 'Von Hand entwickelt', en: 'Hand-coded' },
+  { key: 'hero.chip2', de: 'Eigener Foto- & Videocontent', en: 'Own photo & video content' },
+  { key: 'hero.chip3', de: 'Ein Ansprechpartner', en: 'One point of contact' },
+];
+
+const clients = ['TUM Management Alumni', 'Cantero Consulting', 'ExamDraft', 'WIRO e.V.', 'Focus Partner'];
+---
 
 <!-- Hero Video Background -->
 <div id="hero-video-wrapper" class="fixed inset-0 -z-20">
   <div id="hero-player" class="w-full h-full"></div>
-  <div class="hero-video-overlay"></div>
+  <div class="hero-scrim"></div>
 </div>
 
 <!-- Video Controls -->
-<div id="video-controls" class="fixed bottom-8 right-8 z-50 hidden md:flex gap-3" style="transition: opacity 0.5s ease; opacity: 1;">
-  <button id="fullscreen-btn" class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300" aria-label="Video fullscreen">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+<div id="video-controls" class="fixed bottom-6 right-6 z-40 hidden md:flex gap-2" style="transition: opacity 0.4s ease; opacity: 1;">
+  <button id="fullscreen-btn" class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-white/70 hover:text-white hover:bg-black/60 transition-all duration-300" aria-label={isEn ? 'Fullscreen video' : 'Video im Vollbild'}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
   </button>
-  <button id="unmute-btn" class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300" aria-label="Ton einschalten">
-    <svg id="mute-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-    <svg id="sound-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+  <button id="unmute-btn" class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-white/70 hover:text-white hover:bg-black/60 transition-all duration-300" aria-label={isEn ? 'Toggle sound' : 'Ton ein-/ausschalten'}>
+    <svg id="mute-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+    <svg id="sound-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
   </button>
 </div>
 
-<section class="min-h-[100dvh] w-full flex flex-col justify-center items-center px-4 sm:px-6 pt-20 pb-12 md:pt-32 md:pb-20 lg:px-24 relative">
-  <div class="w-full max-w-5xl mx-auto flex flex-col items-start text-left">
-    <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-5xl reveal-on-scroll">
-      <span class="block" data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
-      <span class="block" data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
-      <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span></span>
-    </h1>
+<section class="relative min-h-[100dvh] w-full flex flex-col justify-center pt-24 pb-28 md:pt-32 md:pb-24">
+  <div class="shell">
+    <div class="max-w-4xl">
+      <div class="reveal-on-scroll inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-1.5 mb-7">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+        </span>
+        <span class="text-xs font-medium text-white/80" data-i18n="hero.badge">{isEn ? 'Taking on new projects' : 'Kapazität für neue Projekte'}</span>
+      </div>
 
-    <p class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal-on-scroll" data-i18n="hero.subline">
-      {isEn ? 'Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.' : 'Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.'}
-    </p>
+      <h1 class="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.06] reveal-on-scroll" style="--reveal-delay: 60ms">
+        <span class="block" data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
+        <span class="block" data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
+        <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span></span>
+      </h1>
 
-    <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-8 sm:mt-12 w-fit reveal-on-scroll">
-      <a href="#contact" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
-        <span data-i18n="hero.primaryCta">{isEn ? 'Start a project' : 'Projekt anfragen'}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-      </a>
-      <a href="#work" class="group px-6 sm:px-8 py-3 sm:py-4 text-white font-medium hover:text-cyan-400 transition-colors flex items-center gap-2 text-sm sm:text-base">
-        <span data-i18n="hero.secondaryCta">{isEn ? 'View work' : 'Arbeiten ansehen'}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 -translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-y-0 sm:w-4 sm:h-4"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
-      </a>
+      <p class="mt-6 text-base sm:text-lg md:text-xl text-zinc-300/90 max-w-2xl leading-relaxed reveal-on-scroll" style="--reveal-delay: 120ms" data-i18n="hero.subline">
+        {isEn ? 'Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.' : 'Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.'}
+      </p>
+
+      <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2.5 reveal-on-scroll" style="--reveal-delay: 160ms">
+        {chips.map(c => (
+          <li class="flex items-center gap-2 text-sm text-zinc-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0"><path d="M20 6 9 17l-5-5"/></svg>
+            <span data-i18n={c.key}>{isEn ? c.en : c.de}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-9 reveal-on-scroll" style="--reveal-delay: 200ms">
+        <a href="#contact" class="group btn btn-primary text-base w-full sm:w-auto">
+          <span data-i18n="hero.primaryCta">{isEn ? 'Start a project' : 'Projekt anfragen'}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+        <a href="#work" class="btn btn-secondary text-base w-full sm:w-auto">
+          <span data-i18n="hero.secondaryCta">{isEn ? 'View work' : 'Arbeiten ansehen'}</span>
+        </a>
+      </div>
+
+      <p class="mt-4 text-sm text-zinc-500 reveal-on-scroll" style="--reveal-delay: 240ms" data-i18n="hero.microTrust">
+        {isEn ? 'Free, non-binding assessment — usually within 24 hours.' : 'Kostenlose, unverbindliche Einschätzung — in der Regel innerhalb von 24 Stunden.'}
+      </p>
     </div>
+  </div>
 
-    <div class="mt-12 sm:mt-16 reveal-on-scroll">
-      <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] text-zinc-500 mb-3 sm:mb-4" data-i18n="hero.trust">{isEn ? 'Trusted by companies like' : 'Vertrauen von Unternehmen wie'}</p>
-      <div class="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-2 text-zinc-400/90 text-sm sm:text-base font-semibold tracking-tight">
-        <span>TUM Management Alumni</span>
-        <span class="hidden sm:inline text-zinc-700">·</span>
-        <span>Cantero Consulting</span>
-        <span class="hidden sm:inline text-zinc-700">·</span>
-        <span>ExamDraft</span>
-        <span class="hidden sm:inline text-zinc-700">·</span>
-        <span>WIRO e.V.</span>
-        <span class="hidden sm:inline text-zinc-700">·</span>
-        <span>Focus Partner</span>
+  <!-- Trust bar pinned to the bottom of the fold -->
+  <div class="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/25 backdrop-blur-sm">
+    <div class="shell py-4 md:py-5">
+      <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
+        <p class="text-[0.65rem] uppercase tracking-[0.2em] text-zinc-500 shrink-0" data-i18n="hero.trust">{isEn ? 'Trusted by' : 'Vertrauen von'}</p>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-1.5 text-zinc-400 text-sm font-medium">
+          {clients.map((c, i) => (
+            <>
+              {i > 0 && <span class="hidden sm:inline text-zinc-700" aria-hidden="true">·</span>}
+              <span>{c}</span>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   </div>
+
   <!-- Sentinel: observed to pause/play video when hero leaves viewport -->
   <div id="hero-sentinel" class="absolute bottom-0 w-full h-px pointer-events-none"></div>
 </section>
 
 <style>
   #hero-video-wrapper {
-    background: #030303;
+    background: #050506 url('https://i.ytimg.com/vi/vWi8L-jiYhc/maxresdefault.jpg') center / cover no-repeat;
   }
   #hero-player {
     position: absolute;
@@ -85,20 +115,19 @@ const isEn = lang === 'en';
     width: max(100vw, calc(100vh * 16 / 9));
     height: max(100vh, calc(100vw * 9 / 16));
   }
-  .hero-video-overlay {
+  /* Two-axis scrim: the vertical pass darkens the whole frame, the horizontal pass
+     protects the left-aligned copy from the bright/lettered parts of the footage. */
+  .hero-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.7) 50%, rgba(3,3,3,0.95) 100%);
     z-index: 1;
     pointer-events: auto;
+    background:
+      linear-gradient(100deg, rgba(5,5,6,0.94) 0%, rgba(5,5,6,0.82) 38%, rgba(5,5,6,0.42) 68%, rgba(5,5,6,0.55) 100%),
+      linear-gradient(180deg, rgba(5,5,6,0.72) 0%, rgba(5,5,6,0.35) 35%, rgba(5,5,6,0.75) 82%, #050506 100%);
   }
-  /* Poster is always shown (all viewports) so the hero has imagery before the (deferred) video loads.
+  /* Poster is always shown so the hero has imagery before the (deferred) video loads.
      On mobile the player itself stays disabled — only the poster is displayed. */
-  #hero-video-wrapper {
-    background-image: url('https://i.ytimg.com/vi/vWi8L-jiYhc/maxresdefault.jpg');
-    background-size: cover;
-    background-position: center;
-  }
   @media (max-width: 768px) {
     #hero-player { display: none !important; }
   }

@@ -5,74 +5,158 @@ interface Props {
 
 const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
+
+const links = [
+  { href: '#services', key: 'nav.services', de: 'Leistungen', en: 'Services' },
+  { href: '#work', key: 'nav.work', de: 'Referenzen', en: 'Work' },
+  { href: '#process', key: 'nav.process', de: 'Ablauf', en: 'Process' },
+  { href: '#faq', key: 'nav.faq', de: 'FAQ', en: 'FAQ' },
+];
 ---
 
-<nav class="fixed top-0 w-full flex items-center justify-between px-4 py-3 sm:px-6 md:px-12 z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
-  <a href="/" class="flex items-center gap-2 group w-fit relative z-50">
-    <img src="/favicon.svg" alt="tryoud" class="w-8 h-8 rounded-lg shadow-lg transition-transform group-hover:scale-105 group-hover:rotate-6" />
-    <span class="text-lg sm:text-xl font-bold tracking-tight text-white/90">tryoud</span>
-  </a>
-  
-  <!-- Desktop Nav -->
-  <div class="hidden md:flex items-center gap-8">
-    <a href="#services" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.services">{isEn ? 'Services' : 'Services'}</a>
-    <a href="#expertise" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.expertise">{isEn ? 'Expertise' : 'Expertise'}</a>
-    <a href="#work" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.work">{isEn ? 'Work' : 'Work'}</a>
-    <a href="#process" class="text-sm text-zinc-400 hover:text-white transition-colors" data-i18n="nav.process">{isEn ? 'Process' : 'Prozess'}</a>
-    <a href="#contact" class="px-5 py-2 text-sm font-semibold text-white transition-all bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:scale-105" data-i18n="nav.contact">{isEn ? 'Contact' : 'Kontakt'}</a>
-    <div class="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Sprachauswahl">
-      <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold transition-colors hover:bg-white/10" data-lang-switch="de" aria-label="Deutsch" aria-pressed={!isEn}>DE</button>
-      <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold transition-colors hover:bg-white/10" data-lang-switch="en" aria-label="English" aria-pressed={isEn}>EN</button>
+<nav id="site-nav" class="fixed top-0 w-full z-50 transition-colors duration-300 border-b border-transparent">
+  <div class="flex items-center justify-between px-4 py-3 sm:px-6 md:px-10">
+    <a href="/" class="flex items-center gap-2.5 group w-fit relative z-50">
+      <img src="/favicon.svg" alt="" aria-hidden="true" class="w-8 h-8 rounded-lg transition-transform duration-300 group-hover:scale-105" />
+      <span class="text-lg font-semibold tracking-tight text-white">tryoud</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-1">
+      {links.map(l => (
+        <a
+          href={l.href}
+          data-navlink={l.href.slice(1)}
+          class="nav-link px-3.5 py-2 text-sm text-zinc-400 hover:text-white transition-colors rounded-full"
+          data-i18n={l.key}
+        >{isEn ? l.en : l.de}</a>
+      ))}
     </div>
+
+    <div class="hidden md:flex items-center gap-3">
+      <div class="flex items-center gap-0.5 rounded-full border border-white/10 bg-white/5 p-0.5" aria-label={isEn ? 'Language' : 'Sprachauswahl'}>
+        <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="de" aria-label="Deutsch" aria-pressed={!isEn}>DE</button>
+        <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="en" aria-label="English" aria-pressed={isEn}>EN</button>
+      </div>
+      <a href="#contact" class="btn px-5 py-2.5 text-sm bg-white text-black hover:shadow-[0_10px_36px_-10px_rgba(34,211,238,0.7)]" data-i18n="nav.contact">{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden p-2 -mr-2 text-white/80 hover:text-white relative z-50" aria-label={isEn ? 'Open menu' : 'Menü öffnen'} aria-expanded="false" aria-controls="mobile-menu">
+      <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/></svg>
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
+    </button>
   </div>
-  
-  <!-- Mobile Menu Button -->
-  <button id="mobile-menu-btn" class="md:hidden p-2 text-white/80 hover:text-white" aria-label="Menü öffnen">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-  </button>
+
+  <!-- Scroll progress -->
+  <div class="absolute bottom-0 left-0 h-px w-full bg-transparent">
+    <div id="scroll-progress" class="h-full w-0 bg-gradient-to-r from-cyan-400 to-blue-500 transition-[width] duration-150 ease-out"></div>
+  </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 pt-20">
-  <a href="#services" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.services">{isEn ? 'Services' : 'Services'}</a>
-  <a href="#expertise" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.expertise">{isEn ? 'Expertise' : 'Expertise'}</a>
-  <a href="#work" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.work">{isEn ? 'Work' : 'Work'}</a>
-  <a href="#process" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors mobile-link" data-i18n="nav.process">{isEn ? 'Process' : 'Prozess'}</a>
-  <a href="#contact" class="px-8 py-4 text-lg font-bold text-black bg-gradient-to-r from-cyan-400 to-violet-400 rounded-full mobile-link" data-i18n="nav.contact">{isEn ? 'Contact' : 'Kontakt'}</a>
-  <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Sprachauswahl">
-    <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:bg-white/10 mobile-link" data-lang-switch="de" aria-label="Deutsch" aria-pressed={!isEn}>DE</button>
-    <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:bg-white/10 mobile-link" data-lang-switch="en" aria-label="English" aria-pressed={isEn}>EN</button>
+<div id="mobile-menu" class="fixed inset-0 bg-[#050506]/98 backdrop-blur-xl z-40 hidden flex-col justify-center gap-2 px-6 pt-20 pb-10">
+  {links.map(l => (
+    <a href={l.href} class="mobile-link text-3xl font-semibold text-white/90 hover:text-cyan-400 transition-colors py-3 border-b border-white/5" data-i18n={l.key}>{isEn ? l.en : l.de}</a>
+  ))}
+  <a href="#contact" class="mobile-link btn btn-primary mt-8 w-full py-4 text-base" data-i18n="nav.contact">{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
+  <div class="mt-8 flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 w-fit" aria-label={isEn ? 'Language' : 'Sprachauswahl'}>
+    <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="de" aria-label="Deutsch" aria-pressed={!isEn}>DE</button>
+    <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="en" aria-label="English" aria-pressed={isEn}>EN</button>
   </div>
 </div>
 
+<!-- Sticky mobile CTA: the contact form sits ~6000px down, so mobile needs a permanent way in -->
+<a
+  id="sticky-cta"
+  href="#contact"
+  class="md:hidden fixed bottom-4 inset-x-4 z-40 btn btn-primary py-3.5 text-sm translate-y-24 opacity-0 transition-all duration-300"
+  data-i18n="nav.contact"
+>{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
+
 <script>
   document.addEventListener('astro:page-load', () => {
+    const nav = document.getElementById('site-nav');
+    const progress = document.getElementById('scroll-progress');
+    const stickyCta = document.getElementById('sticky-cta');
+    const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav-link'));
+
+    // --- Nav background + scroll progress + sticky CTA ---
+    const onScroll = () => {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (nav) {
+        const solid = y > 24;
+        nav.classList.toggle('bg-[#050506]/85', solid);
+        nav.classList.toggle('backdrop-blur-xl', solid);
+        nav.classList.toggle('border-white/10', solid);
+        nav.classList.toggle('border-transparent', !solid);
+      }
+      if (progress && max > 0) {
+        progress.style.width = `${Math.min(100, (y / max) * 100)}%`;
+      }
+      if (stickyCta) {
+        // Show once the hero is behind us, hide again over the contact form itself
+        const contact = document.getElementById('contact');
+        const contactTop = contact ? contact.getBoundingClientRect().top + y : Infinity;
+        const show = y > window.innerHeight * 0.9 && y < contactTop - window.innerHeight * 0.5;
+        stickyCta.classList.toggle('translate-y-24', !show);
+        stickyCta.classList.toggle('opacity-0', !show);
+        stickyCta.classList.toggle('pointer-events-none', !show);
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // --- Active section highlight ---
+    const sections = navLinks
+      .map(link => document.getElementById(link.dataset.navlink ?? ''))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (sections.length) {
+      const setActive = (id: string) => {
+        navLinks.forEach(link => {
+          const active = link.dataset.navlink === id;
+          link.classList.toggle('text-white', active);
+          link.classList.toggle('bg-white/8', active);
+          link.classList.toggle('text-zinc-400', !active);
+        });
+      };
+      const observer = new IntersectionObserver(
+        entries => {
+          const visible = entries.filter(e => e.isIntersecting);
+          if (visible.length) setActive(visible[0].target.id);
+        },
+        { rootMargin: '-20% 0px -70% 0px' },
+      );
+      sections.forEach(s => observer.observe(s));
+    }
+
+    // --- Mobile menu ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+
     if (mobileMenuBtn && mobileMenu) {
-      let menuOpen = false;
+      const setMenu = (open: boolean) => {
+        mobileMenu.classList.toggle('hidden', !open);
+        mobileMenu.classList.toggle('flex', open);
+        iconOpen?.classList.toggle('hidden', open);
+        iconClose?.classList.toggle('hidden', !open);
+        mobileMenuBtn.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+
       mobileMenuBtn.addEventListener('click', () => {
-        menuOpen = !menuOpen;
-        if (menuOpen) {
-          mobileMenu.classList.remove('hidden');
-          mobileMenu.classList.add('flex');
-          document.body.style.overflow = 'hidden';
-        } else {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('flex');
-          document.body.style.overflow = '';
-        }
+        setMenu(mobileMenu.classList.contains('hidden'));
       });
-      
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          menuOpen = false;
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('flex');
-          document.body.style.overflow = '';
-        });
+      document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => setMenu(false));
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) setMenu(false);
       });
     }
   });

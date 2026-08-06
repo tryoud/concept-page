@@ -1,0 +1,80 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+
+const rows = [
+  {
+    key: 'design',
+    de: { label: 'Design', bad: 'Template, das tausend andere auch nutzen', good: 'Auf dein Angebot und deine Zielgruppe zugeschnitten' },
+    en: { label: 'Design', bad: 'A template a thousand others use too', good: 'Cut to fit your offer and your audience' },
+  },
+  {
+    key: 'speed',
+    de: { label: 'Performance', bad: 'Plugin-Ballast, langsame Ladezeiten', good: 'Statisch gebaut, weltweit per CDN ausgeliefert' },
+    en: { label: 'Performance', bad: 'Plugin bloat, slow load times', good: 'Statically built, delivered worldwide via CDN' },
+  },
+  {
+    key: 'content',
+    de: { label: 'Bildsprache', bad: 'Stockfotos aus der Datenbank', good: 'Eigene Foto-, Video- und Drohnenaufnahmen' },
+    en: { label: 'Imagery', bad: 'Stock photos from a database', good: 'Your own photo, video, and drone footage' },
+  },
+  {
+    key: 'contact',
+    de: { label: 'Zusammenarbeit', bad: 'Ticket-System und wechselnde Ansprechpartner', good: 'Direkt mit der Person, die auch umsetzt' },
+    en: { label: 'Collaboration', bad: 'Ticket systems and rotating contacts', good: 'Straight to the person who builds it' },
+  },
+];
+
+const stack = ['Astro', 'WordPress', 'TypeScript', 'Cloudflare', 'Figma', 'Premiere Pro', 'Lightroom'];
+---
+
+<section id="expertise" class="section w-full bg-[#050506] relative z-40 border-t border-white/10">
+  <div class="shell">
+    <div class="max-w-2xl mb-12 reveal-on-scroll">
+      <span class="eyebrow mb-3" data-i18n="difference.eyebrow">{isEn ? 'The difference' : 'Der Unterschied'}</span>
+      <h2 class="text-3xl md:text-5xl text-white leading-[1.1]">
+        <span data-i18n="difference.headingPrefix">{isEn ? 'Page builder' : 'Baukasten'}</span> <span class="text-zinc-600" data-i18n="difference.headingVs">{isEn ? 'vs.' : 'vs.'}</span> <span class="text-cyan-400" data-i18n="difference.headingAccent">{isEn ? 'custom-built.' : 'nach Maß.'}</span>
+      </h2>
+      <p class="mt-4 text-zinc-400 leading-relaxed" data-i18n="difference.subline">
+        {isEn ? 'A page builder gets you online. It rarely gets you inquiries. Here is where the two approaches actually diverge.' : 'Mit einem Baukasten bist du online. Anfragen bekommst du damit selten. Hier liegen die echten Unterschiede.'}
+      </p>
+    </div>
+
+    <div class="card overflow-hidden reveal-on-scroll">
+      <!-- Column headers (desktop) -->
+      <div class="hidden md:grid grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)_minmax(0,1fr)] gap-6 px-7 py-4 border-b border-white/8 bg-white/2">
+        <span class="text-xs uppercase tracking-[0.15em] text-zinc-600"></span>
+        <span class="text-xs uppercase tracking-[0.15em] text-zinc-500" data-i18n="difference.colBad">{isEn ? 'Page builder / template' : 'Baukasten / Template'}</span>
+        <span class="text-xs uppercase tracking-[0.15em] text-cyan-400" data-i18n="difference.colGood">{isEn ? 'tryoud' : 'tryoud'}</span>
+      </div>
+
+      {rows.map(r => (
+        <div class="grid grid-cols-1 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2 md:gap-6 px-6 md:px-7 py-5 md:py-6 border-b border-white/8 last:border-b-0">
+          <span class="text-sm font-semibold text-white md:pt-0.5" data-i18n={`difference.rows.${r.key}.label`}>{isEn ? r.en.label : r.de.label}</span>
+
+          <span class="flex items-start gap-2.5 text-sm text-zinc-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" class="text-zinc-600 shrink-0 mt-0.5" aria-hidden="true"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
+            <span data-i18n={`difference.rows.${r.key}.bad`}>{isEn ? r.en.bad : r.de.bad}</span>
+          </span>
+
+          <span class="flex items-start gap-2.5 text-sm text-zinc-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0 mt-0.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span data-i18n={`difference.rows.${r.key}.good`}>{isEn ? r.en.good : r.de.good}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 reveal-on-scroll">
+      <p class="text-xs uppercase tracking-[0.15em] text-zinc-600 shrink-0" data-i18n="difference.stackLabel">{isEn ? 'Built with' : 'Gebaut mit'}</p>
+      <div class="flex flex-wrap gap-2">
+        {stack.map(tag => (
+          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/8 text-xs text-zinc-400 font-medium">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

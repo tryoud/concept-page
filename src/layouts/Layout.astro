@@ -30,7 +30,7 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 		<meta name="viewport" content="width=device-width" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -92,7 +92,7 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
     
     <ViewTransitions />
 	</head>
-	<body class="bg-[#030303] text-zinc-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
+	<body class="bg-[#050506] text-zinc-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
 
 		<slot />
 
@@ -106,16 +106,6 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 </html>
 
 <style is:global>
-  :root {
-    --bg-color: #030303;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    background-color: var(--bg-color);
-  }
-
   /* Reduced motion: disable animations globally */
   html[data-reduced-motion="true"] *,
   html[data-reduced-motion="true"] *::before,

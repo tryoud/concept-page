@@ -6,59 +6,67 @@ const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
 
 const steps = [
-  { color: 'cyan', titleKey: 'process.discovery.title', textKey: 'process.discovery.text' },
-  { color: 'violet', titleKey: 'process.strategy.title', textKey: 'process.strategy.text' },
-  { color: 'cyan', titleKey: 'process.implementation.title', textKey: 'process.implementation.text' },
-  { color: 'amber', titleKey: 'process.launch.title', textKey: 'process.launch.text' }
+  {
+    de: { title: 'Erstgespräch', text: 'Wir klären in 30 Minuten, was du brauchst, was es bringen soll und ob ich der Richtige dafür bin.' },
+    en: { title: 'First call', text: 'In 30 minutes we clarify what you need, what it should achieve, and whether I am the right fit.' },
+    badgeDe: 'Kostenlos',
+    badgeEn: 'Free',
+  },
+  {
+    de: { title: 'Konzept & Angebot', text: 'Positionierung, Struktur und technischer Ansatz — inklusive Festpreis-Angebot, bevor irgendetwas beginnt.' },
+    en: { title: 'Concept & quote', text: 'Positioning, structure, and technical approach — including a fixed-price quote before anything starts.' },
+    badgeDe: null,
+    badgeEn: null,
+  },
+  {
+    de: { title: 'Umsetzung', text: 'Design, Entwicklung und Content-Produktion. Du siehst Zwischenstände und gibst Feedback, bevor es final wird.' },
+    en: { title: 'Build', text: 'Design, development, and content production. You see progress and give feedback before anything is final.' },
+    badgeDe: null,
+    badgeEn: null,
+  },
+  {
+    de: { title: 'Launch & Betreuung', text: 'Go-Live, Übergabe und auf Wunsch laufende Pflege und Optimierung.' },
+    en: { title: 'Launch & support', text: 'Go-live, hand-over, and ongoing maintenance and optimization if you want it.' },
+    badgeDe: null,
+    badgeEn: null,
+  },
 ];
-
-const deSteps = [
-  { title: 'Discovery', text: 'Ich höre deiner Vision zu, analysiere deine Ziele und definiere den Weg zum Erfolg.' },
-  { title: 'Strategie', text: 'Ich analysiere den Markt, definiere die Positionierung und den technischen Ansatz.' },
-  { title: 'Umsetzung', text: 'Design, Build und Feinschliff — effizient und fokussiert auf dein Ziel.' },
-  { title: 'Launch', text: 'Go-Live mit Support und bei Bedarf weiterführender Optimierung.' }
-];
-
-const enSteps = [
-  { title: 'Discovery', text: 'I listen to your vision, analyze your goals, and define the path to success.' },
-  { title: 'Strategy', text: 'I analyze the market, define positioning, and choose the technical approach.' },
-  { title: 'Implementation', text: 'Design, build, and refinement — efficient and focused on your goal.' },
-  { title: 'Launch', text: 'Go-live with support and further optimization when needed.' }
-];
-
-const displaySteps = isEn ? enSteps : deSteps;
 ---
 
-<section id="process" class="py-24 md:py-32 px-4 sm:px-6 md:px-16 lg:px-24 w-full bg-zinc-950 relative z-40 border-t border-white/5">
-  <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-16 gap-6 reveal-on-scroll">
-      <div>
-        <span class="text-xs tracking-[0.3em] text-cyan-500 uppercase font-bold mb-4 block" data-i18n="process.eyebrow">{isEn ? 'My Process' : 'Mein Prozess'}</span>
-        <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-          <span data-i18n="process.headingPrefix">{isEn ? 'How' : 'So'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400" data-i18n="process.headingAccent">{isEn ? 'I work.' : 'arbeite ich.'}</span>
+<section id="process" class="section w-full bg-[#0b0c0e] relative z-40 border-t border-white/10">
+  <div class="shell">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 reveal-on-scroll">
+      <div class="max-w-xl">
+        <span class="eyebrow mb-3" data-i18n="process.eyebrow">{isEn ? 'Process' : 'Ablauf'}</span>
+        <h2 class="text-3xl md:text-5xl text-white leading-[1.1]">
+          <span data-i18n="process.headingPrefix">{isEn ? 'How' : 'So'}</span> <span class="text-cyan-400" data-i18n="process.headingAccent">{isEn ? 'I work.' : 'arbeite ich.'}</span>
         </h2>
       </div>
-      <p class="text-zinc-400 max-w-md" data-i18n="process.subline">
-        {isEn ? 'Four clear steps from the first idea to final launch — structured and focused.' : 'Vier klare Schritte von der ersten Idee bis zum finalen Launch — strukturiert und fokussiert.'}
+      <p class="text-zinc-400 max-w-sm leading-relaxed" data-i18n="process.subline">
+        {isEn ? 'Four clear steps. You always know what happens next and what it costs.' : 'Vier klare Schritte. Du weißt jederzeit, was als Nächstes passiert und was es kostet.'}
       </p>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-      {displaySteps.map((step, idx) => {
-        const num = String(idx + 1).padStart(2, '0');
-        const color = steps[idx].color;
-        const colorClass = color === 'cyan' ? 'text-cyan-500' : color === 'violet' ? 'text-violet-500' : 'text-amber-500';
-        const borderClass = color === 'cyan' ? 'hover:border-cyan-500/30' : color === 'violet' ? 'hover:border-violet-500/30' : 'hover:border-amber-500/30';
-        return (
-          <div class={`reveal-on-scroll bg-zinc-900/50 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 flex items-start gap-4 sm:gap-6 group transition-colors duration-500 ${borderClass}`}>
-            <span class={`text-3xl sm:text-4xl md:text-5xl font-black opacity-30 group-hover:opacity-100 transition-colors ${colorClass}`}>{num}</span>
-            <div>
-              <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2" data-i18n={`process.steps.${idx}.title`}>{step.title}</h3>
-              <p class="text-zinc-500 text-sm md:text-base" data-i18n={`process.steps.${idx}.text`}>{step.text}</p>
-            </div>
+
+    <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative">
+      <!-- Connecting rail (desktop only) -->
+      <div class="hidden lg:block absolute top-[1.4rem] left-[6%] right-[6%] h-px bg-gradient-to-r from-cyan-500/40 via-white/10 to-transparent" aria-hidden="true"></div>
+
+      {steps.map((step, idx) => (
+        <li class="relative reveal-on-scroll" style={`--reveal-delay: ${idx * 90}ms`}>
+          <div class="flex items-center gap-3 mb-5">
+            <span class="relative z-10 w-11 h-11 shrink-0 rounded-full bg-[#0b0c0e] border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-semibold text-sm">
+              {String(idx + 1).padStart(2, '0')}
+            </span>
+            {(isEn ? step.badgeEn : step.badgeDe) && (
+              <span class="text-[0.65rem] font-semibold uppercase tracking-[0.12em] px-2 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300" data-i18n={`process.steps.${idx}.badge`}>
+                {isEn ? step.badgeEn : step.badgeDe}
+              </span>
+            )}
           </div>
-        );
-      })}
-    </div>
+          <h3 class="text-lg font-semibold text-white mb-2" data-i18n={`process.steps.${idx}.title`}>{isEn ? step.en.title : step.de.title}</h3>
+          <p class="text-sm text-zinc-400 leading-relaxed" data-i18n={`process.steps.${idx}.text`}>{isEn ? step.en.text : step.de.text}</p>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>

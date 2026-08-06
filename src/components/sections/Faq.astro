@@ -1,0 +1,127 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+
+/* Answers are also emitted as FAQPage structured data, which is why they are
+   kept as plain strings here. Keep them factual — Google penalises markup that
+   does not match visible text. */
+const faqs = [
+  {
+    key: 'price',
+    de: {
+      q: 'Was kostet eine Website?',
+      a: 'Das hängt vom Umfang ab. Website-Projekte starten bei 4.900 €, Foto- und Videoproduktionen bei 1.200 €. Nach dem Erstgespräch bekommst du ein Festpreis-Angebot — es wird also nicht teurer als vereinbart.',
+    },
+    en: {
+      q: 'What does a website cost?',
+      a: 'It depends on scope. Website projects start at €4,900, photo and video production at €1,200. After the first call you get a fixed-price quote — so it never ends up costing more than agreed.',
+    },
+  },
+  {
+    key: 'duration',
+    de: {
+      q: 'Wie lange dauert ein Projekt?',
+      // TODO(nikolas): Zeitraum an deine echte Auslastung anpassen
+      a: 'Eine Landingpage ist typischerweise in 2 bis 4 Wochen live, eine größere Unternehmensseite in 6 bis 10 Wochen. Der größte Faktor bist meist du selbst: Wie schnell Texte, Freigaben und Zugänge kommen, bestimmt das Tempo.',
+    },
+    en: {
+      q: 'How long does a project take?',
+      a: 'A landing page is typically live in 2 to 4 weeks, a larger company site in 6 to 10 weeks. The biggest factor is usually you: how fast copy, approvals, and access credentials arrive sets the pace.',
+    },
+  },
+  {
+    key: 'maintain',
+    de: {
+      q: 'Kann ich die Website danach selbst pflegen?',
+      a: 'Ja. Du bekommst die Seite so übergeben, dass dein Team Inhalte selbst ändern kann — bei WordPress über das gewohnte Backend, bei statischen Seiten über einen einfachen Editor. Auf Wunsch übernehme ich die Pflege auch weiterhin.',
+    },
+    en: {
+      q: 'Can I maintain the site myself afterwards?',
+      a: 'Yes. The site is handed over so your team can change content itself — through the familiar backend on WordPress, or a simple editor on static sites. If you prefer, I keep maintaining it for you.',
+    },
+  },
+  {
+    key: 'content',
+    de: {
+      q: 'Brauche ich eigene Fotos und Videos?',
+      a: 'Nicht zwingend, aber sie machen den Unterschied. Ich produziere Foto-, Video- und Drohnenaufnahmen selbst — dadurch zeigt deine Website dein echtes Unternehmen statt Stockmaterial, das auch die Konkurrenz nutzt.',
+    },
+    en: {
+      q: 'Do I need my own photos and videos?',
+      a: 'Not strictly, but they make the difference. I produce photo, video, and drone footage myself — so your website shows your actual company instead of stock material your competitors use too.',
+    },
+  },
+  {
+    key: 'relaunch',
+    de: {
+      q: 'Arbeitest du auch an bestehenden Websites?',
+      a: 'Ja. Relaunches sind ein großer Teil meiner Arbeit — die Alumni-Plattformen der TUM School of Management und von WIRO e.V. sind Beispiele dafür. Ob Relaunch oder Neubau günstiger ist, klären wir im Erstgespräch ehrlich.',
+    },
+    en: {
+      q: 'Do you work on existing websites too?',
+      a: 'Yes. Relaunches are a big part of my work — the alumni platforms of TUM School of Management and WIRO e.V. are examples. Whether a relaunch or a rebuild makes more sense, we assess honestly in the first call.',
+    },
+  },
+  {
+    key: 'after',
+    de: {
+      q: 'Was passiert nach dem Launch?',
+      a: 'Du bekommst alle Zugänge und eine Übergabe. Danach kannst du selbst weitermachen oder mich für Pflege, Weiterentwicklung und Content-Nachschub weiter buchen — ohne Knebelvertrag.',
+    },
+    en: {
+      q: 'What happens after launch?',
+      a: 'You get all credentials and a proper hand-over. From there you can continue on your own or keep me booked for maintenance, further development, and new content — with no lock-in contract.',
+    },
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: isEn ? f.en.q : f.de.q,
+    acceptedAnswer: { '@type': 'Answer', text: isEn ? f.en.a : f.de.a },
+  })),
+};
+---
+
+<section id="faq" class="section w-full bg-[#050506] relative z-40 border-t border-white/10">
+  <div class="shell">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] gap-10 lg:gap-16 items-start">
+      <div class="reveal-on-scroll lg:sticky lg:top-28">
+        <span class="eyebrow mb-3" data-i18n="faq.eyebrow">{isEn ? 'FAQ' : 'Häufige Fragen'}</span>
+        <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] text-white leading-[1.1]" data-i18n="faq.heading">
+          {isEn ? 'Answered before you ask.' : 'Beantwortet, bevor du fragst.'}
+        </h2>
+        <p class="mt-4 text-zinc-400 leading-relaxed max-w-sm" data-i18n="faq.subline">
+          {isEn ? 'Something missing? Ask me directly — you usually get an answer the same day.' : 'Etwas nicht dabei? Frag mich direkt — meist bekommst du noch am selben Tag eine Antwort.'}
+        </p>
+        <a href="#contact" class="btn btn-secondary mt-6 text-sm" data-i18n="faq.cta">{isEn ? 'Ask a question' : 'Frage stellen'}</a>
+      </div>
+
+      <div class="divide-y divide-white/8 border-y border-white/8">
+        {faqs.map((f, i) => (
+          <details class="faq-item group reveal-on-scroll" style={`--reveal-delay: ${Math.min(i, 4) * 60}ms`}>
+            <summary class="flex items-start justify-between gap-6 cursor-pointer list-none py-5 text-left">
+              <h3 class="text-base md:text-lg font-medium text-white group-hover:text-cyan-300 transition-colors" data-i18n={`faq.items.${f.key}.q`}>
+                {isEn ? f.en.q : f.de.q}
+              </h3>
+              <span class="faq-icon shrink-0 mt-1 text-cyan-400 transition-transform duration-300" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="text-sm md:text-base text-zinc-400 leading-relaxed pb-5 pr-10 -mt-1" data-i18n={`faq.items.${f.key}.a`}>
+              {isEn ? f.en.a : f.de.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>
