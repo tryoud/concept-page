@@ -38,31 +38,49 @@
       "description": "Maßgeschneiderte Websites für mittelständische Unternehmen — individuell konzipiert und von Hand entwickelt statt Baukasten. Dazu Foto, Video und Drohnenaufnahmen aus einer Hand."
     },
     "nav": {
-      "services": "Services",
+      "services": "Leistungen",
       "expertise": "Expertise",
-      "work": "Work",
-      "process": "Prozess",
-      "contact": "Kontakt"
+      "work": "Referenzen",
+      "process": "Ablauf",
+      "faq": "FAQ",
+      "contact": "Projekt anfragen"
+    },
+    "common": {
+      "backHome": "Zurück zur Startseite"
     },
     "hero": {
+      "badge": "Kapazität für neue Projekte",
       "line1": "Websites nach Maß",
       "line2": "für Unternehmen,",
       "line3Prefix": "die mehr wollen",
       "line3Accent": "als Standard.",
       "subline": "Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.",
+      "chip1": "Von Hand entwickelt",
+      "chip2": "Eigener Foto- & Videocontent",
+      "chip3": "Ein Ansprechpartner",
       "primaryCta": "Projekt anfragen",
       "secondaryCta": "Arbeiten ansehen",
-      "trust": "Vertrauen von Unternehmen wie"
+      "microTrust": "Kostenlose, unverbindliche Einschätzung — in der Regel innerhalb von 24 Stunden.",
+      "trust": "Vertrauen von"
     },
     "journey": {
-      "headline": "Alles aus<br/>einer Hand.",
-      "sub": "Strategie, Design, Code und Content — ein Partner von der ersten Idee bis zum Launch. Keine Übergaben, keine Reibungsverluste."
+      "eyebrow": "Warum tryoud",
+      "headline": "Alles aus einer Hand.",
+      "sub": "Ein Partner von der ersten Idee bis zum Launch — keine Übergaben, keine Reibungsverluste, keine Schuldzuweisungen, wenn etwas hakt.",
+      "points": {
+        "one": { "title": "Ein Ansprechpartner", "text": "Strategie, Design, Code und Content laufen bei einer Person zusammen. Keine Übergaben zwischen Agentur, Fotograf und Entwickler." },
+        "custom": { "title": "Kein Baukasten", "text": "Jede Seite wird auf dein Angebot zugeschnitten und von Hand entwickelt — statt ein Template zurechtzubiegen." },
+        "content": { "title": "Eigener Content", "text": "Foto-, Video- und Drohnenaufnahmen von deinem Unternehmen. Kein Stockmaterial, das auch die Konkurrenz nutzt." }
+      }
     },
     "services": {
       "eyebrow": "Leistungen",
       "headingPrefix": "Was ich",
       "headingAccent": "mache.",
       "subline": "Strategie, Design, Code und Content aus einer Hand — ohne Reibungsverluste zwischen drei verschiedenen Dienstleistern.",
+      "fromLabel": "Projekte ab",
+      "cta": "Anfragen",
+      "priceNote": "Der Endpreis hängt vom Umfang ab — du bekommst vor dem Start ein Festpreis-Angebot. Keine Überraschungen nach Stundenzettel.",
       "web": {
         "title": "Websites & Landing Pages",
         "text": "Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.",
@@ -85,6 +103,22 @@
         "bullet3": "Ruhige, filmische Shots"
       }
     },
+    "difference": {
+      "eyebrow": "Der Unterschied",
+      "headingPrefix": "Baukasten",
+      "headingVs": "vs.",
+      "headingAccent": "nach Maß.",
+      "subline": "Mit einem Baukasten bist du online. Anfragen bekommst du damit selten. Hier liegen die echten Unterschiede.",
+      "colBad": "Baukasten / Template",
+      "colGood": "tryoud",
+      "stackLabel": "Gebaut mit",
+      "rows": {
+        "design": { "label": "Design", "bad": "Template, das tausend andere auch nutzen", "good": "Auf dein Angebot und deine Zielgruppe zugeschnitten" },
+        "speed": { "label": "Performance", "bad": "Plugin-Ballast, langsame Ladezeiten", "good": "Statisch gebaut, weltweit per CDN ausgeliefert" },
+        "content": { "label": "Bildsprache", "bad": "Stockfotos aus der Datenbank", "good": "Eigene Foto-, Video- und Drohnenaufnahmen" },
+        "contact": { "label": "Zusammenarbeit", "bad": "Ticket-System und wechselnde Ansprechpartner", "good": "Direkt mit der Person, die auch umsetzt" }
+      }
+    },
     "expertise": {
       "eyebrow": "Expertise",
       "headingPrefix": "Drei Bereiche,",
@@ -101,7 +135,9 @@
       "subline": "Moderner Stack für performante Ergebnisse. Schnelle Umsetzung, saubere Struktur."
     },
     "work": {
-      "heading": "Ausgewählte Arbeiten",
+      "eyebrow": "Referenzen",
+      "heading": "Live und im Einsatz.",
+      "subline": "Jede Seite hier unten ist gerade online — klick dich durch und urteile selbst.",
       "items": {
         "focuspartner": "Konzept, Design und Entwicklung einer Produktseite — statisch mit Astro gebaut und weltweit per CDN ausgeliefert.",
         "examdraft": "Landingpage für eine KI-Lernplattform — vom ersten Entwurf bis zum Launch, auf Anmeldungen optimiert.",
@@ -111,19 +147,44 @@
       },
       "visit": "Besuchen →"
     },
+    "testimonials": {
+      "eyebrow": "Kundenstimmen",
+      "heading": "Was Kunden sagen."
+    },
     "process": {
-      "eyebrow": "Mein Prozess",
+      "eyebrow": "Ablauf",
       "headingPrefix": "So",
       "headingAccent": "arbeite ich.",
-      "subline": "Vier klare Schritte von der ersten Idee bis zum finalen Launch — strukturiert und fokussiert.",
+      "subline": "Vier klare Schritte. Du weißt jederzeit, was als Nächstes passiert und was es kostet.",
       "steps": [
-        { "title": "Discovery", "text": "Ich höre deiner Vision zu, analysiere deine Ziele und definiere den Weg zum Erfolg." },
-        { "title": "Strategie", "text": "Ich analysiere den Markt, definiere die Positionierung und den technischen Ansatz." },
-        { "title": "Umsetzung", "text": "Design, Build und Feinschliff — effizient und fokussiert auf dein Ziel." },
-        { "title": "Launch", "text": "Go-Live mit Support und bei Bedarf weiterführender Optimierung." }
+        { "title": "Erstgespräch", "text": "Wir klären in 30 Minuten, was du brauchst, was es bringen soll und ob ich der Richtige dafür bin.", "badge": "Kostenlos" },
+        { "title": "Konzept & Angebot", "text": "Positionierung, Struktur und technischer Ansatz — inklusive Festpreis-Angebot, bevor irgendetwas beginnt." },
+        { "title": "Umsetzung", "text": "Design, Entwicklung und Content-Produktion. Du siehst Zwischenstände und gibst Feedback, bevor es final wird." },
+        { "title": "Launch & Betreuung", "text": "Go-Live, Übergabe und auf Wunsch laufende Pflege und Optimierung." }
       ]
     },
+    "faq": {
+      "eyebrow": "Häufige Fragen",
+      "heading": "Beantwortet, bevor du fragst.",
+      "subline": "Etwas nicht dabei? Frag mich direkt — meist bekommst du noch am selben Tag eine Antwort.",
+      "cta": "Frage stellen",
+      "items": {
+        "price": { "q": "Was kostet eine Website?", "a": "Das hängt vom Umfang ab. Website-Projekte starten bei 4.900 €, Foto- und Videoproduktionen bei 1.200 €. Nach dem Erstgespräch bekommst du ein Festpreis-Angebot — es wird also nicht teurer als vereinbart." },
+        "duration": { "q": "Wie lange dauert ein Projekt?", "a": "Eine Landingpage ist typischerweise in 2 bis 4 Wochen live, eine größere Unternehmensseite in 6 bis 10 Wochen. Der größte Faktor bist meist du selbst: Wie schnell Texte, Freigaben und Zugänge kommen, bestimmt das Tempo." },
+        "maintain": { "q": "Kann ich die Website danach selbst pflegen?", "a": "Ja. Du bekommst die Seite so übergeben, dass dein Team Inhalte selbst ändern kann — bei WordPress über das gewohnte Backend, bei statischen Seiten über einen einfachen Editor. Auf Wunsch übernehme ich die Pflege auch weiterhin." },
+        "content": { "q": "Brauche ich eigene Fotos und Videos?", "a": "Nicht zwingend, aber sie machen den Unterschied. Ich produziere Foto-, Video- und Drohnenaufnahmen selbst — dadurch zeigt deine Website dein echtes Unternehmen statt Stockmaterial, das auch die Konkurrenz nutzt." },
+        "relaunch": { "q": "Arbeitest du auch an bestehenden Websites?", "a": "Ja. Relaunches sind ein großer Teil meiner Arbeit — die Alumni-Plattformen der TUM School of Management und von WIRO e.V. sind Beispiele dafür. Ob Relaunch oder Neubau günstiger ist, klären wir im Erstgespräch ehrlich." },
+        "after": { "q": "Was passiert nach dem Launch?", "a": "Du bekommst alle Zugänge und eine Übergabe. Danach kannst du selbst weitermachen oder mich für Pflege, Weiterentwicklung und Content-Nachschub weiter buchen — ohne Knebelvertrag." }
+      }
+    },
+    "ctaBand": {
+      "heading": "Neugierig, wie das für dich aussehen würde?",
+      "text": "Erzähl mir in zwei Sätzen von deinem Projekt. Du bekommst eine ehrliche Einschätzung — auch dann, wenn ich nicht der Richtige bin.",
+      "cta": "Einschätzung anfragen",
+      "note": "Kostenlos · unverbindlich · Antwort in 24 h"
+    },
     "contact": {
+      "eyebrow": "Kontakt",
       "headingPrefix": "Lass uns etwas",
       "headingAccent": "Bleibendes",
       "headingSuffix": "bauen.",
@@ -133,6 +194,8 @@
       "form": {
         "name": "Name",
         "email": "E-Mail",
+        "serviceDefault": "Was brauchst du?",
+        "serviceOther": "Etwas anderes",
         "subject": "Betreff",
         "message": "Nachricht",
         "submit": "Nachricht senden",
@@ -172,27 +235,45 @@
       "expertise": "Expertise",
       "work": "Work",
       "process": "Process",
-      "contact": "Contact"
+      "faq": "FAQ",
+      "contact": "Start a project"
+    },
+    "common": {
+      "backHome": "Back to home"
     },
     "hero": {
+      "badge": "Taking on new projects",
       "line1": "Custom-built websites",
       "line2": "for companies",
       "line3Prefix": "that want more",
       "line3Accent": "than standard.",
       "subline": "Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.",
+      "chip1": "Hand-coded",
+      "chip2": "Own photo & video content",
+      "chip3": "One point of contact",
       "primaryCta": "Start a project",
       "secondaryCta": "View work",
-      "trust": "Trusted by companies like"
+      "microTrust": "Free, non-binding assessment — usually within 24 hours.",
+      "trust": "Trusted by"
     },
     "journey": {
-      "headline": "Everything from<br/>one source.",
-      "sub": "Strategy, design, code, and content — one partner from the first idea to launch. No hand-offs, no friction."
+      "eyebrow": "Why tryoud",
+      "headline": "Everything from one source.",
+      "sub": "One partner from the first idea to launch — no hand-offs, no friction, no finger-pointing when something breaks.",
+      "points": {
+        "one": { "title": "One point of contact", "text": "Strategy, design, code, and content all sit with one person. No hand-offs between agency, photographer, and developer." },
+        "custom": { "title": "No page builder", "text": "Every page is cut to fit your offer and hand-coded — instead of bending a template into shape." },
+        "content": { "title": "Your own content", "text": "Photo, video, and drone footage of your actual company. No stock material your competitors use too." }
+      }
     },
     "services": {
       "eyebrow": "Services",
       "headingPrefix": "What I",
       "headingAccent": "do.",
       "subline": "Strategy, design, code, and content from one source — without the friction of juggling three different vendors.",
+      "fromLabel": "Projects from",
+      "cta": "Enquire",
+      "priceNote": "Final price depends on scope — you get a fixed quote before anything starts. No hourly surprises.",
       "web": {
         "title": "Websites & Landing Pages",
         "text": "High-performance websites that explain your offer clearly and turn visitors into inquiries.",
@@ -215,6 +296,22 @@
         "bullet3": "Smooth, cinematic shots"
       }
     },
+    "difference": {
+      "eyebrow": "The difference",
+      "headingPrefix": "Page builder",
+      "headingVs": "vs.",
+      "headingAccent": "custom-built.",
+      "subline": "A page builder gets you online. It rarely gets you inquiries. Here is where the two approaches actually diverge.",
+      "colBad": "Page builder / template",
+      "colGood": "tryoud",
+      "stackLabel": "Built with",
+      "rows": {
+        "design": { "label": "Design", "bad": "A template a thousand others use too", "good": "Cut to fit your offer and your audience" },
+        "speed": { "label": "Performance", "bad": "Plugin bloat, slow load times", "good": "Statically built, delivered worldwide via CDN" },
+        "content": { "label": "Imagery", "bad": "Stock photos from a database", "good": "Your own photo, video, and drone footage" },
+        "contact": { "label": "Collaboration", "bad": "Ticket systems and rotating contacts", "good": "Straight to the person who builds it" }
+      }
+    },
     "expertise": {
       "eyebrow": "Expertise",
       "headingPrefix": "Three disciplines,",
@@ -231,7 +328,9 @@
       "subline": "A modern stack for high-performance results. Fast implementation, clean structure."
     },
     "work": {
-      "heading": "Selected Work",
+      "eyebrow": "Selected work",
+      "heading": "Live and in use.",
+      "subline": "Every site below is online right now — click through and judge for yourself.",
       "items": {
         "focuspartner": "Concept, design, and development of a product page — statically built with Astro, delivered worldwide via CDN.",
         "examdraft": "Landing page for an AI learning platform — from first draft to launch, optimized for sign-ups.",
@@ -241,19 +340,44 @@
       },
       "visit": "Visit →"
     },
+    "testimonials": {
+      "eyebrow": "Client feedback",
+      "heading": "What clients say."
+    },
     "process": {
       "eyebrow": "My Process",
       "headingPrefix": "How",
       "headingAccent": "I work.",
-      "subline": "Four clear steps from the first idea to final launch — structured and focused.",
+      "subline": "Four clear steps. You always know what happens next and what it costs.",
       "steps": [
-        { "title": "Discovery", "text": "I listen to your vision, analyze your goals, and define the path to success." },
-        { "title": "Strategy", "text": "I analyze the market, define positioning, and choose the technical approach." },
-        { "title": "Implementation", "text": "Design, build, and refinement — efficient and focused on your goal." },
-        { "title": "Launch", "text": "Go-live with support and further optimization when needed." }
+        { "title": "First call", "text": "In 30 minutes we clarify what you need, what it should achieve, and whether I am the right fit.", "badge": "Free" },
+        { "title": "Concept & quote", "text": "Positioning, structure, and technical approach — including a fixed-price quote before anything starts." },
+        { "title": "Build", "text": "Design, development, and content production. You see progress and give feedback before anything is final." },
+        { "title": "Launch & support", "text": "Go-live, hand-over, and ongoing maintenance and optimization if you want it." }
       ]
     },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Answered before you ask.",
+      "subline": "Something missing? Ask me directly — you usually get an answer the same day.",
+      "cta": "Ask a question",
+      "items": {
+        "price": { "q": "What does a website cost?", "a": "It depends on scope. Website projects start at €4,900, photo and video production at €1,200. After the first call you get a fixed-price quote — so it never ends up costing more than agreed." },
+        "duration": { "q": "How long does a project take?", "a": "A landing page is typically live in 2 to 4 weeks, a larger company site in 6 to 10 weeks. The biggest factor is usually you: how fast copy, approvals, and access credentials arrive sets the pace." },
+        "maintain": { "q": "Can I maintain the site myself afterwards?", "a": "Yes. The site is handed over so your team can change content itself — through the familiar backend on WordPress, or a simple editor on static sites. If you prefer, I keep maintaining it for you." },
+        "content": { "q": "Do I need my own photos and videos?", "a": "Not strictly, but they make the difference. I produce photo, video, and drone footage myself — so your website shows your actual company instead of stock material your competitors use too." },
+        "relaunch": { "q": "Do you work on existing websites too?", "a": "Yes. Relaunches are a big part of my work — the alumni platforms of TUM School of Management and WIRO e.V. are examples. Whether a relaunch or a rebuild makes more sense, we assess honestly in the first call." },
+        "after": { "q": "What happens after launch?", "a": "You get all credentials and a proper hand-over. From there you can continue on your own or keep me booked for maintenance, further development, and new content — with no lock-in contract." }
+      }
+    },
+    "ctaBand": {
+      "heading": "Curious what this would look like for you?",
+      "text": "Tell me about your project in two sentences. You get an honest assessment — including when I am not the right fit.",
+      "cta": "Get an assessment",
+      "note": "Free · no obligation · reply within 24 h"
+    },
     "contact": {
+      "eyebrow": "Contact",
       "headingPrefix": "Let's build something",
       "headingAccent": "lasting",
       "headingSuffix": "together.",
@@ -263,6 +387,8 @@
       "form": {
         "name": "Name",
         "email": "Email",
+        "serviceDefault": "What do you need?",
+        "serviceOther": "Something else",
         "subject": "Subject",
         "message": "Message",
         "submit": "Send message",

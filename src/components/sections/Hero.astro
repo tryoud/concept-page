@@ -12,68 +12,93 @@ const chips = [
 ];
 
 const clients = ['TUM Management Alumni', 'Cantero Consulting', 'ExamDraft', 'WIRO e.V.', 'Focus Partner'];
+
+/* The showcase stack. Order matters: last entry renders on top / closest to the viewer.
+   Screenshots come from the same mshots service the Work section uses. */
+const showcase = [
+  { name: 'Focus Partner', domain: 'focuspartner.app', url: 'https%3A%2F%2Ffocuspartner.app%2F' },
+  { name: 'ExamDraft', domain: 'examdraft.com', url: 'https%3A%2F%2Fexamdraft.com%2F' },
+  { name: 'Cantero Consulting', domain: 'cantero-consulting.de', url: 'https%3A%2F%2Fwww.cantero-consulting.de%2F' },
+  { name: 'TUM Management Alumni', domain: 'tum-management-alumni.de', url: 'https%3A%2F%2Ftum-management-alumni.de%2F' },
+];
 ---
 
-<!-- Hero Video Background -->
-<div id="hero-video-wrapper" class="fixed inset-0 -z-20">
-  <div id="hero-player" class="w-full h-full"></div>
-  <div class="hero-scrim"></div>
+<!-- Hero backdrop. Pure CSS so the fold paints instantly with no third-party request. -->
+<div class="fixed inset-0 -z-20 hero-backdrop" aria-hidden="true">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
 </div>
 
-<!-- Video Controls -->
-<div id="video-controls" class="fixed bottom-6 right-6 z-40 hidden md:flex gap-2" style="transition: opacity 0.4s ease; opacity: 1;">
-  <button id="fullscreen-btn" class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-white/70 hover:text-white hover:bg-black/60 transition-all duration-300" aria-label={isEn ? 'Fullscreen video' : 'Video im Vollbild'}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-  </button>
-  <button id="unmute-btn" class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-white/70 hover:text-white hover:bg-black/60 transition-all duration-300" aria-label={isEn ? 'Toggle sound' : 'Ton ein-/ausschalten'}>
-    <svg id="mute-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-    <svg id="sound-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-  </button>
-</div>
-
-<section class="relative min-h-[100dvh] w-full flex flex-col justify-center pt-24 pb-28 md:pt-32 md:pb-24">
+<section class="relative min-h-[100dvh] w-full flex flex-col justify-center pt-28 pb-28 md:pt-32 md:pb-24 overflow-hidden">
   <div class="shell">
-    <div class="max-w-4xl">
-      <div class="reveal-on-scroll inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-1.5 mb-7">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
-        </span>
-        <span class="text-xs font-medium text-white/80" data-i18n="hero.badge">{isEn ? 'Taking on new projects' : 'Kapazität für neue Projekte'}</span>
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] gap-12 lg:gap-8 items-center">
+      <!-- Copy -->
+      <div class="max-w-2xl">
+        <div class="reveal-on-scroll inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-1.5 mb-7">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+          </span>
+          <span class="text-xs font-medium text-white/80" data-i18n="hero.badge">{isEn ? 'Taking on new projects' : 'Kapazität für neue Projekte'}</span>
+        </div>
+
+        <h1 class="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[3.75rem] font-bold tracking-tight text-white leading-[1.06] reveal-on-scroll" style="--reveal-delay: 60ms">
+          <span class="block" data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
+          <span class="block" data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
+          <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span></span>
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-zinc-300/90 max-w-xl leading-relaxed reveal-on-scroll" style="--reveal-delay: 120ms" data-i18n="hero.subline">
+          {isEn ? 'Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.' : 'Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.'}
+        </p>
+
+        <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2.5 reveal-on-scroll" style="--reveal-delay: 160ms">
+          {chips.map(c => (
+            <li class="flex items-center gap-2 text-sm text-zinc-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0"><path d="M20 6 9 17l-5-5"/></svg>
+              <span data-i18n={c.key}>{isEn ? c.en : c.de}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-9 reveal-on-scroll" style="--reveal-delay: 200ms">
+          <a href="#contact" class="group btn btn-primary text-base w-full sm:w-auto">
+            <span data-i18n="hero.primaryCta">{isEn ? 'Start a project' : 'Projekt anfragen'}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+          <a href="#work" class="btn btn-secondary text-base w-full sm:w-auto">
+            <span data-i18n="hero.secondaryCta">{isEn ? 'View work' : 'Arbeiten ansehen'}</span>
+          </a>
+        </div>
+
+        <p class="mt-4 text-sm text-zinc-500 reveal-on-scroll" style="--reveal-delay: 240ms" data-i18n="hero.microTrust">
+          {isEn ? 'Free, non-binding assessment — usually within 24 hours.' : 'Kostenlose, unverbindliche Einschätzung — in der Regel innerhalb von 24 Stunden.'}
+        </p>
       </div>
 
-      <h1 class="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.06] reveal-on-scroll" style="--reveal-delay: 60ms">
-        <span class="block" data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
-        <span class="block" data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
-        <span class="block"><span data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span></span>
-      </h1>
-
-      <p class="mt-6 text-base sm:text-lg md:text-xl text-zinc-300/90 max-w-2xl leading-relaxed reveal-on-scroll" style="--reveal-delay: 120ms" data-i18n="hero.subline">
-        {isEn ? 'Individually designed, hand-coded — and filled with your own photo, video, and drone content instead of stock material.' : 'Individuell konzipiert, von Hand entwickelt — und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.'}
-      </p>
-
-      <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2.5 reveal-on-scroll" style="--reveal-delay: 160ms">
-        {chips.map(c => (
-          <li class="flex items-center gap-2 text-sm text-zinc-300">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0"><path d="M20 6 9 17l-5-5"/></svg>
-            <span data-i18n={c.key}>{isEn ? c.en : c.de}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-9 reveal-on-scroll" style="--reveal-delay: 200ms">
-        <a href="#contact" class="group btn btn-primary text-base w-full sm:w-auto">
-          <span data-i18n="hero.primaryCta">{isEn ? 'Start a project' : 'Projekt anfragen'}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-        </a>
-        <a href="#work" class="btn btn-secondary text-base w-full sm:w-auto">
-          <span data-i18n="hero.secondaryCta">{isEn ? 'View work' : 'Arbeiten ansehen'}</span>
-        </a>
+      <!-- Showcase: real client sites, angled and drifting -->
+      <div class="showcase reveal-on-scroll hidden lg:block" style="--reveal-delay: 280ms" aria-hidden="true">
+        <div class="showcase-stage">
+          {showcase.map((s, i) => (
+            <figure class={`showcase-card showcase-card-${i}`}>
+              <div class="showcase-chrome">
+                <span class="showcase-dot"></span>
+                <span class="showcase-dot"></span>
+                <span class="showcase-dot"></span>
+                <span class="showcase-url">{s.domain}</span>
+              </div>
+              <img
+                src={`https://s0.wordpress.com/mshots/v1/${s.url}?w=1000&h=680`}
+                alt=""
+                width="1000"
+                height="680"
+                loading={i >= showcase.length - 2 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
       </div>
-
-      <p class="mt-4 text-sm text-zinc-500 reveal-on-scroll" style="--reveal-delay: 240ms" data-i18n="hero.microTrust">
-        {isEn ? 'Free, non-binding assessment — usually within 24 hours.' : 'Kostenlose, unverbindliche Einschätzung — in der Regel innerhalb von 24 Stunden.'}
-      </p>
     </div>
   </div>
 
@@ -93,150 +118,111 @@ const clients = ['TUM Management Alumni', 'Cantero Consulting', 'ExamDraft', 'WI
       </div>
     </div>
   </div>
-
-  <!-- Sentinel: observed to pause/play video when hero leaves viewport -->
-  <div id="hero-sentinel" class="absolute bottom-0 w-full h-px pointer-events-none"></div>
 </section>
 
 <style>
-  #hero-video-wrapper {
-    background: #050506 url('https://i.ytimg.com/vi/vWi8L-jiYhc/maxresdefault.jpg') center / cover no-repeat;
+  .hero-backdrop {
+    background:
+      radial-gradient(ellipse 80% 55% at 12% -10%, rgba(34, 211, 238, 0.13), transparent 62%),
+      radial-gradient(ellipse 65% 50% at 92% 8%, rgba(59, 130, 246, 0.10), transparent 60%),
+      #050506;
   }
-  #hero-player {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    overflow: hidden;
-  }
-  #hero-player iframe {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: max(100vw, calc(100vh * 16 / 9));
-    height: max(100vh, calc(100vw * 9 / 16));
-  }
-  /* Two-axis scrim: the vertical pass darkens the whole frame, the horizontal pass
-     protects the left-aligned copy from the bright/lettered parts of the footage. */
-  .hero-scrim {
+  /* Faint engineering grid — reads as "built, not assembled" without competing with the copy */
+  .hero-grid {
     position: absolute;
     inset: 0;
-    z-index: 1;
-    pointer-events: auto;
-    background:
-      linear-gradient(100deg, rgba(5,5,6,0.94) 0%, rgba(5,5,6,0.82) 38%, rgba(5,5,6,0.42) 68%, rgba(5,5,6,0.55) 100%),
-      linear-gradient(180deg, rgba(5,5,6,0.72) 0%, rgba(5,5,6,0.35) 35%, rgba(5,5,6,0.75) 82%, #050506 100%);
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 75% 60% at 30% 25%, #000 20%, transparent 75%);
   }
-  /* Poster is always shown so the hero has imagery before the (deferred) video loads.
-     On mobile the player itself stays disabled — only the poster is displayed. */
-  @media (max-width: 768px) {
-    #hero-player { display: none !important; }
+  /* Bottom fade so the hero dissolves into the first section instead of ending on a hard edge */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(5, 5, 6, 0.85) 88%, #050506 100%);
+  }
+
+  /* ---------- Showcase stack ---------- */
+
+  .showcase {
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
+  }
+  .showcase-stage {
+    position: relative;
+    height: 28rem;
+    transform-style: preserve-3d;
+    /* Rotate the whole stack once, so each card only carries its own offset */
+    transform: rotateY(-20deg) rotateX(6deg) rotateZ(2deg);
+  }
+
+  .showcase-card {
+    position: absolute;
+    width: 27rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #15181d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 24px 60px -12px rgba(0, 0, 0, 0.75);
+    animation: showcase-drift 14s ease-in-out infinite;
+  }
+  .showcase-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top center;
+    /* mshots renders on white; knock it back so bright shots don't blow out the dark hero */
+    filter: saturate(0.92) brightness(0.92);
+  }
+
+  .showcase-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    background: #1c2027;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .showcase-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .showcase-url {
+    margin-left: 0.5rem;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.01em;
+  }
+
+  /* Depth is carried by translateZ so the perspective does the scaling for us.
+     Every card stays at left >= 0 so the stack never reaches into the copy column. */
+  .showcase-card-0 { top: 0;       left: 8rem; transform: translateZ(-190px); opacity: 0.45; animation-delay: 0s; }
+  .showcase-card-1 { top: 3.75rem; left: 6rem; transform: translateZ(-110px); opacity: 0.62; animation-delay: 1.2s; }
+  .showcase-card-2 { top: 7.5rem;  left: 3rem; transform: translateZ(-30px);  opacity: 0.82; animation-delay: 2.4s; }
+  .showcase-card-3 { top: 11.25rem; left: 0;   transform: translateZ(50px);   opacity: 1;    animation-delay: 3.6s; }
+
+  @keyframes showcase-drift {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -14px; }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1400px) {
+    .showcase-stage { height: 24rem; }
+    .showcase-card { width: 23rem; }
+    .showcase-card-0 { top: 0; left: 6rem; }
+    .showcase-card-1 { top: 3.25rem; left: 4.5rem; }
+    .showcase-card-2 { top: 6.5rem; left: 2.25rem; }
+    .showcase-card-3 { top: 9.75rem; left: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-card { animation: none; }
   }
 </style>
-
-<script>
-  document.addEventListener('astro:page-load', () => {
-    // YouTube IFrame API
-    let player;
-    let isMuted = true;
-    const isMobile = window.innerWidth <= 768;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Defer the YouTube API until the page is idle so it never blocks first paint.
-    function loadYTApi() {
-      if (window.YT && window.YT.Player) {
-        initYTPlayer();
-        return;
-      }
-      window.onYouTubeIframeAPIReady = initYTPlayer;
-      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      }
-    }
-
-    function scheduleYTLoad() {
-      // setTimeout instead of requestIdleCallback: idle callbacks can starve in background tabs
-      setTimeout(loadYTApi, 800);
-    }
-
-    function initYTPlayer() {
-      player = new YT.Player('hero-player', {
-        videoId: 'vWi8L-jiYhc',
-        playerVars: {
-          autoplay: 1, mute: 1, loop: 1, playlist: 'vWi8L-jiYhc',
-          controls: 0, rel: 0, modestbranding: 1, playsinline: 1,
-          showinfo: 0, fs: 0, wmode: 'transparent', vq: 'hd2160'
-        },
-        events: {
-          onReady: (e) => { e.target.setPlaybackQuality('hd2160'); },
-          onPlaybackQualityChange: (e) => {
-            const q = e.target.getPlaybackQuality();
-            if (q !== 'hd2160' && q !== 'hd1440' && q !== 'hd1080') {
-              e.target.setPlaybackQuality('hd2160');
-            }
-          }
-        }
-      });
-    }
-
-    if (!isMobile && !prefersReducedMotion) {
-      if (document.readyState === 'complete') {
-        scheduleYTLoad();
-      } else {
-        window.addEventListener('load', scheduleYTLoad, { once: true });
-      }
-
-      const heroSentinel = document.getElementById('hero-sentinel');
-      const videoControls = document.getElementById('video-controls');
-      if (heroSentinel) {
-        new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting) {
-            player?.playVideo?.();
-            if (videoControls) { videoControls.style.opacity = '1'; videoControls.style.pointerEvents = 'auto'; }
-          } else {
-            player?.pauseVideo?.();
-            if (videoControls) { videoControls.style.opacity = '0'; videoControls.style.pointerEvents = 'none'; }
-          }
-        }, { threshold: 0 }).observe(heroSentinel);
-      }
-    }
-
-    // Unmute Button
-    const unmuteBtn = document.getElementById('unmute-btn');
-    const muteIcon = document.getElementById('mute-icon');
-    const soundIcon = document.getElementById('sound-icon');
-    function updateUnmuteBtn() {
-      if (!muteIcon || !soundIcon) return;
-      muteIcon.classList.toggle('hidden', !isMuted);
-      soundIcon.classList.toggle('hidden', isMuted);
-    }
-    if (unmuteBtn) {
-      updateUnmuteBtn();
-      unmuteBtn.addEventListener('click', () => {
-        if (!player) return;
-        if (isMuted) { player.unMute(); isMuted = false; }
-        else { player.mute(); isMuted = true; }
-        updateUnmuteBtn();
-      });
-    }
-
-    // Fullscreen Button
-    const fullscreenBtn = document.getElementById('fullscreen-btn');
-    if (fullscreenBtn) {
-      fullscreenBtn.addEventListener('click', () => {
-        if (player && player.getIframe) {
-          const iframe = player.getIframe();
-          if (iframe.requestFullscreen) iframe.requestFullscreen();
-          else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-          else if (iframe.webkitEnterFullscreen) iframe.webkitEnterFullscreen();
-          if (player.unMute) player.unMute();
-          if (player.setVolume) player.setVolume(100);
-          isMuted = false;
-          updateUnmuteBtn();
-        }
-      });
-    }
-  });
-</script>

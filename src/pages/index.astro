@@ -2,11 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Navigation from "../components/Navigation.astro";
 import Hero from "../components/sections/Hero.astro";
-import Journey from "../components/sections/Journey.astro";
+import ValueBand from "../components/sections/ValueBand.astro";
 import Services from "../components/sections/Services.astro";
-import Expertise from "../components/sections/Expertise.astro";
+import Difference from "../components/sections/Difference.astro";
 import Work from "../components/sections/Work.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
 import Process from "../components/sections/Process.astro";
+import Faq from "../components/sections/Faq.astro";
+import CtaBand from "../components/sections/CtaBand.astro";
 import Contact from "../components/sections/Contact.astro";
 import Footer from "../components/sections/Footer.astro";
 import siteData from "../../content/site.json";
@@ -15,20 +18,23 @@ const lang = 'de';
 const t = siteData[lang];
 ---
 
-<Layout 
-  title={t.meta.title} 
-  description={t.meta.description} 
+<Layout
+  title={t.meta.title}
+  description={t.meta.description}
   lang={lang}
   canonical="/"
 >
   <main class="relative z-10 font-sans">
     <Navigation lang={lang} />
     <Hero lang={lang} />
-    <Journey lang={lang} />
+    <ValueBand lang={lang} />
     <Services lang={lang} />
-    <Expertise lang={lang} />
+    <Difference lang={lang} />
     <Work lang={lang} />
+    <Testimonials lang={lang} />
     <Process lang={lang} />
+    <Faq lang={lang} />
+    <CtaBand lang={lang} />
     <Contact lang={lang} />
     <Footer lang={lang} />
   </main>
