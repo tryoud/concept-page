@@ -6,11 +6,16 @@ interface Props {
 const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
 
+/* A bare "#services" goes nowhere from /imprint or /privacy, so those pages need
+   the "/" prefix; the homepage keeps the bare hash to stay a same-page scroll. */
+const isHome = Astro.url.pathname === '/';
+const to = (hash: string) => (isHome ? hash : `/${hash}`);
+
 const links = [
-  { href: '#services', key: 'nav.services', de: 'Leistungen', en: 'Services' },
-  { href: '#work', key: 'nav.work', de: 'Referenzen', en: 'Work' },
-  { href: '#process', key: 'nav.process', de: 'Ablauf', en: 'Process' },
-  { href: '#faq', key: 'nav.faq', de: 'FAQ', en: 'FAQ' },
+  { href: to('#services'), key: 'nav.services', de: 'Leistungen', en: 'Services' },
+  { href: to('#work'), key: 'nav.work', de: 'Referenzen', en: 'Work' },
+  { href: to('#process'), key: 'nav.process', de: 'Ablauf', en: 'Process' },
+  { href: to('#faq'), key: 'nav.faq', de: 'FAQ', en: 'FAQ' },
 ];
 ---
 
@@ -26,7 +31,7 @@ const links = [
       {links.map(l => (
         <a
           href={l.href}
-          data-navlink={l.href.slice(1)}
+          data-navlink={l.href.split("#")[1]}
           class="nav-link px-3.5 py-2 text-sm text-zinc-400 hover:text-white transition-colors rounded-full"
           data-i18n={l.key}
         >{isEn ? l.en : l.de}</a>
@@ -38,7 +43,7 @@ const links = [
         <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="de" aria-label="Deutsch" aria-pressed={!isEn}>DE</button>
         <button type="button" class="language-switcher rounded-full px-2.5 py-1 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="en" aria-label="English" aria-pressed={isEn}>EN</button>
       </div>
-      <a href="#contact" class="btn px-5 py-2.5 text-sm bg-white text-black hover:shadow-[0_10px_36px_-10px_rgba(34,211,238,0.7)]" data-i18n="nav.contact">{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
+      <a href={to("#contact")} class="btn px-5 py-2.5 text-sm bg-white text-black hover:shadow-[0_10px_36px_-10px_rgba(34,211,238,0.7)]" data-i18n="nav.contact">{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -55,11 +60,11 @@ const links = [
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 bg-[#050506]/98 backdrop-blur-xl z-40 hidden flex-col justify-center gap-2 px-6 pt-20 pb-10">
+<div id="mobile-menu" class="fixed inset-0 bg-[#050506]/98 backdrop-blur-xl z-40 hidden flex-col justify-center gap-2 px-6 pt-24 pb-12 overflow-y-auto overscroll-contain">
   {links.map(l => (
     <a href={l.href} class="mobile-link text-3xl font-semibold text-white/90 hover:text-cyan-400 transition-colors py-3 border-b border-white/5" data-i18n={l.key}>{isEn ? l.en : l.de}</a>
   ))}
-  <a href="#contact" class="mobile-link btn btn-primary mt-8 w-full py-4 text-base" data-i18n="nav.contact">{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
+  <a href={to("#contact")} class="mobile-link btn btn-primary mt-8 w-full py-4 text-base" data-i18n="nav.contact">{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
   <div class="mt-8 flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 w-fit" aria-label={isEn ? 'Language' : 'Sprachauswahl'}>
     <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="de" aria-label="Deutsch" aria-pressed={!isEn}>DE</button>
     <button type="button" class="language-switcher rounded-full px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10" data-lang-switch="en" aria-label="English" aria-pressed={isEn}>EN</button>
@@ -69,7 +74,7 @@ const links = [
 <!-- Sticky mobile CTA: the contact form sits ~6000px down, so mobile needs a permanent way in -->
 <a
   id="sticky-cta"
-  href="#contact"
+  href={to("#contact")}
   class="md:hidden fixed bottom-4 inset-x-4 z-40 btn btn-primary py-3.5 text-sm translate-y-24 opacity-0 transition-all duration-300"
   data-i18n="nav.contact"
 >{isEn ? 'Start a project' : 'Projekt anfragen'}</a>
@@ -123,12 +128,21 @@ const links = [
           link.classList.toggle('text-zinc-400', !active);
         });
       };
+      const visibility = new Map<string, number>();
       const observer = new IntersectionObserver(
         entries => {
-          const visible = entries.filter(e => e.isIntersecting);
-          if (visible.length) setActive(visible[0].target.id);
+          entries.forEach(e => visibility.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
+          let best = '';
+          let bestRatio = 0;
+          visibility.forEach((ratio, id) => {
+            if (ratio > bestRatio) {
+              bestRatio = ratio;
+              best = id;
+            }
+          });
+          if (best) setActive(best);
         },
-        { rootMargin: '-20% 0px -70% 0px' },
+        { rootMargin: '-15% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
       );
       sections.forEach(s => observer.observe(s));
     }

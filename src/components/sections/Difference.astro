@@ -57,12 +57,18 @@ const stack = ['Astro', 'WordPress', 'TypeScript', 'Cloudflare', 'Figma', 'Premi
 
           <span class="flex items-start gap-2.5 text-sm text-zinc-500">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" class="text-zinc-600 shrink-0 mt-0.5" aria-hidden="true"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
-            <span data-i18n={`difference.rows.${r.key}.bad`}>{isEn ? r.en.bad : r.de.bad}</span>
+            <span>
+              <span class="md:hidden block text-[0.6rem] uppercase tracking-[0.15em] text-zinc-600 mb-0.5" data-i18n="difference.colBad">{isEn ? 'Page builder / template' : 'Baukasten / Template'}</span>
+              <span data-i18n={`difference.rows.${r.key}.bad`}>{isEn ? r.en.bad : r.de.bad}</span>
+            </span>
           </span>
 
-          <span class="flex items-start gap-2.5 text-sm text-zinc-200">
+          <span class="flex items-start gap-2.5 text-sm text-zinc-200 mt-1 md:mt-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0 mt-0.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            <span data-i18n={`difference.rows.${r.key}.good`}>{isEn ? r.en.good : r.de.good}</span>
+            <span>
+              <span class="md:hidden block text-[0.6rem] uppercase tracking-[0.15em] text-cyan-400/70 mb-0.5" data-i18n="difference.colGood">tryoud</span>
+              <span data-i18n={`difference.rows.${r.key}.good`}>{isEn ? r.en.good : r.de.good}</span>
+            </span>
           </span>
         </div>
       ))}

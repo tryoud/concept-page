@@ -5,14 +5,13 @@ interface Props {
 const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
 
-/* ------------------------------------------------------------------
-   PLACEHOLDER PRICES — replace with your real starting rates.
-   These are the only numbers on the site; nothing else depends on them.
-   ------------------------------------------------------------------ */
+/* Starting rates. These numbers also appear in the FAQ answer ("Was kostet
+   eine Website?") and in the Offer JSON-LD in Layout.astro — keep all three
+   in sync when they change. */
 const services = [
   {
     key: 'web',
-    from: '490 €', // TODO(nikolas): echten Ab-Preis eintragen
+    from: { de: '1.490 €', en: '\u20ac1,490' },
     icon: 'layout',
     de: {
       title: 'Websites & Landing Pages',
@@ -27,7 +26,7 @@ const services = [
   },
   {
     key: 'content',
-    from: '450 €', // TODO(nikolas): echten Ab-Preis eintragen
+    from: { de: '850 €', en: '\u20ac850' },
     icon: 'video',
     de: {
       title: 'Foto & Video',
@@ -42,7 +41,7 @@ const services = [
   },
   {
     key: 'drone',
-    from: '390 €', // TODO(nikolas): echten Ab-Preis eintragen
+    from: { de: '590 €', en: '\u20ac590' },
     icon: 'drone',
     de: {
       title: 'Drohne & Aerial',
@@ -99,7 +98,7 @@ const services = [
           <div class="mt-auto pt-5 border-t border-white/8 flex items-center justify-between gap-3">
             <div>
               <span class="block text-[0.65rem] uppercase tracking-[0.15em] text-zinc-600" data-i18n="services.fromLabel">{isEn ? 'Projects from' : 'Projekte ab'}</span>
-              <span class="text-lg font-semibold text-white">{s.from}</span>
+              <span class="text-lg font-semibold text-white" data-i18n={`services.${s.key}.price`}>{isEn ? s.from.en : s.from.de}</span>
             </div>
             <a
               href="#contact"

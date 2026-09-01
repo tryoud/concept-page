@@ -7,6 +7,18 @@ const isEn = lang === 'en';
 
 const projects = [
   {
+    key: 'tum',
+    name: 'TUM Management Alumni',
+    href: 'https://tum-management-alumni.de/',
+    tags: ['WordPress', 'Relaunch'],
+    tagsEn: ['WordPress', 'Relaunch'],
+    de: 'Relaunch der Alumni-Plattform der TUM School of Management — neue Informationsarchitektur und ein zeitgemäßer Auftritt.',
+    en: 'Relaunch of the TUM School of Management alumni platform — new information architecture and a contemporary look.',
+    img: 'https://s0.wordpress.com/mshots/v1/https%3A%2F%2Ftum-management-alumni.de%2F?w=1400&h=900',
+    alt: 'TUM Management Alumni Screenshot',
+    wide: true,
+  },
+  {
     key: 'focuspartner',
     name: 'Focus Partner',
     href: 'https://focuspartner.app/',
@@ -16,7 +28,7 @@ const projects = [
     en: 'Concept, design, and development of a product page — statically built with Astro, delivered worldwide via CDN.',
     img: 'https://s0.wordpress.com/mshots/v1/https%3A%2F%2Ffocuspartner.app%2F?w=1400&h=900',
     alt: 'Focus Partner Screenshot',
-    wide: true,
+    wide: false,
   },
   {
     key: 'examdraft',
@@ -28,18 +40,6 @@ const projects = [
     en: 'Landing page for an AI learning platform — from first draft to launch, optimized for sign-ups.',
     img: 'https://s0.wordpress.com/mshots/v1/https%3A%2F%2Fexamdraft.com%2F?w=1400&h=900',
     alt: 'ExamDraft Screenshot',
-    wide: false,
-  },
-  {
-    key: 'tum',
-    name: 'TUM Management Alumni',
-    href: 'https://tum-management-alumni.de/',
-    tags: ['WordPress', 'Relaunch'],
-    tagsEn: ['WordPress', 'Relaunch'],
-    de: 'Relaunch der Alumni-Plattform der TUM School of Management — neue Informationsarchitektur und ein zeitgemäßer Auftritt.',
-    en: 'Relaunch of the TUM School of Management alumni platform — new information architecture and a contemporary look.',
-    img: 'https://s0.wordpress.com/mshots/v1/https%3A%2F%2Ftum-management-alumni.de%2F?w=1400&h=900',
-    alt: 'TUM Management Alumni Screenshot',
     wide: false,
   },
   {
@@ -92,19 +92,28 @@ const projects = [
           class={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#0f1114] transition-all duration-500 hover:border-cyan-500/40 reveal-on-scroll ${p.wide ? 'md:col-span-2' : ''}`}
           style={`--reveal-delay: ${Math.min(i, 3) * 70}ms`}
         >
-          <div class={`overflow-hidden bg-[#15181d] ${p.wide ? 'aspect-[16/10] md:aspect-[24/9]' : 'aspect-[16/10]'}`}>
+          <div class={`relative overflow-hidden bg-[#15181d] ${p.wide ? 'aspect-[16/10] md:aspect-[21/9]' : 'aspect-[16/10]'}`}>
             <img
               src={p.img}
               alt={p.alt}
-              class="w-full h-full object-cover object-top opacity-70 transition-all duration-700 ease-out group-hover:opacity-95 group-hover:scale-[1.02]"
+              class="w-full h-full object-cover object-top opacity-85 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:scale-[1.02]"
               loading="lazy"
               decoding="async"
             />
+
+            <!-- Solid under the caption, clear over the screenshot: a flat 55% scrim
+                 across the whole card washed the shots out into empty boxes, while a
+                 soft one let the site's own headline bleed through the caption.
+                 Only from md up, where the caption actually sits on the image. -->
+            <div
+              class="hidden md:block absolute inset-0 pointer-events-none"
+              style="background: linear-gradient(to top, #08090b 0%, #08090b 26%, rgba(8,9,11,0.78) 44%, rgba(8,9,11,0.15) 70%, rgba(8,9,11,0) 100%);"
+            ></div>
           </div>
 
-          <div class="absolute inset-0 bg-gradient-to-t from-[#08090b] via-[#08090b]/55 to-transparent pointer-events-none"></div>
-
-          <div class="absolute bottom-0 left-0 right-0 p-6 md:p-7">
+          <!-- Below the image on phones: overlaid, the caption was taller than the
+               card and spilled over the screenshot. -->
+          <div class="relative bg-[#0f1114] p-6 md:bg-transparent md:absolute md:bottom-0 md:left-0 md:right-0 md:p-7">
             <div class="flex flex-wrap gap-1.5 mb-3">
               {(isEn ? p.tagsEn : p.tags).map(t => (
                 <span class="px-2.5 py-1 text-[0.7rem] font-medium rounded-md bg-white/8 border border-white/10 text-zinc-300 backdrop-blur-sm">{t}</span>

@@ -29,18 +29,20 @@ const points = [
 
 <section class="section-tight w-full bg-[#050506] relative z-40 border-y border-white/10">
   <div class="shell">
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] gap-10 lg:gap-16 items-start">
-      <div class="reveal-on-scroll">
-        <span class="eyebrow mb-3" data-i18n="journey.eyebrow">{isEn ? 'Why tryoud' : 'Warum tryoud'}</span>
-        <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] text-white leading-[1.1]" data-i18n="journey.headline">
-          {isEn ? 'Everything from one source.' : 'Alles aus einer Hand.'}
-        </h2>
-        <p class="mt-4 text-zinc-400 leading-relaxed max-w-md" data-i18n="journey.sub">
+    <div class="flex flex-col gap-10 lg:gap-12">
+      <div class="reveal-on-scroll flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 lg:gap-10">
+        <div class="max-w-xl">
+          <span class="eyebrow mb-3" data-i18n="journey.eyebrow">{isEn ? 'Why tryoud' : 'Warum tryoud'}</span>
+          <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] text-white leading-[1.1]" data-i18n="journey.headline">
+            {isEn ? 'Everything from one source.' : 'Alles aus einer Hand.'}
+          </h2>
+        </div>
+        <p class="text-zinc-400 leading-relaxed max-w-md lg:text-right" data-i18n="journey.sub">
           {isEn ? 'One partner from the first idea to launch — no hand-offs, no friction, no finger-pointing when something breaks.' : 'Ein Partner von der ersten Idee bis zum Launch — keine Übergaben, keine Reibungsverluste, keine Schuldzuweisungen, wenn etwas hakt.'}
         </p>
       </div>
 
-      <ul class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+      <ul class="grid grid-cols-1 sm:grid-cols-3 gap-7 lg:gap-8">
         {points.map((p, i) => (
           <li class="reveal-on-scroll" style={`--reveal-delay: ${i * 80}ms`}>
             <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4">

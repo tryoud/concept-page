@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css'
 
 interface Props {
@@ -19,6 +19,14 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://tryoud.com';
+
+/* Starting prices, mirrored from Services.astro. Structured data must match the
+   prices a visitor actually sees, so these three places move together. */
+const offers = [
+  { price: '1490', de: 'Websites & Landing Pages', en: 'Websites & Landing Pages' },
+  { price: '850', de: 'Foto & Video', en: 'Photo & Video' },
+  { price: '590', de: 'Drohne & Aerial', en: 'Drone & Aerial' },
+];
 const fullCanonical = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
@@ -27,10 +35,24 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 <html lang={lang} class="dark" data-reduced-motion="false">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#050506" />
+
+		<!-- Set before first paint so scroll-reveal only hides content when JS can bring it back -->
+		<script is:inline>document.documentElement.classList.add('js');</script>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+		<!-- Loaded async: a blocking Google Fonts request would hold up first paint -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+			media="print"
+			onload="this.media='all'"
+		/>
+		<noscript>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+		</noscript>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -73,24 +95,31 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
       "@type": "ProfessionalService",
       name: "tryoud",
       url: siteUrl,
+      image: fullOgImage,
       description: "Webdesign, Webentwicklung und Content-Produktion (Foto, Video, Drohne) für mittelständische Unternehmen.",
       founder: { "@type": "Person", name: "Nikolas Maerker" },
       areaServed: "DE",
-      email: "nikolas.maerker@gmail.com"
-    })} />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: title,
-      url: siteUrl,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: `${siteUrl}/?q={search_term_string}`,
-        "query-input": "required name=search_term_string"
+      email: "nikolas.maerker@gmail.com",
+      priceRange: "€€",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: lang === 'en' ? "Services" : "Leistungen",
+        itemListElement: offers.map(offer => ({
+          "@type": "Offer",
+          priceCurrency: "EUR",
+          price: offer.price,
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            priceCurrency: "EUR",
+            price: offer.price,
+            valueAddedTaxIncluded: false
+          },
+          itemOffered: { "@type": "Service", name: lang === 'en' ? offer.en : offer.de }
+        }))
       }
     })} />
     
-    <ViewTransitions />
+    <ClientRouter />
 	</head>
 	<body class="bg-[#050506] text-zinc-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
 

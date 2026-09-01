@@ -51,11 +51,14 @@ const t = siteData[lang];
       const textNodes = Array.from(document.querySelectorAll('[data-i18n]'));
       const placeholderNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
 
+      /* Defaults are keyed by node, not by i18n key: several keys appear on more
+         than one element (e.g. services.content.title on the service card and on
+         the contact <select>), and a key-based map would let the last one win. */
       const defaults = {
         title: document.title,
         description: document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
-        text: new Map(textNodes.map((node) => [node.getAttribute('data-i18n'), node.innerHTML])),
-        placeholders: new Map(placeholderNodes.map((node) => [node.getAttribute('data-i18n-placeholder'), node.getAttribute('placeholder') ?? ''])),
+        text: new Map(textNodes.map((node) => [node, node.innerHTML])),
+        placeholders: new Map(placeholderNodes.map((node) => [node, node.getAttribute('placeholder') ?? ''])),
       };
 
       const getLanguage = () => {
@@ -87,7 +90,7 @@ const t = siteData[lang];
         textNodes.forEach((node) => {
           const key = node.getAttribute('data-i18n');
           const value = key.split('.').reduce((obj, k) => obj?.[k], dictionary);
-          node.innerHTML = lang === 'en' && value ? value : defaults.text.get(key);
+          node.innerHTML = lang === 'en' && value ? value : defaults.text.get(node);
         });
 
         placeholderNodes.forEach((node) => {
@@ -95,7 +98,7 @@ const t = siteData[lang];
           const value = key.split('.').reduce((obj, k) => obj?.[k], dictionary);
           node.setAttribute(
             'placeholder',
-            lang === 'en' && value ? value : defaults.placeholders.get(key),
+            lang === 'en' && value ? value : defaults.placeholders.get(node),
           );
         });
 
