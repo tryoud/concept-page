@@ -33,11 +33,11 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 ---
 
 <!doctype html>
-<html lang={lang} data-reduced-motion="false">
+<html lang={lang} class="dark" data-reduced-motion="false">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#f5f3ee" />
+		<meta name="theme-color" content="#050506" />
 
 		<!-- Set before first paint so scroll-reveal only hides content when JS can bring it back -->
 		<script is:inline>document.documentElement.classList.add('js');</script>
@@ -47,12 +47,12 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 		<!-- Loaded async: a blocking Google Fonts request would hold up first paint -->
 		<link
 			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
 			media="print"
 			onload="this.media='all'"
 		/>
 		<noscript>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
 		</noscript>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/favicon.svg" />
@@ -122,7 +122,7 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
     
     <ClientRouter />
 	</head>
-	<body class="bg-paper text-ink antialiased overflow-x-hidden selection:bg-ink selection:text-paper">
+	<body class="bg-[#050506] text-zinc-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
 
 		<slot />
 

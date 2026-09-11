@@ -6,7 +6,7 @@ const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
 
 /* Starting rates. These numbers also appear in the FAQ answer ("Was kostet
-   eine Website?") and in the Offer JSON-LD in Layout.astro - keep all three
+   eine Website?") and in the Offer JSON-LD in Layout.astro — keep all three
    in sync when they change. */
 const services = [
   {
@@ -14,9 +14,10 @@ const services = [
     /* Two entry points into the same service: a single landing page, or a
        full multi-page site. Content/drone stay single-tier. */
     from: [
-      { de: { label: 'Landing Page', price: '1.490 €' }, en: { label: 'Landing page', price: '€1,490' } },
-      { de: { label: 'Komplettauftritt', price: '3.500 €' }, en: { label: 'Complete website', price: '€3,500' } },
+      { de: { label: 'Landing Page', price: '1.490 €' }, en: { label: 'Landing page', price: '\u20ac1,490' } },
+      { de: { label: 'Komplettauftritt', price: '3.500 €' }, en: { label: 'Complete website', price: '\u20ac3,500' } },
     ],
+    icon: 'layout',
     de: {
       title: 'Websites & Landing Pages',
       text: 'Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.',
@@ -30,7 +31,8 @@ const services = [
   },
   {
     key: 'content',
-    from: [{ de: { label: null, price: '850 €' }, en: { label: null, price: '€850' } }],
+    from: [{ de: { label: null, price: '850 €' }, en: { label: null, price: '\u20ac850' } }],
+    icon: 'video',
     de: {
       title: 'Foto & Video',
       text: 'Foto- und Videocontent, der deine Marke hochwertig zeigt - für Website, Social Media und Kampagnen.',
@@ -44,7 +46,8 @@ const services = [
   },
   {
     key: 'drone',
-    from: [{ de: { label: null, price: '590 €' }, en: { label: null, price: '€590' } }],
+    from: [{ de: { label: null, price: '590 €' }, en: { label: null, price: '\u20ac590' } }],
+    icon: 'drone',
     de: {
       title: 'Drohne & Aerial',
       text: 'Lizenzierte Drohnenaufnahmen für Immobilien, Events und Markencontent. Filmische Shots.',
@@ -59,70 +62,77 @@ const services = [
 ];
 ---
 
-<section id="services" class="section w-full bg-paper-2 border-t rule">
+<section id="services" class="section px-0 w-full bg-[#0b0c0e] relative z-40">
   <div class="shell">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-16 gap-6">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
       <div class="reveal-on-scroll max-w-xl">
-        <span class="eyebrow mb-4" data-i18n="services.eyebrow">{isEn ? 'Services' : 'Leistungen'}</span>
-        <h2 class="h-section">
-          <span data-i18n="services.headingPrefix">{isEn ? 'What I' : 'Was ich'}</span> <span class="em" data-i18n="services.headingAccent">{isEn ? 'do.' : 'mache.'}</span>
+        <span class="eyebrow mb-3" data-i18n="services.eyebrow">{isEn ? 'Services' : 'Leistungen'}</span>
+        <h2 class="text-3xl md:text-5xl text-white leading-[1.1]">
+          <span data-i18n="services.headingPrefix">{isEn ? 'What I' : 'Was ich'}</span> <span class="text-cyan-400" data-i18n="services.headingAccent">{isEn ? 'do.' : 'mache.'}</span>
         </h2>
       </div>
-      <p class="text-ink-2 max-w-sm reveal-on-scroll leading-relaxed" data-i18n="services.subline">
+      <p class="text-zinc-400 max-w-sm reveal-on-scroll leading-relaxed" data-i18n="services.subline">
         {isEn ? 'Strategy, design, code, and content from one source - without the friction of juggling three different vendors.' : 'Strategie, Design, Code und Content aus einer Hand - ohne Reibungsverluste zwischen drei verschiedenen Dienstleistern.'}
       </p>
     </div>
 
-    <!-- Rows, not cards: each service reads as an entry in a price list -->
-    <div class="border-t rule">
-      {services.map((s) => (
-        <article class="reveal-on-scroll grid grid-cols-1 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,0.6fr)] gap-6 md:gap-10 py-9 md:py-11 border-b rule">
-          <div>
-            <h3 class="h-sub md:text-[1.9rem] mb-3" data-i18n={`services.${s.key}.title`}>{isEn ? s.en.title : s.de.title}</h3>
-            <p class="text-ink-2 leading-relaxed max-w-md" data-i18n={`services.${s.key}.text`}>{isEn ? s.en.text : s.de.text}</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {services.map((s, i) => (
+        <div class="card reveal-on-scroll p-7 flex flex-col group" style={`--reveal-delay: ${i * 90}ms`}>
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 transition-transform duration-500 group-hover:scale-105">
+              {s.icon === 'layout' && <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>}
+              {s.icon === 'video' && <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>}
+              {s.icon === 'drone' && <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="m5 12-2-2 2-2"/><path d="m19 12 2-2-2-2"/><path d="m5 16-2 2 2 2"/><path d="m19 16 2 2-2 2"/><circle cx="12" cy="5" r="3"/></svg>}
+            </div>
+            <span class="text-xs font-mono text-zinc-600 pt-1">{String(i + 1).padStart(2, '0')}</span>
           </div>
 
-          <ul class="space-y-2 text-sm text-ink-2 md:pt-2">
+          <h3 class="text-xl font-semibold text-white mb-3" data-i18n={`services.${s.key}.title`}>{isEn ? s.en.title : s.de.title}</h3>
+          <p class="text-zinc-400 leading-relaxed text-sm mb-6" data-i18n={`services.${s.key}.text`}>{isEn ? s.en.text : s.de.text}</p>
+
+          <ul class="space-y-2.5 text-sm text-zinc-500 mb-7">
             {(isEn ? s.en.bullets : s.de.bullets).map((b, bi) => (
-              <li class="flex items-start gap-3">
-                <span class="text-ink-3 shrink-0" aria-hidden="true">&mdash;</span>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1 h-1 rounded-full bg-cyan-500 mt-2 shrink-0"></span>
                 <span data-i18n={`services.${s.key}.bullet${bi + 1}`}>{b}</span>
               </li>
             ))}
           </ul>
 
-          <div class="md:text-right md:pt-1">
-            <span class="block text-xs text-ink-3 mb-1" data-i18n="services.fromLabel">{isEn ? 'Projects from' : 'Projekte ab'}</span>
-            <div class={s.from.length > 1 ? 'space-y-2.5' : ''}>
+          <div class="mt-auto pt-5 border-t border-white/8 flex items-end justify-between gap-3">
+            <div class={s.from.length > 1 ? 'space-y-2' : ''}>
+              <span class="block text-[0.65rem] uppercase tracking-[0.15em] text-zinc-600" data-i18n="services.fromLabel">{isEn ? 'Projects from' : 'Projekte ab'}</span>
               {s.from.map((tier, ti) => (
-                <div>
+                <div class={ti > 0 ? 'mt-1' : ''}>
                   {tier.de.label && (
-                    <span class="block text-xs text-ink-3" data-i18n={`services.${s.key}.tier${ti}Label`}>{isEn ? tier.en.label : tier.de.label}</span>
+                    <span class="block text-[0.65rem] text-zinc-500" data-i18n={`services.${s.key}.tier${ti}Label`}>{isEn ? tier.en.label : tier.de.label}</span>
                   )}
-                  <span class={`block font-display text-ink ${s.from.length > 1 ? 'text-xl' : 'text-2xl'}`} data-i18n={`services.${s.key}.tier${ti}Price`}>{isEn ? tier.en.price : tier.de.price}</span>
+                  <span class="text-lg font-semibold text-white" data-i18n={`services.${s.key}.tier${ti}Price`}>{isEn ? tier.en.price : tier.de.price}</span>
                 </div>
               ))}
             </div>
             <a
               href="#contact"
               data-service={s.key}
-              class="service-cta link inline-block mt-4 text-sm text-ink"
+              class="service-cta shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
             >
               <span data-i18n="services.cta">{isEn ? 'Enquire' : 'Anfragen'}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
-        </article>
+        </div>
       ))}
     </div>
 
-    <p class="mt-6 text-sm text-ink-3 max-w-2xl reveal-on-scroll" data-i18n="services.priceNote">
+    <p class="mt-6 text-sm text-zinc-500 reveal-on-scroll" data-i18n="services.priceNote">
       {isEn ? 'Final price depends on scope - you get a fixed quote before anything starts. No hourly surprises.' : 'Der Endpreis hängt vom Umfang ab - du bekommst vor dem Start ein Festpreis-Angebot. Keine Überraschungen nach Stundenzettel.'}
     </p>
   </div>
 </section>
 
 <script>
-  // Clicking "Anfragen" on a service row preselects that service in the contact form
+  // Clicking "Anfragen" on a service card preselects that service in the contact form
   document.addEventListener('astro:page-load', () => {
     document.querySelectorAll<HTMLAnchorElement>('.service-cta').forEach(link => {
       link.addEventListener('click', () => {

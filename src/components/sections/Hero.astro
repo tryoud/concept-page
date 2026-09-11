@@ -13,87 +13,281 @@ const chips = [
 
 const clients = ['TUM Management Alumni', 'Cantero Consulting', 'ExamDraft', 'WIRO e.V.', 'Focus Partner'];
 
-/* Two real client sites below the fold copy. Screenshots come from the same
-   mshots service the Work section uses. */
+/* The showcase stack. Order matters: last entry renders on top / closest to the viewer.
+   Screenshots come from the same mshots service the Work section uses. */
 const showcase = [
-  { name: 'TUM Management Alumni', domain: 'tum-management-alumni.de', url: 'https%3A%2F%2Ftum-management-alumni.de%2F' },
   { name: 'Focus Partner', domain: 'focuspartner.app', url: 'https%3A%2F%2Ffocuspartner.app%2F' },
+  { name: 'ExamDraft', domain: 'examdraft.com', url: 'https%3A%2F%2Fexamdraft.com%2F' },
+  { name: 'Cantero Consulting', domain: 'cantero-consulting.de', url: 'https%3A%2F%2Fwww.cantero-consulting.de%2F' },
+  { name: 'TUM Management Alumni', domain: 'tum-management-alumni.de', url: 'https%3A%2F%2Ftum-management-alumni.de%2F' },
 ];
+const front = showcase[showcase.length - 1];
 ---
 
-<section class="relative w-full pt-32 pb-16 md:pt-44 md:pb-20">
-  <div class="shell">
-    <p class="reveal-on-scroll flex items-center gap-2.5 text-sm text-ink-2 mb-8 md:mb-10">
-      <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-      <span data-i18n="hero.badge">{isEn ? 'Taking on new projects' : 'Kapazität für neue Projekte'}</span>
-    </p>
+<!-- Hero backdrop. Pure CSS so the fold paints instantly with no third-party request. -->
+<div class="fixed inset-0 -z-20 hero-backdrop" aria-hidden="true">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+</div>
 
-    <h1 class="h-display max-w-5xl reveal-on-scroll" style="--reveal-delay: 60ms">
-      <span data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
-      <span data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
-      <span data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span>
-      <span class="em" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span>
-    </h1>
+<!-- Flex column rather than an absolutely pinned trust bar: on a 720px-tall laptop
+     the pinned version sat on top of the CTA row. -->
+<section class="relative min-h-[100svh] w-full flex flex-col overflow-hidden">
+  <div class="shell flex-1 flex flex-col justify-center pt-24 pb-10 md:pt-28 md:pb-14 hero-inner">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] gap-10 lg:gap-8 items-center">
+      <!-- Copy -->
+      <!-- Mobile reorders this column (CTA before the supporting detail) so the
+           primary action still lands inside the first screen on a phone. -->
+      <div class="max-w-2xl flex flex-col">
+        <div class="order-1 reveal-on-scroll self-start inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-1.5 mb-5 md:mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+          </span>
+          <span class="text-xs font-medium text-white/80" data-i18n="hero.badge">{isEn ? 'Taking on new projects' : 'Kapazität für neue Projekte'}</span>
+        </div>
 
-    <div class="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-10 lg:gap-16 lg:items-end">
-      <div class="reveal-on-scroll" style="--reveal-delay: 120ms">
-        <p class="text-lg md:text-xl text-ink-2 max-w-xl leading-relaxed" data-i18n="hero.subline">
+        <!-- Each line is its own block so the accent never splits mid-phrase across a wrap -->
+        <h1 class="order-2 hero-title text-[2rem] sm:text-5xl md:text-[3.25rem] lg:text-[3.5rem] font-bold tracking-tight text-white leading-[1.05] reveal-on-scroll" style="--reveal-delay: 60ms">
+          <span class="block" data-i18n="hero.line1">{isEn ? 'Custom-built websites' : 'Websites nach Maß'}</span>
+          <span class="block" data-i18n="hero.line2">{isEn ? 'for companies' : 'für Unternehmen,'}</span>
+          <span class="block" data-i18n="hero.line3Prefix">{isEn ? 'that want more' : 'die mehr wollen'}</span>
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-[length:200%_auto] animate-gradient" data-i18n="hero.line3Accent">{isEn ? 'than standard.' : 'als Standard.'}</span>
+        </h1>
+
+        <p class="order-3 mt-4 md:mt-5 text-base sm:text-lg text-zinc-300/90 max-w-xl leading-relaxed reveal-on-scroll" style="--reveal-delay: 120ms" data-i18n="hero.subline">
           {isEn ? 'Individually designed, hand-coded - and filled with your own photo, video, and drone content instead of stock material.' : 'Individuell konzipiert, von Hand entwickelt - und mit eigenem Foto-, Video- und Drohnencontent gefüllt statt mit Stockmaterial.'}
         </p>
 
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-8">
-          <a href="#contact" class="btn btn-primary text-base w-full sm:w-auto">
+        <ul class="order-6 lg:order-4 mt-7 lg:mt-5 flex flex-wrap gap-x-5 gap-y-2.5 reveal-on-scroll" style="--reveal-delay: 160ms">
+          {chips.map(c => (
+            <li class="flex items-center gap-2 text-sm text-zinc-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0"><path d="M20 6 9 17l-5-5"/></svg>
+              <span data-i18n={c.key}>{isEn ? c.en : c.de}</span>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Mobile showcase: the desktop stack is hidden below lg, which left the
+             phone hero as a wall of text with nothing to look at. -->
+        <div class="order-7 lg:hidden mt-9 reveal-on-scroll" style="--reveal-delay: 200ms" aria-hidden="true">
+          <figure class="showcase-card showcase-card-mobile">
+            <div class="showcase-chrome">
+              <span class="showcase-dot"></span>
+              <span class="showcase-dot"></span>
+              <span class="showcase-dot"></span>
+              <span class="showcase-url">{front.domain}</span>
+            </div>
+            <img
+              src={`https://s0.wordpress.com/mshots/v1/${front.url}?w=1000&h=680`}
+              alt=""
+              width="1000"
+              height="680"
+              loading="eager"
+              fetchpriority="low"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        <div class="order-4 lg:order-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-7 lg:mt-8 reveal-on-scroll" style="--reveal-delay: 240ms">
+          <a href="#contact" class="group btn btn-primary text-base w-full sm:w-auto">
             <span data-i18n="hero.primaryCta">{isEn ? 'Start a project' : 'Projekt anfragen'}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </a>
           <a href="#work" class="btn btn-secondary text-base w-full sm:w-auto">
             <span data-i18n="hero.secondaryCta">{isEn ? 'View work' : 'Arbeiten ansehen'}</span>
           </a>
         </div>
-        <p class="mt-4 text-sm text-ink-3" data-i18n="hero.microTrust">
+
+        <p class="order-5 lg:order-6 mt-4 text-sm text-zinc-500 reveal-on-scroll" style="--reveal-delay: 280ms" data-i18n="hero.microTrust">
           {isEn ? 'Free, non-binding assessment - usually within 24 hours.' : 'Kostenlose, unverbindliche Einschätzung - in der Regel innerhalb von 24 Stunden.'}
         </p>
       </div>
 
-      <ul class="reveal-on-scroll border-t rule lg:justify-self-end w-full lg:max-w-sm" style="--reveal-delay: 160ms">
-        {chips.map((c, i) => (
-          <li class="flex items-baseline gap-4 py-3 border-b rule text-sm">
-            <span class="text-ink-3 tabular-nums w-5 shrink-0">{i + 1}</span>
-            <span class="text-ink" data-i18n={c.key}>{isEn ? c.en : c.de}</span>
-          </li>
-        ))}
-      </ul>
+      <!-- Showcase: real client sites, angled and drifting -->
+      <div class="showcase reveal-on-scroll hidden lg:block" style="--reveal-delay: 280ms" aria-hidden="true">
+        <div class="showcase-stage">
+          {showcase.map((s, i) => (
+            <figure class={`showcase-card showcase-card-${i}`}>
+              <div class="showcase-chrome">
+                <span class="showcase-dot"></span>
+                <span class="showcase-dot"></span>
+                <span class="showcase-dot"></span>
+                <span class="showcase-url">{s.domain}</span>
+              </div>
+              <img
+                src={`https://s0.wordpress.com/mshots/v1/${s.url}?w=1000&h=680`}
+                alt=""
+                width="1000"
+                height="680"
+                loading={i >= showcase.length - 2 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Two real sites, no tilt, no float: the work speaks for itself -->
-    <div class="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] gap-4 md:gap-5 reveal-on-scroll" style="--reveal-delay: 200ms" aria-hidden="true">
-      {showcase.map((s, i) => (
-        <figure class={`frame ${i === 1 ? 'hidden md:block' : ''}`}>
-          <div class="frame-bar">
-            <span class="frame-dot"></span>
-            <span class="frame-dot"></span>
-            <span class="frame-dot"></span>
-            <span class="frame-url">{s.domain}</span>
-          </div>
-          <div class={i === 0 ? 'aspect-[16/10] md:aspect-[16/9]' : 'aspect-[16/9]'}>
-            <img
-              src={`https://s0.wordpress.com/mshots/v1/${s.url}?w=1400&h=900`}
-              alt=""
-              width="1400"
-              height="900"
-              loading="eager"
-              fetchpriority={i === 0 ? 'high' : 'low'}
-              decoding="async"
-            />
-          </div>
-        </figure>
-      ))}
-    </div>
-
-    <div class="mt-8 md:mt-10 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 text-sm reveal-on-scroll">
-      <p class="text-ink-3 shrink-0" data-i18n="hero.trust">{isEn ? 'Trusted by' : 'Vertrauen von'}</p>
-      <ul class="flex flex-wrap gap-x-6 gap-y-1.5 text-ink-2">
-        {clients.map(c => <li>{c}</li>)}
-      </ul>
+  <!-- Trust bar closes the fold -->
+  <div class="shrink-0 border-t border-white/10 bg-black/25 backdrop-blur-sm">
+    <div class="shell py-4 md:py-5">
+      <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
+        <p class="text-[0.65rem] uppercase tracking-[0.2em] text-zinc-500 shrink-0" data-i18n="hero.trust">{isEn ? 'Trusted by' : 'Vertrauen von'}</p>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-1.5 text-zinc-400 text-sm font-medium">
+          {clients.map((c, i) => (
+            <>
+              {i > 0 && <span class="hidden sm:inline text-zinc-700" aria-hidden="true">·</span>}
+              <span>{c}</span>
+            </>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-backdrop {
+    background:
+      radial-gradient(ellipse 80% 55% at 12% -10%, rgba(34, 211, 238, 0.13), transparent 62%),
+      radial-gradient(ellipse 65% 50% at 92% 8%, rgba(59, 130, 246, 0.10), transparent 60%),
+      #050506;
+  }
+  /* Faint engineering grid — reads as "built, not assembled" without competing with the copy */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 75% 60% at 30% 25%, #000 20%, transparent 75%);
+  }
+  /* Bottom fade so the hero dissolves into the first section instead of ending on a hard edge */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(5, 5, 6, 0.85) 88%, #050506 100%);
+  }
+
+  @media (min-width: 768px) and (max-height: 820px) {
+    .hero-inner {
+      padding-top: 5.5rem;
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  /* The four hard-broken lines are a desktop composition; on a phone they would
+     leave huge gaps, so let the browser wrap the headline naturally there. */
+  @media (max-width: 639px) {
+    .hero-title span {
+      display: inline;
+    }
+  }
+
+  /* ---------- Showcase stack ---------- */
+
+  .showcase {
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
+  }
+  .showcase-stage {
+    position: relative;
+    height: 28rem;
+    transform-style: preserve-3d;
+    /* Rotate the whole stack once, so each card only carries its own offset */
+    transform: rotateY(-20deg) rotateX(6deg) rotateZ(2deg);
+  }
+
+  .showcase-card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #15181d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 24px 60px -12px rgba(0, 0, 0, 0.75);
+  }
+  .showcase-stage .showcase-card {
+    position: absolute;
+    width: 27rem;
+    animation: showcase-drift 14s ease-in-out infinite;
+  }
+  .showcase-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top center;
+    /* mshots renders on white; knock it back so bright shots don't blow out the dark hero */
+    filter: saturate(0.92) brightness(0.92);
+    /* Placeholder tone while the screenshot service responds, so a slow or failed
+       shot reads as an empty browser window rather than a broken image */
+    background: #15181d;
+  }
+
+  .showcase-card-mobile {
+    max-width: 30rem;
+    transform: perspective(1200px) rotateX(4deg);
+  }
+
+  .showcase-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    background: #1c2027;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .showcase-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .showcase-url {
+    margin-left: 0.5rem;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.01em;
+  }
+
+  /* Depth is carried by translateZ so the perspective does the scaling for us.
+     Every card stays at left >= 0 so the stack never reaches into the copy column. */
+  .showcase-card-0 { top: 0;       left: 8rem; transform: translateZ(-190px); opacity: 0.45; animation-delay: 0s; }
+  .showcase-card-1 { top: 3.75rem; left: 6rem; transform: translateZ(-110px); opacity: 0.62; animation-delay: 1.2s; }
+  .showcase-card-2 { top: 7.5rem;  left: 3rem; transform: translateZ(-30px);  opacity: 0.82; animation-delay: 2.4s; }
+  .showcase-card-3 { top: 11.25rem; left: 0;   transform: translateZ(50px);   opacity: 1;    animation-delay: 3.6s; }
+
+  @keyframes showcase-drift {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -14px; }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1400px) {
+    .showcase-stage { height: 24rem; }
+    .showcase-stage .showcase-card { width: 23rem; }
+    .showcase-card-0 { top: 0; left: 6rem; }
+    .showcase-card-1 { top: 3.25rem; left: 4.5rem; }
+    .showcase-card-2 { top: 6.5rem; left: 2.25rem; }
+    .showcase-card-3 { top: 9.75rem; left: 0; }
+  }
+
+  /* Short laptop screens (the common 1280x720 / 1440x790 case): shrink the stack
+     and the headline so the trust bar still lands inside the first screen. */
+  @media (min-width: 1024px) and (max-height: 820px) {
+    .hero-title { font-size: 3rem; }
+    .showcase-stage { height: 22rem; }
+    .showcase-stage .showcase-card { width: 21rem; }
+    .showcase-card-1 { top: 3rem; }
+    .showcase-card-2 { top: 6rem; }
+    .showcase-card-3 { top: 9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-card { animation: none; }
+  }
+</style>

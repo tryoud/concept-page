@@ -6,64 +6,87 @@ const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
 ---
 
-<!-- The one dark block on the page: closes the story and makes the form unmissable -->
-<section id="contact" class="section on-ink w-full bg-ink text-paper">
-  <div class="shell">
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] gap-12 lg:gap-24 items-start">
-      <div class="reveal-on-scroll flex flex-col items-start text-left lg:sticky lg:top-28">
-        <span class="eyebrow mb-5 !text-paper/55" data-i18n="contact.eyebrow">{isEn ? 'Contact' : 'Kontakt'}</span>
-        <h2 class="h-section mb-6">
+<section id="contact" class="section w-full relative overflow-hidden bg-[#050506]">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(34,211,238,0.10), transparent 65%);"></div>
+  <div class="shell relative z-10">
+    <!-- Two columns from lg up: the single centred column left a 1440px screen
+         mostly empty and pushed the form below the fold. -->
+    <div class="cta-content grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] gap-10 lg:gap-16 items-start opacity-0 translate-y-8">
+      <div class="flex flex-col items-start text-left lg:sticky lg:top-28">
+        <span class="eyebrow mb-4" data-i18n="contact.eyebrow">{isEn ? 'Contact' : 'Kontakt'}</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
           <span data-i18n="contact.headingPrefix">{isEn ? "Let's build something" : 'Lass uns etwas'}</span>
-          <span class="em" data-i18n="contact.headingAccent">{isEn ? 'lasting' : 'Bleibendes'}</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500" data-i18n="contact.headingAccent">{isEn ? 'lasting' : 'Bleibendes'}</span>
           <span data-i18n="contact.headingSuffix">{isEn ? 'together.' : 'bauen.'}</span>
         </h2>
-        <p class="text-lg text-paper/70 mb-3 max-w-md leading-relaxed" data-i18n="contact.subline">
+        <p class="text-base sm:text-lg text-zinc-400 mb-4 max-w-xl leading-relaxed" data-i18n="contact.subline">
           {isEn ? "Tell me briefly about your project - you'll usually get an honest assessment within 24 hours." : 'Erzähl mir kurz von deinem Projekt - du bekommst in der Regel innerhalb von 24 Stunden eine ehrliche Einschätzung.'}
         </p>
-        <p class="text-sm text-paper/50 max-w-md" data-i18n="contact.reassurance">
-          {isEn ? 'Free and non-binding - no newsletters, no hold music.' : 'Unverbindlich und kostenlos - keine Newsletter, keine Warteschleife.'}
+        <p class="text-sm text-zinc-500 mb-8 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0"><path d="M20 6 9 17l-5-5"/></svg>
+          <span data-i18n="contact.reassurance">{isEn ? 'Free and non-binding - no newsletters, no hold music.' : 'Unverbindlich und kostenlos - keine Newsletter, keine Warteschleife.'}</span>
         </p>
 
-        <dl class="mt-10 pt-6 border-t border-paper/15 w-full max-w-md grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-8 gap-y-1 sm:gap-y-3 text-sm">
-          <dt class="text-paper/50" data-i18n="contact.directLabel">{isEn ? 'Or email me directly:' : 'Oder direkt per E-Mail:'}</dt>
-          <dd><a href="mailto:nikolas.maerker@gmail.com" class="link text-paper break-all">nikolas.maerker@gmail.com</a></dd>
-          <dt class="text-paper/50 mt-3 sm:mt-0">Social</dt>
-          <dd class="flex flex-wrap gap-x-5 gap-y-1">
-            <a href="https://www.instagram.com/nikolasmaerker" target="_blank" rel="noopener" class="link text-paper">Instagram</a>
-            <a href="https://www.linkedin.com/in/nikolasmaerker/" target="_blank" rel="noopener" class="link text-paper">LinkedIn</a>
-            <a href="https://github.com/tryoud" target="_blank" rel="noopener" class="link text-paper">GitHub</a>
-          </dd>
-        </dl>
+        <p class="mt-6 text-sm text-zinc-500">
+          <span data-i18n="contact.directLabel">{isEn ? 'Or email me directly:' : 'Oder direkt per E-Mail:'}</span>
+          <a href="mailto:nikolas.maerker@gmail.com" class="text-zinc-300 hover:text-cyan-400 transition-colors font-medium">nikolas.maerker@gmail.com</a>
+        </p>
+
+        <div class="mt-8 flex items-center gap-5 sm:gap-6">
+          <a href="https://www.instagram.com/nikolasmaerker" target="_blank" rel="noopener" aria-label="Instagram" class="text-zinc-500 hover:text-white transition-colors p-2 -m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+          </a>
+          <a href="https://github.com/tryoud" target="_blank" rel="noopener" aria-label="GitHub" class="text-zinc-500 hover:text-white transition-colors p-2 -m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/nikolasmaerker/" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-zinc-500 hover:text-white transition-colors p-2 -m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
       </div>
 
-      <form id="contact-form" class="reveal-on-scroll w-full flex flex-col gap-5 lg:pt-2" action="https://formspree.io/f/mzdakanj" method="POST">
+      <form id="contact-form" class="w-full space-y-3 sm:space-y-4 card contact-card p-6 sm:p-8" action="https://formspree.io/f/mzdakanj" method="POST">
         <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" style="position:absolute;left:-9999px;">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
-          <input type="text" name="name" placeholder={isEn ? 'Name' : 'Name'} data-i18n-placeholder="contact.form.name" required class="field">
-          <input type="email" name="email" placeholder={isEn ? 'Email' : 'E-Mail'} data-i18n-placeholder="contact.form.email" required class="field">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <input type="text" name="name" placeholder={isEn ? 'Name' : 'Name'} data-i18n-placeholder="contact.form.name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+          <input type="email" name="email" placeholder={isEn ? 'Email' : 'E-Mail'} data-i18n-placeholder="contact.form.email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
         </div>
-        <select id="contact-service" name="service" class="field">
+        <select id="contact-service" name="service" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base appearance-none bg-[url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2371717a%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_1rem_center]">
           <option value="" data-i18n="contact.form.serviceDefault">{isEn ? 'What do you need?' : 'Was brauchst du?'}</option>
           <option value="web" data-i18n="services.web.title">{isEn ? 'Websites & Landing Pages' : 'Websites & Landing Pages'}</option>
           <option value="content" data-i18n="services.content.title">{isEn ? 'Photo & Video' : 'Foto & Video'}</option>
           <option value="drone" data-i18n="services.drone.title">{isEn ? 'Drone & Aerial' : 'Drohne & Aerial'}</option>
           <option value="other" data-i18n="contact.form.serviceOther">{isEn ? 'Something else' : 'Etwas anderes'}</option>
         </select>
-        <input type="text" name="subject" placeholder={isEn ? 'Subject' : 'Betreff'} data-i18n-placeholder="contact.form.subject" class="field">
-        <textarea name="message" rows="4" placeholder={isEn ? 'Message' : 'Nachricht'} data-i18n-placeholder="contact.form.message" required class="field resize-none"></textarea>
-        <div class="pt-3">
-          <button type="submit" id="contact-submit" class="btn btn-primary w-full sm:w-fit text-base disabled:opacity-60">
-            <span data-i18n="contact.form.submit">{isEn ? 'Send message' : 'Nachricht senden'}</span>
-          </button>
-        </div>
-        <p id="contact-status" class="hidden text-sm border-l-2 pl-4 py-1" role="status" aria-live="polite"></p>
+        <input type="text" name="subject" placeholder={isEn ? 'Subject' : 'Betreff'} data-i18n-placeholder="contact.form.subject" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors text-sm sm:text-base">
+        <textarea name="message" rows="4" placeholder={isEn ? 'Message' : 'Nachricht'} data-i18n-placeholder="contact.form.message" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 transition-colors resize-none text-sm sm:text-base"></textarea>
+        <button type="submit" id="contact-submit" class="btn btn-primary w-full sm:w-fit text-sm sm:text-base disabled:opacity-60">
+          <span data-i18n="contact.form.submit">{isEn ? 'Send message' : 'Nachricht senden'}</span>
+        </button>
+        <p id="contact-status" class="hidden text-sm sm:text-base rounded-xl border px-4 py-3" role="status" aria-live="polite"></p>
       </form>
+
     </div>
   </div>
 </section>
 
 <script>
   document.addEventListener('astro:page-load', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // CTA Animation on Scroll
+    const ctaSection = document.getElementById('contact');
+    const ctaContent = document.querySelector('.cta-content');
+    const ctaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          ctaContent?.classList.add('cta-animate');
+          ctaObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    if (ctaSection) ctaObserver.observe(ctaSection);
+
     // AJAX form submit: keep the visitor on the page and confirm inline
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('contact-submit');
@@ -96,15 +119,36 @@ const isEn = lang === 'en';
           if (!response.ok) throw new Error('Formspree error');
           form.reset();
           statusEl.textContent = strings.success;
-          statusEl.className = 'text-sm border-l-2 pl-4 py-1 border-paper text-paper';
+          statusEl.className = 'text-sm sm:text-base rounded-xl border px-4 py-3 border-cyan-500/40 bg-cyan-500/10 text-cyan-200';
         } catch (err) {
           statusEl.textContent = strings.error;
-          statusEl.className = 'text-sm border-l-2 pl-4 py-1 border-red-400 text-red-200';
+          statusEl.className = 'text-sm sm:text-base rounded-xl border px-4 py-3 border-red-500/40 bg-red-500/10 text-red-200';
         } finally {
           submitBtn.disabled = false;
           if (submitLabel && originalLabel) submitLabel.textContent = originalLabel;
         }
       });
     }
+
+    // If reduced motion, show content immediately
+    if (prefersReducedMotion && ctaContent) {
+      ctaContent.classList.add('cta-animate');
+    }
   });
 </script>
+
+<style>
+  /* Inherits .card for the surface, but a form should not lift on hover */
+  .contact-card:hover {
+    transform: none;
+    border-color: var(--border);
+  }
+
+  .cta-content {
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cta-content.cta-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
