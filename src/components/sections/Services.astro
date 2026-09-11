@@ -11,7 +11,12 @@ const isEn = lang === 'en';
 const services = [
   {
     key: 'web',
-    from: { de: '1.490 €', en: '€1,490' },
+    /* Two entry points into the same service: a single landing page, or a
+       full multi-page site. Content/drone stay single-tier. */
+    from: [
+      { de: { label: 'Landing Page', price: '1.490 €' }, en: { label: 'Landing page', price: '€1,490' } },
+      { de: { label: 'Komplettauftritt', price: '3.500 €' }, en: { label: 'Complete website', price: '€3,500' } },
+    ],
     de: {
       title: 'Websites & Landing Pages',
       text: 'Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.',
@@ -25,7 +30,7 @@ const services = [
   },
   {
     key: 'content',
-    from: { de: '850 €', en: '€850' },
+    from: [{ de: { label: null, price: '850 €' }, en: { label: null, price: '€850' } }],
     de: {
       title: 'Foto & Video',
       text: 'Foto- und Videocontent, der deine Marke hochwertig zeigt - für Website, Social Media und Kampagnen.',
@@ -39,7 +44,7 @@ const services = [
   },
   {
     key: 'drone',
-    from: { de: '590 €', en: '€590' },
+    from: [{ de: { label: null, price: '590 €' }, en: { label: null, price: '€590' } }],
     de: {
       title: 'Drohne & Aerial',
       text: 'Lizenzierte Drohnenaufnahmen für Immobilien, Events und Markencontent. Filmische Shots.',
@@ -88,7 +93,16 @@ const services = [
 
           <div class="md:text-right md:pt-1">
             <span class="block text-xs text-ink-3 mb-1" data-i18n="services.fromLabel">{isEn ? 'Projects from' : 'Projekte ab'}</span>
-            <span class="block font-display text-2xl text-ink" data-i18n={`services.${s.key}.price`}>{isEn ? s.from.en : s.from.de}</span>
+            <div class={s.from.length > 1 ? 'space-y-2.5' : ''}>
+              {s.from.map((tier, ti) => (
+                <div>
+                  {tier.de.label && (
+                    <span class="block text-xs text-ink-3" data-i18n={`services.${s.key}.tier${ti}Label`}>{isEn ? tier.en.label : tier.de.label}</span>
+                  )}
+                  <span class={`block font-display text-ink ${s.from.length > 1 ? 'text-xl' : 'text-2xl'}`} data-i18n={`services.${s.key}.tier${ti}Price`}>{isEn ? tier.en.price : tier.de.price}</span>
+                </div>
+              ))}
+            </div>
             <a
               href="#contact"
               data-service={s.key}

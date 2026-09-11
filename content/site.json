@@ -83,7 +83,10 @@
       "priceNote": "Der Endpreis hängt vom Umfang ab - du bekommst vor dem Start ein Festpreis-Angebot. Keine Überraschungen nach Stundenzettel.",
       "web": {
         "title": "Websites & Landing Pages",
-        "price": "1.490 €",
+        "tier0Label": "Landing Page",
+        "tier0Price": "1.490 €",
+        "tier1Label": "Komplettauftritt",
+        "tier1Price": "3.500 €",
         "text": "Performante Websites, die deine Leistung verständlich machen und auf Anfragen ausgerichtet sind.",
         "bullet1": "Positionierung & UX-Strategie",
         "bullet2": "SEO & Performance-Optimierung",
@@ -91,7 +94,7 @@
       },
       "content": {
         "title": "Foto & Video",
-        "price": "850 €",
+        "tier0Price": "850 €",
         "text": "Foto- und Videocontent, der deine Marke hochwertig zeigt - für Website, Social Media und Kampagnen.",
         "bullet1": "Event-, Portrait- & Redaktionsfotografie",
         "bullet2": "Videoproduktion & Videoschnitt",
@@ -99,7 +102,7 @@
       },
       "drone": {
         "title": "Drohne & Aerial",
-        "price": "590 €",
+        "tier0Price": "590 €",
         "text": "Lizenzierte Drohnenaufnahmen für Immobilien, Events und Markencontent. Filmische Shots.",
         "bullet1": "Lizenzierte Luftaufnahmen",
         "bullet2": "Immobilien, Events & Unternehmen",
@@ -172,7 +175,7 @@
       "subline": "Etwas nicht dabei? Frag mich direkt - meist bekommst du noch am selben Tag eine Antwort.",
       "cta": "Frage stellen",
       "items": {
-        "price": { "q": "Was kostet eine Website?", "a": "Das hängt vom Umfang ab. Website-Projekte starten bei 1.490 €, Foto- und Videoproduktionen bei 850 €, Drohnenaufnahmen bei 590 €. Nach dem Erstgespräch bekommst du ein Festpreis-Angebot - es wird also nicht teurer als vereinbart." },
+        "price": { "q": "Was kostet eine Website?", "a": "Das hängt vom Umfang ab. Eine Landing Page startet bei 1.490 €, ein Komplettauftritt bei 3.500 €, Foto- und Videoproduktionen bei 850 €, Drohnenaufnahmen bei 590 €. Nach dem Erstgespräch bekommst du ein Festpreis-Angebot - es wird also nicht teurer als vereinbart." },
         "duration": { "q": "Wie lange dauert ein Projekt?", "a": "Eine Landingpage ist typischerweise in 2 bis 4 Wochen live, eine größere Unternehmensseite in 6 bis 10 Wochen. Der größte Faktor bist meist du selbst: Wie schnell Texte, Freigaben und Zugänge kommen, bestimmt das Tempo." },
         "maintain": { "q": "Kann ich die Website danach selbst pflegen?", "a": "Ja. Du bekommst die Seite so übergeben, dass dein Team Inhalte selbst ändern kann - bei WordPress über das gewohnte Backend, bei statischen Seiten über einen einfachen Editor. Auf Wunsch übernehme ich die Pflege auch weiterhin." },
         "content": { "q": "Brauche ich eigene Fotos und Videos?", "a": "Nicht zwingend, aber sie machen den Unterschied. Ich produziere Foto-, Video- und Drohnenaufnahmen selbst - dadurch zeigt deine Website dein echtes Unternehmen statt Stockmaterial, das auch die Konkurrenz nutzt." },
@@ -276,7 +279,10 @@
       "priceNote": "Final price depends on scope - you get a fixed quote before anything starts. No hourly surprises.",
       "web": {
         "title": "Websites & Landing Pages",
-        "price": "\u20ac1,490",
+        "tier0Label": "Landing page",
+        "tier0Price": "\u20ac1,490",
+        "tier1Label": "Complete website",
+        "tier1Price": "\u20ac3,500",
         "text": "High-performance websites that explain your offer clearly and turn visitors into inquiries.",
         "bullet1": "Positioning & UX strategy",
         "bullet2": "SEO & performance optimization",
@@ -284,7 +290,7 @@
       },
       "content": {
         "title": "Photo & Video",
-        "price": "\u20ac850",
+        "tier0Price": "\u20ac850",
         "text": "Photo and video content that presents your brand with a premium look - for websites, social media, and campaigns.",
         "bullet1": "Event, portrait & editorial photography",
         "bullet2": "Video production & editing",
@@ -292,7 +298,7 @@
       },
       "drone": {
         "title": "Drone & Aerial",
-        "price": "\u20ac590",
+        "tier0Price": "\u20ac590",
         "text": "Licensed drone footage for real estate, events, and brand content. Cinematic shots.",
         "bullet1": "Licensed aerial footage",
         "bullet2": "Real estate, events & companies",
@@ -365,7 +371,7 @@
       "subline": "Something missing? Ask me directly - you usually get an answer the same day.",
       "cta": "Ask a question",
       "items": {
-        "price": { "q": "What does a website cost?", "a": "It depends on scope. Website projects start at €1,490, photo and video production at €850, drone footage at €590. After the first call you get a fixed-price quote - so it never ends up costing more than agreed." },
+        "price": { "q": "What does a website cost?", "a": "It depends on scope. A landing page starts at €1,490, a complete website at €3,500, photo and video production at €850, drone footage at €590. After the first call you get a fixed-price quote - so it never ends up costing more than agreed." },
         "duration": { "q": "How long does a project take?", "a": "A landing page is typically live in 2 to 4 weeks, a larger company site in 6 to 10 weeks. The biggest factor is usually you: how fast copy, approvals, and access credentials arrive sets the pace." },
         "maintain": { "q": "Can I maintain the site myself afterwards?", "a": "Yes. The site is handed over so your team can change content itself - through the familiar backend on WordPress, or a simple editor on static sites. If you prefer, I keep maintaining it for you." },
         "content": { "q": "Do I need my own photos and videos?", "a": "Not strictly, but they make the difference. I produce photo, video, and drone footage myself - so your website shows your actual company instead of stock material your competitors use too." },
