@@ -24,6 +24,15 @@ src/components/sections/   One file per homepage section
 src/styles/global.css      Design tokens, .section/.shell rhythm, .card, .btn
 ```
 
+## Design
+
+Warm paper background, near-black ink, one rust accent used only for small labels and
+focus rings. Headlines are set in Instrument Serif (single weight, italic for the one
+accent word via `.em`), body copy in Instrument Sans. Sections are separated by hairlines
+rather than cards; the contact block and footer are the only dark surfaces. Tokens and
+the shared classes (`.h-display`, `.h-section`, `.eyebrow`, `.btn`, `.frame`, `.field`)
+live in `src/styles/global.css`.
+
 ## How the two languages work
 
 German is the rendered default: every translatable node carries `data-i18n="some.key"`

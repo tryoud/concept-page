@@ -31,56 +31,46 @@ const rows = [
 const stack = ['Astro', 'WordPress', 'TypeScript', 'Cloudflare', 'Figma', 'Premiere Pro', 'Lightroom'];
 ---
 
-<section id="expertise" class="section w-full bg-[#050506] relative z-40 border-t border-white/10">
+<section id="expertise" class="section w-full border-t rule">
   <div class="shell">
-    <div class="max-w-2xl mb-12 reveal-on-scroll">
-      <span class="eyebrow mb-3" data-i18n="difference.eyebrow">{isEn ? 'The difference' : 'Der Unterschied'}</span>
-      <h2 class="text-3xl md:text-5xl text-white leading-[1.1]">
-        <span data-i18n="difference.headingPrefix">{isEn ? 'Page builder' : 'Baukasten'}</span> <span class="text-zinc-600" data-i18n="difference.headingVs">{isEn ? 'vs.' : 'vs.'}</span> <span class="text-cyan-400" data-i18n="difference.headingAccent">{isEn ? 'custom-built.' : 'nach Maß.'}</span>
+    <div class="max-w-2xl mb-12 md:mb-16 reveal-on-scroll">
+      <span class="eyebrow mb-4" data-i18n="difference.eyebrow">{isEn ? 'The difference' : 'Der Unterschied'}</span>
+      <h2 class="h-section">
+        <span data-i18n="difference.headingPrefix">{isEn ? 'Page builder' : 'Baukasten'}</span> <span class="text-ink-3" data-i18n="difference.headingVs">{isEn ? 'vs.' : 'vs.'}</span> <span class="em" data-i18n="difference.headingAccent">{isEn ? 'custom-built.' : 'nach Maß.'}</span>
       </h2>
-      <p class="mt-4 text-zinc-400 leading-relaxed" data-i18n="difference.subline">
+      <p class="mt-5 text-ink-2 leading-relaxed" data-i18n="difference.subline">
         {isEn ? 'A page builder gets you online. It rarely gets you inquiries. Here is where the two approaches actually diverge.' : 'Mit einem Baukasten bist du online. Anfragen bekommst du damit selten. Hier liegen die echten Unterschiede.'}
       </p>
     </div>
 
-    <div class="card overflow-hidden reveal-on-scroll">
+    <div class="reveal-on-scroll">
       <!-- Column headers (desktop) -->
-      <div class="hidden md:grid grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)_minmax(0,1fr)] gap-6 px-7 py-4 border-b border-white/8 bg-white/2">
-        <span class="text-xs uppercase tracking-[0.15em] text-zinc-600"></span>
-        <span class="text-xs uppercase tracking-[0.15em] text-zinc-500" data-i18n="difference.colBad">{isEn ? 'Page builder / template' : 'Baukasten / Template'}</span>
-        <span class="text-xs uppercase tracking-[0.15em] text-cyan-400" data-i18n="difference.colGood">{isEn ? 'tryoud' : 'tryoud'}</span>
+      <div class="hidden md:grid grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)_minmax(0,1fr)] gap-8 pb-3 border-b border-ink text-xs">
+        <span></span>
+        <span class="text-ink-3" data-i18n="difference.colBad">{isEn ? 'Page builder / template' : 'Baukasten / Template'}</span>
+        <span class="text-ink font-medium" data-i18n="difference.colGood">{isEn ? 'tryoud' : 'tryoud'}</span>
       </div>
 
       {rows.map(r => (
-        <div class="grid grid-cols-1 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2 md:gap-6 px-6 md:px-7 py-5 md:py-6 border-b border-white/8 last:border-b-0">
-          <span class="text-sm font-semibold text-white md:pt-0.5" data-i18n={`difference.rows.${r.key}.label`}>{isEn ? r.en.label : r.de.label}</span>
+        <div class="grid grid-cols-1 md:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2 md:gap-8 py-5 md:py-6 border-b rule">
+          <span class="font-display text-xl text-ink" data-i18n={`difference.rows.${r.key}.label`}>{isEn ? r.en.label : r.de.label}</span>
 
-          <span class="flex items-start gap-2.5 text-sm text-zinc-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" class="text-zinc-600 shrink-0 mt-0.5" aria-hidden="true"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
-            <span>
-              <span class="md:hidden block text-[0.6rem] uppercase tracking-[0.15em] text-zinc-600 mb-0.5" data-i18n="difference.colBad">{isEn ? 'Page builder / template' : 'Baukasten / Template'}</span>
-              <span data-i18n={`difference.rows.${r.key}.bad`}>{isEn ? r.en.bad : r.de.bad}</span>
-            </span>
+          <span class="text-sm text-ink-3 md:pt-1">
+            <span class="md:hidden block text-xs mb-0.5" data-i18n="difference.colBad">{isEn ? 'Page builder / template' : 'Baukasten / Template'}</span>
+            <span data-i18n={`difference.rows.${r.key}.bad`}>{isEn ? r.en.bad : r.de.bad}</span>
           </span>
 
-          <span class="flex items-start gap-2.5 text-sm text-zinc-200 mt-1 md:mt-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400 shrink-0 mt-0.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            <span>
-              <span class="md:hidden block text-[0.6rem] uppercase tracking-[0.15em] text-cyan-400/70 mb-0.5" data-i18n="difference.colGood">tryoud</span>
-              <span data-i18n={`difference.rows.${r.key}.good`}>{isEn ? r.en.good : r.de.good}</span>
-            </span>
+          <span class="text-sm text-ink mt-1 md:mt-0 md:pt-1">
+            <span class="md:hidden block text-xs text-ink-3 mb-0.5" data-i18n="difference.colGood">tryoud</span>
+            <span data-i18n={`difference.rows.${r.key}.good`}>{isEn ? r.en.good : r.de.good}</span>
           </span>
         </div>
       ))}
     </div>
 
-    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 reveal-on-scroll">
-      <p class="text-xs uppercase tracking-[0.15em] text-zinc-600 shrink-0" data-i18n="difference.stackLabel">{isEn ? 'Built with' : 'Gebaut mit'}</p>
-      <div class="flex flex-wrap gap-2">
-        {stack.map(tag => (
-          <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/8 text-xs text-zinc-400 font-medium">{tag}</span>
-        ))}
-      </div>
-    </div>
+    <p class="mt-8 text-sm text-ink-3 reveal-on-scroll">
+      <span data-i18n="difference.stackLabel">{isEn ? 'Built with' : 'Gebaut mit'}</span>
+      <span class="text-ink-2">{stack.join(', ')}</span>
+    </p>
   </div>
 </section>

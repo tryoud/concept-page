@@ -180,12 +180,6 @@
         "after": { "q": "Was passiert nach dem Launch?", "a": "Du bekommst alle Zugänge und eine Übergabe. Danach kannst du selbst weitermachen oder mich für Pflege, Weiterentwicklung und Content-Nachschub weiter buchen - ohne Knebelvertrag." }
       }
     },
-    "ctaBand": {
-      "heading": "Neugierig, wie das für dich aussehen würde?",
-      "text": "Erzähl mir in zwei Sätzen von deinem Projekt. Du bekommst eine ehrliche Einschätzung - auch dann, wenn ich nicht der Richtige bin.",
-      "cta": "Einschätzung anfragen",
-      "note": "Kostenlos · unverbindlich · Antwort in 24 h"
-    },
     "contact": {
       "eyebrow": "Kontakt",
       "headingPrefix": "Lass uns etwas",
@@ -378,12 +372,6 @@
         "relaunch": { "q": "Do you work on existing websites too?", "a": "Yes. Relaunches are a big part of my work - the alumni platforms of TUM School of Management and WIRO e.V. are examples. Whether a relaunch or a rebuild makes more sense, we assess honestly in the first call." },
         "after": { "q": "What happens after launch?", "a": "You get all credentials and a proper hand-over. From there you can continue on your own or keep me booked for maintenance, further development, and new content - with no lock-in contract." }
       }
-    },
-    "ctaBand": {
-      "heading": "Curious what this would look like for you?",
-      "text": "Tell me about your project in two sentences. You get an honest assessment - including when I am not the right fit.",
-      "cta": "Get an assessment",
-      "note": "Free · no obligation · reply within 24 h"
     },
     "contact": {
       "eyebrow": "Contact",
